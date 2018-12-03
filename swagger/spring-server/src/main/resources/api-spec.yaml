@@ -1,0 +1,157 @@
+swagger: '2.0'
+info:
+  version: '0.1.0'
+  title: WP2 API
+  description: Gamification API for WP2
+host: localhost:8080
+basePath: /api
+schemes:
+- http
+paths:
+  /badges:
+    post:
+      tags:
+      - "badges"
+      summary: "Add a new badge to the store"
+      description: create a badge
+      operationId: createBadge
+      consumes:
+      - application/json
+      parameters:
+      - name: badge
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Badge'
+      responses:
+        '201':
+          description: created
+          schema:
+            $ref: '#/definitions/Location'
+    get:
+      tags:
+      - "badges"
+      summary: "Return all the badges on the store"
+      description: get the list of all badges
+      operationId: getBadges
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Badge'
+
+  /badges/{id}:
+    get:
+      tags:
+      - "badges"
+      summary: "Return a specific badge with the id"
+      parameters:
+      - in : path
+        name : id
+        type : integer
+        required : true
+        description : get a specific badge
+      operationId: getBadge
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: success
+          schema:
+            $ref: '#/definitions/Badge'
+
+  /pointScales:
+    post:
+      tags:
+      - "pointScales"
+      summary: "Add a new pointScale to the store"
+      description: create a pointScale
+      operationId: createPointScale
+      consumes:
+      - application/json
+      parameters:
+      - name: pointScale
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/PointScale'
+      responses:
+        '201':
+          description: created
+          schema:
+            type: object
+            properties:
+              location:
+                type: string
+
+    get:
+      tags:
+      - "pointScales"
+      summary: "Return all the pointScales on the store"
+      description: get the list of all pointScales
+      operationId: getPointScales
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PointScale'
+
+  /pointScales/{id}:
+    get:
+      tags:
+      - "pointScales"
+      summary: "Return a specific pointScales with the id"
+      parameters:
+      - in : path
+        name : id
+        type : integer
+        required : true
+        description : get a specific pointScale
+      operationId: getPointScale
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: success
+          schema:
+            $ref: '#/definitions/PointScale'
+
+
+definitions:
+  Badge:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      image:
+        type: string
+      description:
+        type: string
+
+  PointScale:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      description:
+        type: string
+
+  Location:
+    type: object
+    properties:
+      location:
+        type: string
+
+
