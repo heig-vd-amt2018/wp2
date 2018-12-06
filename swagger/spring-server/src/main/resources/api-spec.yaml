@@ -83,10 +83,7 @@ paths:
         '201':
           description: created
           schema:
-            type: object
-            properties:
-              location:
-                type: string
+            $ref: '#/definitions/Location'
 
     get:
       tags:

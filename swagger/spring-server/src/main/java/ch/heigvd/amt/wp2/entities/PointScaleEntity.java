@@ -6,24 +6,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-
 @Entity
-public class BadgeEntity implements Serializable {
+public class PointScaleEntity implements Serializable {
 
     @Id
     private long id; //@GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private String name;
-    private String image;
     private String description;
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public String getDescription() {
         return description;

@@ -2,12 +2,19 @@ package ch.heigvd.amt.wp2.api.endpoints;
 
 import ch.heigvd.amt.wp2.api.BadgesApi;
 import ch.heigvd.amt.wp2.api.model.Badge;
-import ch.heigvd.amt.wp2.api.model.InlineResponse201;
 import ch.heigvd.amt.wp2.api.model.Location;
+import ch.heigvd.amt.wp2.entities.BadgeEntity;
 import ch.heigvd.amt.wp2.repositories.BadgeRepository;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,68 +24,60 @@ import java.util.List;
 public class BadgesApiController implements BadgesApi {
 
     @Autowired
-    BadgeRepository badgeRepositoryRepository;
-
-
-    @Override
-    public ResponseEntity<Location> createBadge(Badge badge) {
-        return null;
-    }
+    BadgeRepository badgeRepository;
 
     @Override
-    public ResponseEntity<Badge> getBadge(Integer id) {
-        return null;
-    }
+    public ResponseEntity<Location> createBadge( @ApiParam(value = "", required = true) @Valid @RequestBody Badge badge) {
 
-    @Override
-    public ResponseEntity<List<Badge>> getBadges() {
-        return null;
-    }
-
-    /*public ResponseEntity<Object> createFruit(@ApiParam(value = "", required = true) @Valid @RequestBody Fruit fruit) {
-        BadgeEntity newFruitEntity = toFruitEntity(fruit);
-        fruitRepository.save(newFruitEntity);
-        Long id = newFruitEntity.getId();
+        BadgeEntity newBadgeEntity = toBadgeEntity(badge);
+        badgeRepository.save(newBadgeEntity);
+        Long id = newBadgeEntity.getId();
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
-                .buildAndExpand(newFruitEntity.getId()).toUri();
+                .buildAndExpand(newBadgeEntity.getId()).toUri();
 
         return ResponseEntity.created(location).build();
     }
 
+    @Override
+    public ResponseEntity<Badge> getBadge(Integer id) {
 
-    public ResponseEntity<List<Fruit>> getFruits() {
-        List<Fruit> fruits = new ArrayList<>();
-        for (BadgeEntity fruitEntity : fruitRepository.findAll()) {
-            fruits.add(toFruit(fruitEntity));
+        Badge badge;
+        BadgeEntity badgeEntity = badgeRepository.findOne((long)id);
+
+        badge = toBadge(badgeEntity);
+
+        return ResponseEntity.ok(badge);
+    }
+
+    @Override
+    public ResponseEntity<List<Badge>> getBadges() {
+
+        List<Badge> badges = new ArrayList<>();
+        for (BadgeEntity badgeEntity : badgeRepository.findAll()) {
+            badges.add(toBadge(badgeEntity));
         }
-        /*
-        Fruit staticFruit = new Fruit();
-        staticFruit.setColour("red");
-        staticFruit.setKind("banana");
-        staticFruit.setSize("medium");
-        List<Fruit> fruits = new ArrayList<>();
-        fruits.add(staticFruit);
 
-        return ResponseEntity.ok(fruits);
+        return ResponseEntity.ok(badges);
     }
 
 
-    private BadgeEntity toFruitEntity(Fruit fruit) {
+    private BadgeEntity toBadgeEntity(Badge badge) {
         BadgeEntity entity = new BadgeEntity();
-        entity.setColour(fruit.getColour());
-        entity.setKind(fruit.getKind());
-        entity.setSize(fruit.getSize());
+        entity.setDescription(badge.getDescription());
+        entity.setId(badge.getId());
+        entity.setImage(badge.getImage());
+        entity.setName(badge.getName());
         return entity;
     }
 
-    private Fruit toFruit(BadgeEntity entity) {
-        Fruit fruit = new Fruit();
-        fruit.setColour(entity.getColour());
-        fruit.setKind(entity.getKind());
-        fruit.setSize(entity.getSize());
-        return fruit;
-    }*/
-
+    private Badge toBadge(BadgeEntity entity) {
+        Badge badge = new Badge();
+        badge.setDescription(entity.getDescription());
+        badge.setId((int)entity.getId());
+        badge.setImage(entity.getImage());
+        badge.setName(entity.getName());
+        return badge;
+    }
 }
