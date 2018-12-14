@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc9bf3c1-9d6e-484b-992a-a6886feabb34" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../spring-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../images/mysql/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../../images/mysql/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../images/phpmyadmin/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../../images/phpmyadmin/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../images/spring-boot/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../../images/spring-boot/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../spring-server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-server/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../spring-server/swagger-spring.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-server/swagger-spring.iml" afterDir="false" />
     </list>
     <ignored path="full-project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,7 +48,7 @@
         <entry file="file://$PROJECT_DIR$/../spring-server/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-705">
-              <caret line="17" column="13" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -57,7 +57,7 @@
         <entry file="file://$PROJECT_DIR$/../spring-server/src/main/resources/application.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
-              <caret line="15" column="18" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="18" />
+              <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -747,7 +747,7 @@
       <workItem from="1544187855767" duration="2981000" />
       <workItem from="1544191543393" duration="2732000" />
       <workItem from="1544348281387" duration="171000" />
-      <workItem from="1544790218288" duration="4517000" />
+      <workItem from="1544790218288" duration="5693000" />
     </task>
     <servers />
   </component>
@@ -763,7 +763,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36528000" />
+    <option name="totallyTimeSpent" value="37704000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1061" extended-state="6" />
@@ -989,14 +989,14 @@
     <entry file="file://$PROJECT_DIR$/../spring-server/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-705">
-          <caret line="17" column="13" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../spring-server/src/main/resources/application.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
-          <caret line="15" column="18" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="18" />
+          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
         </state>
       </provider>
     </entry>
