@@ -6,36 +6,38 @@ info:
 host: localhost:8080
 basePath: /api
 schemes:
-- http
+  - http
 paths:
   /badges:
     post:
       tags:
-      - "badges"
-      summary: "Add a new badge to the store"
+        - "badges"
+      summary: "Add a new badge to the app"
       description: create a badge
       operationId: createBadge
       consumes:
-      - application/json
+        - application/json
       parameters:
-      - name: badge
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/Badge'
+        - name: badge
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Badge'
       responses:
         '201':
           description: created
           schema:
             $ref: '#/definitions/Location'
+        '401':
+          $ref: "#/responses/Unauthorized"
     get:
       tags:
-      - "badges"
-      summary: "Return all the badges on the store"
+        - "badges"
+      summary: "Return all the badges for an app"
       description: get the list of all badges
       operationId: getBadges
       produces:
-      - application/json
+        - application/json
       responses:
         '200':
           description: success
@@ -43,56 +45,62 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Badge'
+        '401':
+          $ref: "#/responses/Unauthorized"
 
-  /badges/{id}:
+  /badges/{name}:
     get:
       tags:
-      - "badges"
-      summary: "Return a specific badge with the id"
+        - "badges"
+      summary: "Return a specific app badge with from its name"
       parameters:
-      - in : path
-        name : id
-        type : integer
-        required : true
-        description : get a specific badge
+        - in : path
+          name : name
+          type : integer
+          required : true
+          description : bagde's name
       operationId: getBadge
       produces:
-      - application/json
+        - application/json
       responses:
         '200':
           description: success
           schema:
             $ref: '#/definitions/Badge'
+        '401':
+          $ref: "#/responses/Unauthorized"
 
   /pointScales:
     post:
       tags:
-      - "pointScales"
-      summary: "Add a new pointScale to the store"
+        - "pointScales"
+      summary: "Add a new pointScale to the app"
       description: create a pointScale
       operationId: createPointScale
       consumes:
-      - application/json
+        - application/json
       parameters:
-      - name: pointScale
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/PointScale'
+        - name: pointScale
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PointScale'
       responses:
         '201':
           description: created
           schema:
             $ref: '#/definitions/Location'
+        '401':
+          $ref: "#/responses/Unauthorized"
 
     get:
       tags:
-      - "pointScales"
-      summary: "Return all the pointScales on the store"
+        - "pointScales"
+      summary: "Return all the pointScales of the app"
       description: get the list of all pointScales
       operationId: getPointScales
       produces:
-      - application/json
+        - application/json
       responses:
         '200':
           description: success
@@ -100,34 +108,80 @@ paths:
             type: array
             items:
               $ref: '#/definitions/PointScale'
+        '401':
+          $ref: "#/responses/Unauthorized"
 
-  /pointScales/{id}:
+  /pointScales/{name}:
     get:
       tags:
-      - "pointScales"
+        - "pointScales"
       summary: "Return a specific pointScales with the id"
+      description: get the specific app pointScale
       parameters:
-      - in : path
-        name : id
-        type : integer
-        required : true
-        description : get a specific pointScale
+        - in : path
+          name : name
+          type : integer
+          required : true
+          description : get a specific pointScale
       operationId: getPointScale
       produces:
-      - application/json
+        - application/json
       responses:
         '200':
           description: success
           schema:
             $ref: '#/definitions/PointScale'
+        '401':
+          $ref: "#/responses/Unauthorized"
 
+  /rules:
+    post:
+      tags:
+        - "rules"
+      summary: "Add a new rules to the app"
+      description: create a rule
+      operationId: createRule
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: rule
+          required: true
+          schema:
+            $ref: '#/definitions/Rule'
+      responses:
+        '201':
+          description: created
+          schema:
+            $ref: '#/definitions/Rule'
+        '401':
+          $ref: "#/responses/Unauthorized"
+
+  /events:
+    post:
+      tags:
+        - "events"
+      summary: "send event"
+      description: post event
+      operationId: postEvent
+      consumes:
+        - application/json
+      parameters:
+        - name: event
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Event'
+      responses:
+        '200':
+          description: handled
+        '401':
+          $ref: "#/responses/Unauthorized"
 
 definitions:
   Badge:
     type: object
     properties:
-      id:
-        type: integer
       name:
         type: string
       image:
@@ -138,12 +192,32 @@ definitions:
   PointScale:
     type: object
     properties:
-      id:
-        type: integer
       name:
         type: string
       description:
         type: string
+
+  Rule:
+    type: object
+    properties:
+      eventName:
+        type: string
+      apiKey:
+        type: string
+      pointScaleName:
+        type: string
+      badgeName:
+        type: string
+      threshold:
+        type: integer
+        format: int64
+
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
 
   Location:
     type: object
@@ -151,4 +225,31 @@ definitions:
       location:
         type: string
 
+  Event:
+    type: object
+    properties:
+      userId:
+        type: integer
+        format: int64
+      timestamp:
+        type: integer
+        format: date-type
+      type:
+        type: string
+      quantity:
+        type: integer
+        format: int64
 
+securityDefinitions:
+  ApiKey:
+    description: "Format: {apiKey}"
+    type: apiKey
+    name: Authorization
+    in: header
+
+security:
+  - ApiKey: []
+
+responses:
+  Unauthorized:
+    description: "Unauthorized access"
