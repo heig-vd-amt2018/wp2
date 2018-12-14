@@ -1,4 +1,4 @@
-package ch.heigvd.amt.wp2.entities;
+package ch.heigvd.amt.wp2.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
