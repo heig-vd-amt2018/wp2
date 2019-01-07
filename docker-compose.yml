@@ -1,0 +1,25 @@
+version: '3'
+services:
+  spring-boot:
+    build: ./images/spring-boot/
+    environment:
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "8080:8080"
+    links:
+      - mysql:db
+  mysql:
+    build: ./images/mysql/
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+  phpmyadmin:
+    build: ./images/phpmyadmin/
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "6060:80"
+    links:
+      - mysql:db
