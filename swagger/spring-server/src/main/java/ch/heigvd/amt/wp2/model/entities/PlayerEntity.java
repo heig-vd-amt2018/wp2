@@ -6,22 +6,22 @@ import java.util.List;
 
 @Entity
 @Table(name = "player")
-public class Player extends AbstractDomainModelEntity<Long> {
+public class PlayerEntity extends AbstractDomainModelEntity<Long> {
 
     @Column(name = "username", nullable = false)
     private String username;
 
     @Column(name = "badgeRewards", nullable = true)
-    private List<BadgeReward> badgeRewards;
+    private List<BadgeRewardEntity> badgeRewards;
 
     @Column(name = "pointRewards", nullable = true)
-    private List<PointReward> pointRewards;
+    private List<PointRewardEntity> pointRewards;
 
-    public Player() {
+    public PlayerEntity() {
         //only here for JPA
     }
 
-    public Player(String username, List<BadgeReward> badgeRewards, List<PointReward> pointRewards) {
+    public PlayerEntity(String username, List<BadgeRewardEntity> badgeRewards, List<PointRewardEntity> pointRewards) {
         this.username = username;
         this.badgeRewards = badgeRewards;
         this.pointRewards = pointRewards;
@@ -35,27 +35,27 @@ public class Player extends AbstractDomainModelEntity<Long> {
         this.username = username;
     }
 
-    public List<BadgeReward> getBadgeRewards() {
+    public List<BadgeRewardEntity> getBadgeRewards() {
         return badgeRewards;
     }
 
-    public void setBadgeRewards(List<BadgeReward> badgeRewards) {
+    public void setBadgeRewards(List<BadgeRewardEntity> badgeRewards) {
         this.badgeRewards = badgeRewards;
     }
 
-    public boolean addBadgeReward(BadgeReward badgeReward){
+    public boolean addBadgeReward(BadgeRewardEntity badgeReward){
         return badgeRewards.add(badgeReward);
     }
 
-    public List<PointReward> getPointRewards() {
+    public List<PointRewardEntity> getPointRewards() {
         return pointRewards;
     }
 
-    public void setPointRewards(List<PointReward> pointRewards) {
+    public void setPointRewards(List<PointRewardEntity> pointRewards) {
         this.pointRewards = pointRewards;
     }
 
-    public boolean addPointReward(PointReward pointReward){
+    public boolean addPointReward(PointRewardEntity pointReward){
         return pointRewards.add(pointReward);
     }
 }

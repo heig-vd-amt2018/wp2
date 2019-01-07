@@ -6,19 +6,19 @@ import java.util.Date;
 
 @Entity
 @Table(name = "badge_reward")
-public class BadgeReward extends AbstractDomainModelEntity<Long> {
+public class BadgeRewardEntity extends AbstractDomainModelEntity<Long> {
 
     @Column(name = "created_date", updatable = false, nullable = false)
     private Timestamp createdDate;
 
     @Column(name = "badge", nullable = false)
-    private Badge badge;
+    private BadgeEntity badge;
 
-    public BadgeReward() {
+    public BadgeRewardEntity() {
         //Here for JPA
     }
 
-    public BadgeReward(Badge badge) {
+    public BadgeRewardEntity(BadgeEntity badge) {
         this.createdDate = new Timestamp((new Date()).getTime());
         this.badge = badge;
     }
@@ -27,11 +27,11 @@ public class BadgeReward extends AbstractDomainModelEntity<Long> {
         return createdDate;
     }
 
-    public Badge getBadge() {
+    public BadgeEntity getBadge() {
         return badge;
     }
 
-    public void setBadge(Badge badge) {
+    public void setBadge(BadgeEntity badge) {
         this.badge = badge;
     }
 }

@@ -3,7 +3,7 @@ package ch.heigvd.amt.wp2.api.endpoints;
 import ch.heigvd.amt.wp2.api.BadgesApi;
 import ch.heigvd.amt.wp2.api.model.Badge;
 import ch.heigvd.amt.wp2.api.model.Location;
-import ch.heigvd.amt.wp2.entities.BadgeEntity;
+import ch.heigvd.amt.wp2.model.entities.BadgeEntity;
 import ch.heigvd.amt.wp2.repositories.BadgeRepository;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class BadgesApiController implements BadgesApi {
     }
 
     @Override
-    public ResponseEntity<Badge> getBadge(Integer id) {
+    public ResponseEntity<Badge> getBadge(Long id) {
 
         Badge badge;
         BadgeEntity badgeEntity = badgeRepository.findOne((long)id);
@@ -62,6 +62,11 @@ public class BadgesApiController implements BadgesApi {
         return ResponseEntity.ok(badges);
     }
 
+    @Override
+    public ResponseEntity<Location> updateBadge(Long id, Badge badge) {
+        return null; // TODO
+    }
+
 
     private BadgeEntity toBadgeEntity(Badge badge) {
         BadgeEntity entity = new BadgeEntity();
@@ -75,7 +80,7 @@ public class BadgesApiController implements BadgesApi {
     private Badge toBadge(BadgeEntity entity) {
         Badge badge = new Badge();
         badge.setDescription(entity.getDescription());
-        badge.setId((int)entity.getId());
+        badge.setId(entity.getId());
         badge.setImage(entity.getImage());
         badge.setName(entity.getName());
         return badge;

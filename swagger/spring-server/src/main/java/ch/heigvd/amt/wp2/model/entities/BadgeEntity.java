@@ -1,28 +1,36 @@
 package ch.heigvd.amt.wp2.model.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.io.Serializable;
-
+import javax.persistence.*;
 
 @Entity
-public class BadgeEntity implements Serializable {
+@Table(name = "badge")
+public class BadgeEntity extends AbstractDomainModelEntity<Long> {
 
-    @Id
-    private long id; //@GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @Column(name = "name", nullable = false)
     private String name;
-    private String image;
+
+    @Column(name = "description", nullable = true)
     private String description;
 
-    public String getImage() {
-        return image;
+    @Column(name = "image", nullable = true)
+    private String image;
+
+    public BadgeEntity() {
+        //Here for JPA
     }
 
-    public void setImage(String image) {
+    public BadgeEntity(String name, String description, String image) {
+        this.name = name;
+        this.description = description;
         this.image = image;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -33,19 +41,11 @@ public class BadgeEntity implements Serializable {
         this.description = description;
     }
 
-    public long getId() {
-        return id;
+    public String getImage() {
+        return image;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setImage(String image) {
+        this.image = image;
     }
 }

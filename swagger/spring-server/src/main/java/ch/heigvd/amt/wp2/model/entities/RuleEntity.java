@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "rule")
-public class Rule extends AbstractDomainModelEntity<Long>{
+public class RuleEntity extends AbstractDomainModelEntity<Long>{
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -13,19 +13,19 @@ public class Rule extends AbstractDomainModelEntity<Long>{
     private String eventName;
 
     @Column(name = "pointScale", nullable = false)
-    private PointScale pointScale;
+    private PointScaleEntity pointScale;
 
     @Column(name = "badge", nullable = false)
-    private Badge badge;
+    private BadgeEntity badge;
 
     @Column(name = "threshold", nullable = false)
     private Long threshold;
 
-    public Rule() {
+    public RuleEntity() {
         //here fo JPA
     }
 
-    public Rule(String name, String eventName, PointScale pointScale, Badge badge, Long threshold) {
+    public RuleEntity(String name, String eventName, PointScaleEntity pointScale, BadgeEntity badge, Long threshold) {
         this.name = name;
         this.eventName = eventName;
         this.pointScale = pointScale;
@@ -49,19 +49,19 @@ public class Rule extends AbstractDomainModelEntity<Long>{
         this.eventName = eventName;
     }
 
-    public PointScale getPointScale() {
+    public PointScaleEntity getPointScale() {
         return pointScale;
     }
 
-    public void setPointScale(PointScale pointScale) {
+    public void setPointScale(PointScaleEntity pointScale) {
         this.pointScale = pointScale;
     }
 
-    public Badge getBadge() {
+    public BadgeEntity getBadge() {
         return badge;
     }
 
-    public void setBadge(Badge badge) {
+    public void setBadge(BadgeEntity badge) {
         this.badge = badge;
     }
 

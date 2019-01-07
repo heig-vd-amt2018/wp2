@@ -3,7 +3,7 @@ package ch.heigvd.amt.wp2.api.endpoints;
 import ch.heigvd.amt.wp2.api.PointScalesApi;
 import ch.heigvd.amt.wp2.api.model.Location;
 import ch.heigvd.amt.wp2.api.model.PointScale;
-import ch.heigvd.amt.wp2.entities.PointScaleEntity;
+import ch.heigvd.amt.wp2.model.entities.PointScaleEntity;
 import ch.heigvd.amt.wp2.repositories.PointScaleRepository;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class PointScalesApiController implements PointScalesApi {
     }
 
     @Override
-    public ResponseEntity<PointScale> getPointScale(Integer id) {
+    public ResponseEntity<PointScale> getPointScale(Long id) {
 
         PointScale pointScale;
         PointScaleEntity pointScaleEntity = pointScaleRepository.findOne((long)id);
@@ -61,6 +61,11 @@ public class PointScalesApiController implements PointScalesApi {
         return ResponseEntity.ok(pointScales);
     }
 
+    @Override
+    public ResponseEntity<Location> updatePointScales(Long id, PointScale pointScale) {
+        return null; //TODO
+    }
+
 
     private PointScaleEntity toPointScaleEntity(PointScale pointScale) {
         PointScaleEntity entity = new PointScaleEntity();
@@ -73,7 +78,7 @@ public class PointScalesApiController implements PointScalesApi {
     private PointScale toPointScale(PointScaleEntity entity) {
         PointScale pointScale = new PointScale();
         pointScale.setDescription(entity.getDescription());
-        pointScale.setId((int)entity.getId());
+        pointScale.setId(entity.getId());
         pointScale.setName(entity.getName());
         return pointScale;
     }

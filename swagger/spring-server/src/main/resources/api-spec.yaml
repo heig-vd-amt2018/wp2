@@ -48,15 +48,16 @@ paths:
         '401':
           $ref: "#/responses/Unauthorized"
 
-  /badges/{name}:
+  /badges/{id}:
     get:
       tags:
         - "badges"
       summary: "Return a specific app badge from its name"
       parameters:
         - in : path
-          name : name
-          type : string
+          name : id
+          type: integer
+          format: int64
           required : true
           description : bagde's name
       operationId: getBadge
@@ -79,8 +80,9 @@ paths:
         - application/json
       parameters:
         - in: path
-          name: name
-          type: string
+          name: id
+          type: integer
+          format: int64
           required: true
           description: badge's name
         - in: body
@@ -138,7 +140,7 @@ paths:
         '401':
           $ref: "#/responses/Unauthorized"
 
-  /pointScales/{name}:
+  /pointScales/{id}:
     get:
       tags:
         - "pointScales"
@@ -146,8 +148,9 @@ paths:
       description: get the specific app pointScale
       parameters:
         - in : path
-          name : name
-          type : string
+          name : id
+          type : integer
+          format: int64
           required : true
           description : get a specific pointScale
       operationId: getPointScale
@@ -170,10 +173,11 @@ paths:
         - application/json
       parameters:
         - in: path
-          name: name
-          type: string
+          name: id
+          type: integer
+          format: int64
           required: true
-          description: pointScale's name
+          description: pointScale's id
         - in: body
           name: pointScale
           required: true
@@ -302,6 +306,9 @@ definitions:
   Badge:
     type: object
     properties:
+      id:
+        type: integer
+        format: int64
       name:
         type: string
       image:
@@ -312,6 +319,9 @@ definitions:
   PointScale:
     type: object
     properties:
+      id:
+        type: integer
+        format: int64
       name:
         type: string
       description:

@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "application")
-public class Application extends AbstractDomainModelEntity<Long> {
+public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -14,22 +14,22 @@ public class Application extends AbstractDomainModelEntity<Long> {
     private Long apiKey;
 
     @Column(name = "badges", nullable = true)
-    private List<Badge> badges;
+    private List<BadgeEntity> badges;
 
     @Column(name = "pointScales", nullable = true)
-    private List<PointScale> pointScales;
+    private List<PointScaleEntity> pointScales;
 
     @Column(name = "players", nullable = true)
-    private List<Player> players;
+    private List<PlayerEntity> players;
 
     @Column(name = "rules", nullable = true)
-    private List<Rule> rules;
+    private List<RuleEntity> rules;
 
-    public Application() {
+    public ApplicationEntity() {
         //here fo JPA
     }
 
-    public Application(String name, Long apiKey, List<Badge> badges, List<PointScale> pointScales, List<Player> players, List<Rule> rules) {
+    public ApplicationEntity(String name, Long apiKey, List<BadgeEntity> badges, List<PointScaleEntity> pointScales, List<PlayerEntity> players, List<RuleEntity> rules) {
         this.name = name;
         this.apiKey = apiKey;
         this.badges = badges;
@@ -54,51 +54,51 @@ public class Application extends AbstractDomainModelEntity<Long> {
         this.apiKey = apiKey;
     }
 
-    public List<Badge> getBadges() {
+    public List<BadgeEntity> getBadges() {
         return badges;
     }
 
-    public void setBadges(List<Badge> badges) {
+    public void setBadges(List<BadgeEntity> badges) {
         this.badges = badges;
     }
 
-    public boolean addBadge(Badge badge){
+    public boolean addBadge(BadgeEntity badge){
         return badges.add(badge);
     }
 
-    public List<PointScale> getPointScales() {
+    public List<PointScaleEntity> getPointScales() {
         return pointScales;
     }
 
-    public void setPointScales(List<PointScale> pointScales) {
+    public void setPointScales(List<PointScaleEntity> pointScales) {
         this.pointScales = pointScales;
     }
 
-    public boolean addPointScale(PointScale pointScale){
+    public boolean addPointScale(PointScaleEntity pointScale){
         return pointScales.add(pointScale);
     }
 
-    public List<Player> getPlayers() {
+    public List<PlayerEntity> getPlayers() {
         return players;
     }
 
-    public void setPlayers(List<Player> players) {
+    public void setPlayers(List<PlayerEntity> players) {
         this.players = players;
     }
 
-    public boolean addPlayer(Player player){
+    public boolean addPlayer(PlayerEntity player){
         return players.add(player);
     }
 
-    public List<Rule> getRules() {
+    public List<RuleEntity> getRules() {
         return rules;
     }
 
-    public void setRules(List<Rule> rules) {
+    public void setRules(List<RuleEntity> rules) {
         this.rules = rules;
     }
 
-    public boolean addRule(Rule rule){
+    public boolean addRule(RuleEntity rule){
         return rules.add(rule);
     }
 }
