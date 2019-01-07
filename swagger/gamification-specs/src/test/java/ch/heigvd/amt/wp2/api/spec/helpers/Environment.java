@@ -2,6 +2,7 @@ package ch.heigvd.amt.wp2.api.spec.helpers;
 
 
 import ch.heigvd.amt.wp2.api.BadgesApi;
+import ch.heigvd.amt.wp2.api.PointScalesApi;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -11,17 +12,24 @@ import java.util.Properties;
  */
 public class Environment {
 
-    private BadgesApi api = new BadgesApi();
+    private BadgesApi badgesApi = new BadgesApi();
+    private PointScalesApi pointScalesApi = new PointScalesApi();
 
     public Environment() throws IOException {
         Properties properties = new Properties();
         properties.load(this.getClass().getClassLoader().getResourceAsStream("environment.properties"));
         String url = properties.getProperty("ch.heigvd.amt.wp2.url");
-        api.getApiClient().setBasePath(url);
+
+        badgesApi.getApiClient().setBasePath(url);
+        pointScalesApi.getApiClient().setBasePath(url);
     }
 
-    public BadgesApi getApi() {
-        return api;
+    public BadgesApi getBadgeApi() {
+        return badgesApi;
+    }
+
+    public PointScalesApi getPointScalesApi() {
+        return pointScalesApi;
     }
 
 }
