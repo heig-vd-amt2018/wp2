@@ -52,11 +52,11 @@ paths:
     get:
       tags:
         - "badges"
-      summary: "Return a specific app badge with from its name"
+      summary: "Return a specific app badge from its name"
       parameters:
         - in : path
           name : name
-          type : integer
+          type : string
           required : true
           description : bagde's name
       operationId: getBadge
@@ -69,6 +69,33 @@ paths:
             $ref: '#/definitions/Badge'
         '401':
           $ref: "#/responses/Unauthorized"
+    patch:
+      tags:
+        - "badges"
+      summary: "Update a specific badge"
+      description: update a badge
+      operationId: updateBadge
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: name
+          type: string
+          required: true
+          description: badge's name
+        - in: body
+          name: badge
+          required: true
+          schema:
+            $ref: '#/definitions/Badge'
+      responses:
+        '200':
+          description: updated
+          schema:
+            $ref: '#/definitions/Location'
+        '401':
+          $ref: "#/responses/Unauthorized"
+
 
   /pointScales:
     post:
@@ -120,7 +147,7 @@ paths:
       parameters:
         - in : path
           name : name
-          type : integer
+          type : string
           required : true
           description : get a specific pointScale
       operationId: getPointScale
@@ -133,6 +160,34 @@ paths:
             $ref: '#/definitions/PointScale'
         '401':
           $ref: "#/responses/Unauthorized"
+    patch:
+      tags:
+        - "pointScales"
+      summary: "Update a specific pointScale"
+      description: update a pointScale
+      operationId: updatePointScales
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: name
+          type: string
+          required: true
+          description: pointScale's name
+        - in: body
+          name: pointScale
+          required: true
+          schema:
+            $ref: '#/definitions/PointScale'
+      responses:
+        '200':
+          description: updated
+          schema:
+            $ref: '#/definitions/Location'
+        '401':
+          $ref: "#/responses/Unauthorized"
+
+
 
   /rules:
     post:
@@ -154,6 +209,71 @@ paths:
           description: created
           schema:
             $ref: '#/definitions/Rule'
+        '401':
+          $ref: "#/responses/Unauthorized"
+    get:
+      tags:
+        - "rules"
+      summary: "Get all rules defined for the app"
+      description: get rules
+      operationId: getRules
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Rule'
+        '401':
+          $ref: "#/responses/Unauthorized"
+
+  /rules/{name}:
+    get:
+      tags:
+        - "rules"
+      summary: "Return a specific app rule from its name"
+      parameters:
+        - in : path
+          name : name
+          type : string
+          required : true
+          description : rule's name
+      operationId: getRule
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: success
+          schema:
+            $ref: '#/definitions/Rule'
+        '401':
+          $ref: "#/responses/Unauthorized"
+    patch:
+      tags:
+        - "rules"
+      summary: "Update a specific rule"
+      description: update a rule
+      operationId: updateRule
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: name
+          type: string
+          required: true
+          description: rule's name
+        - in: body
+          name: rule
+          required: true
+          schema:
+            $ref: '#/definitions/Rule'
+      responses:
+        '200':
+          description: updated
+          schema:
+            $ref: '#/definitions/Location'
         '401':
           $ref: "#/responses/Unauthorized"
 
@@ -200,6 +320,8 @@ definitions:
   Rule:
     type: object
     properties:
+      name:
+        type: string
       eventName:
         type: string
       apiKey:
