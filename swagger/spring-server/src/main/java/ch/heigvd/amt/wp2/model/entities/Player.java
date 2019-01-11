@@ -11,10 +11,10 @@ public class Player extends AbstractDomainModelEntity<Long> {
     @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "badgeRewards", nullable = true)
+    @Column(name = "badge_rewards", nullable = true)
     private List<BadgeReward> badgeRewards;
 
-    @Column(name = "pointRewards", nullable = true)
+    @Column(name = "point_rewards", nullable = true)
     private List<PointReward> pointRewards;
 
     public Player() {

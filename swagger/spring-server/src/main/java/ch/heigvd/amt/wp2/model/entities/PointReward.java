@@ -11,7 +11,7 @@ public class PointReward extends AbstractDomainModelEntity<Long> {
     @Column(name = "created_date", updatable = false, nullable = false)
     private Timestamp createdDate;
 
-    @Column(name = "pointScale", nullable = false)
+    @Column(name = "point_scale", nullable = false)
     private PointScale pointScale;
 
     @Column(name = "amount", nullable = false)

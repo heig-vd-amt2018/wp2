@@ -16,7 +16,7 @@ public class Application extends AbstractDomainModelEntity<Long> {
     @Column(name = "badges", nullable = true)
     private List<Badge> badges;
 
-    @Column(name = "pointScales", nullable = true)
+    @Column(name = "point_scales", nullable = true)
     private List<PointScale> pointScales;
 
     @Column(name = "players", nullable = true)

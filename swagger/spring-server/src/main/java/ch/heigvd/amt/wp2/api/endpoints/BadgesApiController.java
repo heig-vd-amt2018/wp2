@@ -10,32 +10,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import java.util.List;
 
-
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-07-26T19:36:34.802Z")
 
 @Controller
 public class BadgesApiController implements BadgesApi {
 
     @Autowired
-    BadgeRepository badgeRepositoryRepository;
-
+    BadgeRepository badgeRepository;
 
     @Override
     public ResponseEntity<Location> createBadge(Badge badge) {
-        return null;
+        return badgeRepository.;
     }
 
     @Override
     public ResponseEntity<Badge> getBadge(Integer id) {
-        return null;
+        return badgeRepository.findByName(id);
     }
 
     @Override
     public ResponseEntity<List<Badge>> getBadges() {
-        return null;
+        return badgeRepository.findAllBy();
     }
 
-    /*public ResponseEntity<Object> createFruit(@ApiParam(value = "", required = true) @Valid @RequestBody Fruit fruit) {
+    public ResponseEntity<Object> createFruit(@ApiParam(value = "", required = true) @Valid @RequestBody Fruit fruit) {
         BadgeEntity newFruitEntity = toFruitEntity(fruit);
         fruitRepository.save(newFruitEntity);
         Long id = newFruitEntity.getId();
@@ -47,13 +45,12 @@ public class BadgesApiController implements BadgesApi {
         return ResponseEntity.created(location).build();
     }
 
-
     public ResponseEntity<List<Fruit>> getFruits() {
         List<Fruit> fruits = new ArrayList<>();
         for (BadgeEntity fruitEntity : fruitRepository.findAll()) {
             fruits.add(toFruit(fruitEntity));
         }
-        /*
+
         Fruit staticFruit = new Fruit();
         staticFruit.setColour("red");
         staticFruit.setKind("banana");
@@ -63,7 +60,6 @@ public class BadgesApiController implements BadgesApi {
 
         return ResponseEntity.ok(fruits);
     }
-
 
     private BadgeEntity toFruitEntity(Fruit fruit) {
         BadgeEntity entity = new BadgeEntity();
@@ -79,6 +75,5 @@ public class BadgesApiController implements BadgesApi {
         fruit.setKind(entity.getKind());
         fruit.setSize(entity.getSize());
         return fruit;
-    }*/
-
+    }
 }

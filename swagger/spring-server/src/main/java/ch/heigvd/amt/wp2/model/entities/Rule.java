@@ -9,10 +9,10 @@ public class Rule extends AbstractDomainModelEntity<Long>{
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "eventName", nullable = false)
+    @Column(name = "event_name", nullable = false)
     private String eventName;
 
-    @Column(name = "pointScale", nullable = false)
+    @Column(name = "point_scale", nullable = false)
     private PointScale pointScale;
 
     @Column(name = "badge", nullable = false)
