@@ -3,26 +3,26 @@ package ch.heigvd.amt.wp2.model.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "badge")
-public class Badge extends AbstractDomainModelEntity<Long> {
+@Table(name = "point_scale")
+public class PointScaleEntity extends AbstractDomainModelEntity<Long> {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "application_id", nullable = false)
+    private ApplicationEntity application;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description", nullable = true)
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "image", nullable = true)
-    private String image;
-
-    public Badge() {
-        //Here for JPA
+    public PointScaleEntity() {
+        //here fo JPA
     }
 
-    public Badge(String name, String description, String image) {
+    public PointScaleEntity(ApplicationEntity application, String name, String description) {
+        this.application = application;
         this.name = name;
         this.description = description;
-        this.image = image;
     }
 
     public String getName() {
@@ -39,13 +39,5 @@ public class Badge extends AbstractDomainModelEntity<Long> {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 }

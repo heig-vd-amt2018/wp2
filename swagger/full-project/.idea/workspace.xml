@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc9bf3c1-9d6e-484b-992a-a6886feabb34" name="Default" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/repositories/ApplicationRepository.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/repositories/BadgeRewardRepository.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/repositories/PlayerRepository.java" afterDir="false" />
@@ -15,6 +16,9 @@
       <change beforePath="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/PointReward.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/PointReward.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/Rule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/repositories/BadgeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/repositories/BadgeRepository.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> fb-badges-pointscales
     </list>
     <ignored path="full-project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,16 +42,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/api/endpoints/BadgesApiController.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="114">
               <caret line="15" column="48" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="225">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
+>>>>>>> fb-badges-pointscales
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/BadgeReward.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
@@ -61,6 +71,12 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
               <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+=======
+        <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/ApplicationEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="40" column="5" selection-start-line="36" selection-start-column="4" selection-end-line="40" selection-end-column="5" />
+>>>>>>> fb-badges-pointscales
             </state>
           </provider>
         </entry>
@@ -68,40 +84,68 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../spring-server/target/generated-sources/swagger/src/main/java/ch/heigvd/amt/wp2/api/BadgesApi.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="90">
               <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+=======
+            <state relative-caret-position="317">
+              <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+>>>>>>> fb-badges-pointscales
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/repositories/ApplicationRepository.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
               <caret line="9" column="41" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="41" />
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../gamification-specs/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="174">
+              <caret line="122" column="37" selection-start-line="122" selection-start-column="37" selection-end-line="122" selection-end-column="37" />
+>>>>>>> fb-badges-pointscales
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/repositories/BadgeRewardRepository.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
               <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+=======
+        <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/PlayerEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
+>>>>>>> fb-badges-pointscales
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/repositories/PointRewardRepository.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
               <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+=======
+        <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/PointScaleEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" column="39" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
+>>>>>>> fb-badges-pointscales
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/repositories/BadgeRepository.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
@@ -109,24 +153,53 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+=======
+        <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/BadgeEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="6" column="66" selection-start-line="6" selection-start-column="66" selection-end-line="8" selection-end-column="58" />
+>>>>>>> fb-badges-pointscales
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/Application.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
               <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+=======
+        <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/PointRewardEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="11" column="16" selection-start-line="9" selection-end-line="11" selection-end-column="32" />
+>>>>>>> fb-badges-pointscales
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/Rule.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="435">
               <caret line="29" column="35" lean-forward="true" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+=======
+        <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/BadgeRewardEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/RuleEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
+>>>>>>> fb-badges-pointscales
             </state>
           </provider>
         </entry>
@@ -182,8 +255,8 @@
         <option value="$PROJECT_DIR$/../gamification-specs/pom.xml" />
         <option value="$PROJECT_DIR$/../gamification-specs/src/main/resources/api-spec.yaml" />
         <option value="$PROJECT_DIR$/../spring-server/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/../spring-server/pom.xml" />
         <option value="$PROJECT_DIR$/../spring-server/src/main/resources/application.yml" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/Player.java" />
         <option value="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/PointReward.java" />
         <option value="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/Rule.java" />
@@ -195,6 +268,16 @@
         <option value="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/repositories/ApplicationRepository.java" />
         <option value="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/Application.java" />
         <option value="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/api/endpoints/BadgesApiController.java" />
+=======
+        <option value="$PROJECT_DIR$/../spring-server/pom.xml" />
+        <option value="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/RuleEntity.java" />
+        <option value="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/PointScaleEntity.java" />
+        <option value="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/BadgeEntity.java" />
+        <option value="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/ApplicationEntity.java" />
+        <option value="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/PlayerEntity.java" />
+        <option value="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/PointRewardEntity.java" />
+        <option value="$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/BadgeRewardEntity.java" />
+>>>>>>> fb-badges-pointscales
       </list>
     </option>
   </component>
@@ -226,7 +309,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
+<<<<<<< HEAD
     <option name="x" value="960" />
+=======
+>>>>>>> fb-badges-pointscales
     <option name="width" value="960" />
     <option name="height" value="1061" />
   </component>
@@ -238,12 +324,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+=======
+      <pane id="PackagesPane" />
+>>>>>>> fb-badges-pointscales
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="full-project" type="b2602c69:ProjectViewProjectNode" />
               <item name="gamification-specs" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
             </path>
             <path>
               <item name="full-project" type="b2602c69:ProjectViewProjectNode" />
@@ -325,6 +416,22 @@
               <item name="full-project" type="b2602c69:ProjectViewProjectNode" />
               <item name="spring-server" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+=======
+>>>>>>> fb-badges-pointscales
+            </path>
+            <path>
+              <item name="full-project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gamification-specs" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="full-project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="full-project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="spring-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="full-project" type="b2602c69:ProjectViewProjectNode" />
@@ -346,54 +453,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="wp2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="full-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="wp2" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="full-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="wp2" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="endpoints" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="full-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="wp2" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="exceptions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="full-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="wp2" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="full-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-server" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="wp2" type="462c0819:PsiDirectoryNode" />
-              <item name="configuration" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="full-project" type="b2602c69:ProjectViewProjectNode" />
@@ -531,7 +590,10 @@
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
       <pane id="PackagesPane" />
+=======
+>>>>>>> fb-badges-pointscales
       <pane id="Scope" />
     </panes>
   </component>
@@ -544,7 +606,11 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="aspect.path.notification.shown" value="true" />
+<<<<<<< HEAD
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546883893531" />
+=======
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547212675352" />
+>>>>>>> fb-badges-pointscales
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -992,10 +1058,15 @@
       <workItem from="1544187855767" duration="2981000" />
       <workItem from="1544191543393" duration="2732000" />
       <workItem from="1544348281387" duration="171000" />
+<<<<<<< HEAD
       <workItem from="1544790218288" duration="6302000" />
       <workItem from="1544964762408" duration="121000" />
       <workItem from="1546873396373" duration="192000" />
       <workItem from="1546873615497" duration="5666000" />
+=======
+      <workItem from="1544790218288" duration="5693000" />
+      <workItem from="1547211651319" duration="957000" />
+>>>>>>> fb-badges-pointscales
     </task>
     <servers />
   </component>
@@ -1011,6 +1082,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="44292000" />
   </component>
   <component name="ToolWindowManager">
@@ -1018,6 +1090,15 @@
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19009584" />
+=======
+    <option name="totallyTimeSpent" value="39743000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="960" height="1061" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.36433262" />
+>>>>>>> fb-badges-pointscales
       <window_info id="Structure" order="1" weight="0.24835886" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -1026,8 +1107,13 @@
       <window_info id="Web" order="6" side_tool="true" />
       <window_info id="Image Layers" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Find" order="1" weight="0.47623864" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.28947368" />
+=======
+      <window_info anchor="bottom" id="Find" order="1" weight="0.83116883" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.43789473" />
+>>>>>>> fb-badges-pointscales
       <window_info anchor="bottom" id="Debug" order="3" weight="0.049603175" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1086,6 +1172,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../spring-server/target/generated-sources/swagger/src/main/java/ch/heig/vd/api/BadgesApi.java" />
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/repositories/BadgeRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+>>>>>>> fb-badges-pointscales
     <entry file="file://$PROJECT_DIR$/../spring-server/target/classes/io/avalia/fruits/api/BadgesApi.class" />
     <entry file="file://$PROJECT_DIR$/../spring-server/target/classes/io/avalia/fruits/api/PointScalesApi.class" />
     <entry file="file://$PROJECT_DIR$/../spring-server/target/classes/api-spec.yaml" />
@@ -1156,11 +1255,23 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/entities/BadgeEntity.java" />
     <entry file="file://$PROJECT_DIR$/../gamification-specs/pom.xml">
+=======
+    <entry file="file://$PROJECT_DIR$/../spring-server/src/main/resources/api-spec.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        <state relative-caret-position="2025">
+          <caret line="135" column="12" selection-start-line="135" selection-start-column="12" selection-end-line="135" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/entities/BadgeEntity.java" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/1.5.4.RELEASE/spring-boot-autoconfigure-1.5.4.RELEASE.jar!/org/springframework/boot/autoconfigure/orm/jpa/JpaBaseConfiguration.class">
+>>>>>>> fb-badges-pointscales
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="92" column="50" selection-start-line="92" selection-start-column="50" selection-end-line="92" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -1171,6 +1282,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/../spring-server/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1244,11 +1356,32 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="466">
           <caret line="104" column="45" selection-end-line="157" />
+=======
+    <entry file="file://$PROJECT_DIR$/../spring-server/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/AbstractDomainModelEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../spring-server/target/generated-sources/swagger/src/main/java/ch/heigvd/amt/wp2/api/BadgesApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+>>>>>>> fb-badges-pointscales
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/api/endpoints/PointScalesApiController.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="150">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding>
@@ -1263,11 +1396,65 @@
           <folding>
             <element signature="e#0#2396#0" expanded="true" />
           </folding>
+=======
+        <state relative-caret-position="225">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/RuleEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/ApplicationEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="40" column="5" selection-start-line="36" selection-start-column="4" selection-end-line="40" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/PointScaleEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="39" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/PlayerEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/PointRewardEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="11" column="16" selection-start-line="9" selection-end-line="11" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/BadgeEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="6" column="66" selection-start-line="6" selection-start-column="66" selection-end-line="8" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/model/entities/BadgeRewardEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
+>>>>>>> fb-badges-pointscales
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../spring-server/src/main/java/ch/heigvd/amt/wp2/repositories/ApplicationRepository.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="75">
           <caret line="9" column="41" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="41" />
         </state>
@@ -1339,6 +1526,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+=======
+        <state relative-caret-position="317">
+          <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../gamification-specs/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="122" column="37" selection-start-line="122" selection-start-column="37" selection-end-line="122" selection-end-column="37" />
+>>>>>>> fb-badges-pointscales
         </state>
       </provider>
     </entry>

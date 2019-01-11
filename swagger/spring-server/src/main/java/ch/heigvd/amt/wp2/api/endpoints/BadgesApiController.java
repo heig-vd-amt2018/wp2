@@ -2,13 +2,21 @@ package ch.heigvd.amt.wp2.api.endpoints;
 
 import ch.heigvd.amt.wp2.api.BadgesApi;
 import ch.heigvd.amt.wp2.api.model.Badge;
-import ch.heigvd.amt.wp2.api.model.InlineResponse201;
 import ch.heigvd.amt.wp2.api.model.Location;
+import ch.heigvd.amt.wp2.model.entities.BadgeEntity;
 import ch.heigvd.amt.wp2.repositories.BadgeRepository;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
+
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-07-26T19:36:34.802Z")
 
@@ -19,61 +27,62 @@ public class BadgesApiController implements BadgesApi {
     BadgeRepository badgeRepository;
 
     @Override
-    public ResponseEntity<Location> createBadge(Badge badge) {
-        return badgeRepository.;
-    }
+    public ResponseEntity<Location> createBadge( @ApiParam(value = "", required = true) @Valid @RequestBody Badge badge) {
 
-    @Override
-    public ResponseEntity<Badge> getBadge(Integer id) {
-        return badgeRepository.findByName(id);
-    }
-
-    @Override
-    public ResponseEntity<List<Badge>> getBadges() {
-        return badgeRepository.findAllBy();
-    }
-
-    public ResponseEntity<Object> createFruit(@ApiParam(value = "", required = true) @Valid @RequestBody Fruit fruit) {
-        BadgeEntity newFruitEntity = toFruitEntity(fruit);
-        fruitRepository.save(newFruitEntity);
-        Long id = newFruitEntity.getId();
+        BadgeEntity newBadgeEntity = toBadgeEntity(badge);
+        badgeRepository.save(newBadgeEntity);
+        Long id = newBadgeEntity.getId();
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
-                .buildAndExpand(newFruitEntity.getId()).toUri();
+                .buildAndExpand(newBadgeEntity.getId()).toUri();
 
         return ResponseEntity.created(location).build();
     }
 
-    public ResponseEntity<List<Fruit>> getFruits() {
-        List<Fruit> fruits = new ArrayList<>();
-        for (BadgeEntity fruitEntity : fruitRepository.findAll()) {
-            fruits.add(toFruit(fruitEntity));
-        }
+    @Override
+    public ResponseEntity<Badge> getBadge(Long id) {
 
-        Fruit staticFruit = new Fruit();
-        staticFruit.setColour("red");
-        staticFruit.setKind("banana");
-        staticFruit.setSize("medium");
-        List<Fruit> fruits = new ArrayList<>();
-        fruits.add(staticFruit);
+        Badge badge;
+        BadgeEntity badgeEntity = badgeRepository.findOne((long)id);
 
-        return ResponseEntity.ok(fruits);
+        badge = toBadge(badgeEntity);
+
+        return ResponseEntity.ok(badge);
     }
 
-    private BadgeEntity toFruitEntity(Fruit fruit) {
+    @Override
+    public ResponseEntity<List<Badge>> getBadges() {
+
+        List<Badge> badges = new ArrayList<>();
+        for (BadgeEntity badgeEntity : badgeRepository.findAll()) {
+            badges.add(toBadge(badgeEntity));
+        }
+
+        return ResponseEntity.ok(badges);
+    }
+
+    @Override
+    public ResponseEntity<Location> updateBadge(Long id, Badge badge) {
+        return null; // TODO
+    }
+
+
+    private BadgeEntity toBadgeEntity(Badge badge) {
         BadgeEntity entity = new BadgeEntity();
-        entity.setColour(fruit.getColour());
-        entity.setKind(fruit.getKind());
-        entity.setSize(fruit.getSize());
+        entity.setDescription(badge.getDescription());
+        entity.setId(badge.getId());
+        entity.setImage(badge.getImage());
+        entity.setName(badge.getName());
         return entity;
     }
 
-    private Fruit toFruit(BadgeEntity entity) {
-        Fruit fruit = new Fruit();
-        fruit.setColour(entity.getColour());
-        fruit.setKind(entity.getKind());
-        fruit.setSize(entity.getSize());
-        return fruit;
+    private Badge toBadge(BadgeEntity entity) {
+        Badge badge = new Badge();
+        badge.setDescription(entity.getDescription());
+        badge.setId(entity.getId());
+        badge.setImage(entity.getImage());
+        badge.setName(entity.getName());
+        return badge;
     }
 }

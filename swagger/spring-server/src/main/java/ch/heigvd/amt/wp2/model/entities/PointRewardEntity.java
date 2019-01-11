@@ -6,22 +6,26 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "point_reward")
-public class PointReward extends AbstractDomainModelEntity<Long> {
+public class PointRewardEntity extends AbstractDomainModelEntity<Long> {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id", nullable = false)
+    private PlayerEntity player;
 
     @Column(name = "created_date", updatable = false, nullable = false)
     private Timestamp createdDate;
 
     @Column(name = "point_scale", nullable = false)
-    private PointScale pointScale;
+    private PointScaleEntity pointScale;
 
     @Column(name = "amount", nullable = false)
     private long amount;
 
-    public PointReward() {
+    public PointRewardEntity() {
         //Here for JPA
     }
 
-    public PointReward(PointScale pointScale, long amount) {
+    public PointRewardEntity(PlayerEntity player, PointScaleEntity pointScale, long amount) {
+        this.player = player;
         this.createdDate = new Timestamp((new Date()).getTime());
         this.pointScale = pointScale;
         this.amount = amount;
@@ -31,11 +35,11 @@ public class PointReward extends AbstractDomainModelEntity<Long> {
         return createdDate;
     }
 
-    public PointScale getPointScale() {
+    public PointScaleEntity getPointScale() {
         return pointScale;
     }
 
-    public void setPointScale(PointScale pointScale) {
+    public void setPointScale(PointScaleEntity pointScale) {
         this.pointScale = pointScale;
     }
 
