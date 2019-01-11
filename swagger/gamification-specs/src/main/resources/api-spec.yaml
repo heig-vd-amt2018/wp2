@@ -339,8 +339,6 @@ definitions:
         type: string
       eventName:
         type: string
-      apiKey:
-        type: string
       pointScaleName:
         type: string
       badgeName:
