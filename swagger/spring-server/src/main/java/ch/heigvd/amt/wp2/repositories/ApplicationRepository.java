@@ -1,10 +1,10 @@
 package ch.heigvd.amt.wp2.repositories;
 
-import ch.heigvd.amt.wp2.model.entities.Badge;
+import ch.heigvd.amt.wp2.model.entities.ApplicationEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface ApplicationRepository extends CrudRepository<Application, Long> {
-    List<Application> findByNameAndApiKey(String name, String apiKey);
+public interface ApplicationRepository extends CrudRepository<ApplicationEntity, Long> {
+    List<ApplicationEntity> findByNameAndApiKey(String name, String apiKey);
 }
