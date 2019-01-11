@@ -5,6 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "rule")
 public class RuleEntity extends AbstractDomainModelEntity<Long>{
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "application_id", nullable = false)
+    private ApplicationEntity application;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -25,7 +28,8 @@ public class RuleEntity extends AbstractDomainModelEntity<Long>{
         //here fo JPA
     }
 
-    public RuleEntity(String name, String eventName, PointScaleEntity pointScale, BadgeEntity badge, Long threshold) {
+    public RuleEntity(ApplicationEntity application, String name, String eventName, PointScaleEntity pointScale, BadgeEntity badge, Long threshold) {
+        this.application = application;
         this.name = name;
         this.eventName = eventName;
         this.pointScale = pointScale;

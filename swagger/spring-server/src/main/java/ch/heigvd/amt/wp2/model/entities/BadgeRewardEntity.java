@@ -7,6 +7,9 @@ import java.util.Date;
 @Entity
 @Table(name = "badge_reward")
 public class BadgeRewardEntity extends AbstractDomainModelEntity<Long> {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id", nullable = false)
+    private PlayerEntity player;
 
     @Column(name = "created_date", updatable = false, nullable = false)
     private Timestamp createdDate;
@@ -18,7 +21,8 @@ public class BadgeRewardEntity extends AbstractDomainModelEntity<Long> {
         //Here for JPA
     }
 
-    public BadgeRewardEntity(BadgeEntity badge) {
+    public BadgeRewardEntity(PlayerEntity player, BadgeEntity badge) {
+        this.player = player;
         this.createdDate = new Timestamp((new Date()).getTime());
         this.badge = badge;
     }

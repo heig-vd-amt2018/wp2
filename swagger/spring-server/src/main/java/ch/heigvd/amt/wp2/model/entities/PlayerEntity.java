@@ -7,21 +7,33 @@ import java.util.List;
 @Entity
 @Table(name = "player")
 public class PlayerEntity extends AbstractDomainModelEntity<Long> {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "application_id", nullable = false)
+    private ApplicationEntity application;
 
     @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "badgeRewards", nullable = true)
+    @OneToMany(
+            mappedBy = "player",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<BadgeRewardEntity> badgeRewards;
 
-    @Column(name = "pointRewards", nullable = true)
+    @OneToMany(
+            mappedBy = "player",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<PointRewardEntity> pointRewards;
 
     public PlayerEntity() {
         //only here for JPA
     }
 
-    public PlayerEntity(String username, List<BadgeRewardEntity> badgeRewards, List<PointRewardEntity> pointRewards) {
+    public PlayerEntity(ApplicationEntity application, String username, List<BadgeRewardEntity> badgeRewards, List<PointRewardEntity> pointRewards) {
+        this.application = application;
         this.username = username;
         this.badgeRewards = badgeRewards;
         this.pointRewards = pointRewards;

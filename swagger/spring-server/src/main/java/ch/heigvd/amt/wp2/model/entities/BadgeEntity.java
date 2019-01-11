@@ -5,6 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "badge")
 public class BadgeEntity extends AbstractDomainModelEntity<Long> {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "application_id", nullable = false)
+    private ApplicationEntity application;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -19,7 +22,8 @@ public class BadgeEntity extends AbstractDomainModelEntity<Long> {
         //Here for JPA
     }
 
-    public BadgeEntity(String name, String description, String image) {
+    public BadgeEntity(ApplicationEntity application, String name, String description, String image) {
+        this.application = application;
         this.name = name;
         this.description = description;
         this.image = image;

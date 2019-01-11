@@ -5,6 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "point_scale")
 public class PointScaleEntity extends AbstractDomainModelEntity<Long> {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "application_id", nullable = false)
+    private ApplicationEntity application;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -16,7 +19,8 @@ public class PointScaleEntity extends AbstractDomainModelEntity<Long> {
         //here fo JPA
     }
 
-    public PointScaleEntity(String name, String description) {
+    public PointScaleEntity(ApplicationEntity application, String name, String description) {
+        this.application = application;
         this.name = name;
         this.description = description;
     }

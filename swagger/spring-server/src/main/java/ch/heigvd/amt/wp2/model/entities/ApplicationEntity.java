@@ -13,16 +13,32 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
     @Column(name = "api_key", nullable = false)
     private Long apiKey;
 
-    @Column(name = "badges", nullable = true)
+    @OneToMany(
+            mappedBy = "application",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<BadgeEntity> badges;
 
-    @Column(name = "pointScales", nullable = true)
+    @OneToMany(
+            mappedBy = "application",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<PointScaleEntity> pointScales;
 
-    @Column(name = "players", nullable = true)
+    @OneToMany(
+            mappedBy = "application",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<PlayerEntity> players;
 
-    @Column(name = "rules", nullable = true)
+    @OneToMany(
+            mappedBy = "application",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<RuleEntity> rules;
 
     public ApplicationEntity() {
