@@ -17,7 +17,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-07-26T19:36:34.802Z")
 
 @Controller
@@ -27,7 +26,7 @@ public class BadgesApiController implements BadgesApi {
     BadgeRepository badgeRepository;
 
     @Override
-    public ResponseEntity<Location> createBadge( @ApiParam(value = "", required = true) @Valid @RequestBody Badge badge) {
+    public ResponseEntity<Location> createBadge(@ApiParam(value = "", required = true) @Valid @RequestBody Badge badge) {
 
         BadgeEntity newBadgeEntity = toBadgeEntity(badge);
         badgeRepository.save(newBadgeEntity);
@@ -44,7 +43,7 @@ public class BadgesApiController implements BadgesApi {
     public ResponseEntity<Badge> getBadge(Long id) {
 
         Badge badge;
-        BadgeEntity badgeEntity = badgeRepository.findOne((long)id);
+        BadgeEntity badgeEntity = badgeRepository.findOne((long) id);
 
         badge = toBadge(badgeEntity);
 
@@ -70,19 +69,23 @@ public class BadgesApiController implements BadgesApi {
 
     private BadgeEntity toBadgeEntity(Badge badge) {
         BadgeEntity entity = new BadgeEntity();
-        entity.setDescription(badge.getDescription());
+
         entity.setId(badge.getId());
-        entity.setImage(badge.getImage());
         entity.setName(badge.getName());
+        entity.setDescription(badge.getDescription());
+        entity.setImage(badge.getImage());
+
         return entity;
     }
 
     private Badge toBadge(BadgeEntity entity) {
         Badge badge = new Badge();
-        badge.setDescription(entity.getDescription());
+
         badge.setId(entity.getId());
-        badge.setImage(entity.getImage());
         badge.setName(entity.getName());
+        badge.setDescription(entity.getDescription());
+        badge.setImage(entity.getImage());
+
         return badge;
     }
 }

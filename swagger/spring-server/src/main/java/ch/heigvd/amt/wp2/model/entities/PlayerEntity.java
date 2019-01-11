@@ -55,7 +55,7 @@ public class PlayerEntity extends AbstractDomainModelEntity<Long> {
         this.badgeRewards = badgeRewards;
     }
 
-    public boolean addBadgeReward(BadgeRewardEntity badgeReward){
+    public boolean addBadgeReward(BadgeRewardEntity badgeReward) {
         return badgeRewards.add(badgeReward);
     }
 
@@ -67,7 +67,7 @@ public class PlayerEntity extends AbstractDomainModelEntity<Long> {
         this.pointRewards = pointRewards;
     }
 
-    public boolean addPointReward(PointRewardEntity pointReward){
+    public boolean addPointReward(PointRewardEntity pointReward) {
         return pointRewards.add(pointReward);
     }
 }

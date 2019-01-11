@@ -1,8 +1,8 @@
 package ch.heigvd.amt.wp2.model.entities;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "point_reward")
