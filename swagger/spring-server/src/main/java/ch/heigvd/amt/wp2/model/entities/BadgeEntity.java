@@ -29,6 +29,14 @@ public class BadgeEntity extends AbstractDomainModelEntity<Long> {
         this.image = image;
     }
 
+    public ApplicationEntity getApplication() {
+        return application;
+    }
+
+    public void setApplication(ApplicationEntity application) {
+        this.application = application;
+    }
+
     public String getName() {
         return name;
     }

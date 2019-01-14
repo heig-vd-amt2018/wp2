@@ -1,6 +1,8 @@
 package ch.heigvd.amt.wp2.model.entities;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "rule")
@@ -12,29 +14,33 @@ public class RuleEntity extends AbstractDomainModelEntity<Long> {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "event_name", nullable = false)
-    private String eventName;
+    @Column(name = "event_type", nullable = false)
+    private String eventType;
 
-    @Column(name = "point_scale", nullable = false)
-    private PointScaleEntity pointScale;
+    @Column(name = "point_rewards", nullable = false)
+    private List<PointRewardEntity> pointRewards;
 
-    @Column(name = "badge", nullable = false)
-    private BadgeEntity badge;
-
-    @Column(name = "threshold", nullable = false)
-    private Long threshold;
+    @Column(name = "badges", nullable = false)
+    private List<BadgeRewardEntity> badgeRewards;
 
     public RuleEntity() {
         //here fo JPA
     }
 
-    public RuleEntity(ApplicationEntity application, String name, String eventName, PointScaleEntity pointScale, BadgeEntity badge, Long threshold) {
+    public RuleEntity(ApplicationEntity application, String name, String eventType, List<PointRewardEntity> pointRewards, List<BadgeRewardEntity> badgeRewards) {
         this.application = application;
         this.name = name;
-        this.eventName = eventName;
-        this.pointScale = pointScale;
-        this.badge = badge;
-        this.threshold = threshold;
+        this.eventType = eventType;
+        this.pointRewards = pointRewards;
+        this.badgeRewards = badgeRewards;
+    }
+
+    public ApplicationEntity getApplication() {
+        return application;
+    }
+
+    public void setApplication(ApplicationEntity application) {
+        this.application = application;
     }
 
     public String getName() {
@@ -45,35 +51,27 @@ public class RuleEntity extends AbstractDomainModelEntity<Long> {
         this.name = name;
     }
 
-    public String getEventName() {
-        return eventName;
+    public String getEventType() {
+        return eventType;
     }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
     }
 
-    public PointScaleEntity getPointScale() {
-        return pointScale;
+    public List<PointRewardEntity> getPointRewards() {
+        return pointRewards;
     }
 
-    public void setPointScale(PointScaleEntity pointScale) {
-        this.pointScale = pointScale;
+    public void setPointRewards(List<PointRewardEntity> pointRewards) {
+        this.pointRewards = pointRewards;
     }
 
-    public BadgeEntity getBadge() {
-        return badge;
+    public List<BadgeRewardEntity> getBadgeRewards() {
+        return badgeRewards;
     }
 
-    public void setBadge(BadgeEntity badge) {
-        this.badge = badge;
-    }
-
-    public Long getThreshold() {
-        return threshold;
-    }
-
-    public void setThreshold(Long threshold) {
-        this.threshold = threshold;
+    public void setBadgeRewards(List<BadgeRewardEntity> badgeRewards) {
+        this.badgeRewards = badgeRewards;
     }
 }

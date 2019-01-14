@@ -31,8 +31,20 @@ public class PointRewardEntity extends AbstractDomainModelEntity<Long> {
         this.amount = amount;
     }
 
+    public PlayerEntity getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(PlayerEntity player) {
+        this.player = player;
+    }
+
     public Timestamp getCreatedDate() {
         return createdDate;
+    }
+
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
     }
 
     public PointScaleEntity getPointScale() {

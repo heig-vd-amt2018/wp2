@@ -27,8 +27,20 @@ public class BadgeRewardEntity extends AbstractDomainModelEntity<Long> {
         this.badge = badge;
     }
 
+    public PlayerEntity getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(PlayerEntity player) {
+        this.player = player;
+    }
+
     public Timestamp getCreatedDate() {
         return createdDate;
+    }
+
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
     }
 
     public BadgeEntity getBadge() {
