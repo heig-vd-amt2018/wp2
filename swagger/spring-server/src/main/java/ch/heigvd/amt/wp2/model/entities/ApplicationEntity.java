@@ -78,7 +78,7 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
         this.badges = badges;
     }
 
-    public boolean addBadge(BadgeEntity badge){
+    public boolean addBadge(BadgeEntity badge) {
         return badges.add(badge);
     }
 
@@ -90,7 +90,7 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
         this.pointScales = pointScales;
     }
 
-    public boolean addPointScale(PointScaleEntity pointScale){
+    public boolean addPointScale(PointScaleEntity pointScale) {
         return pointScales.add(pointScale);
     }
 
@@ -102,7 +102,7 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
         this.players = players;
     }
 
-    public boolean addPlayer(PlayerEntity player){
+    public boolean addPlayer(PlayerEntity player) {
         return players.add(player);
     }
 
@@ -114,7 +114,7 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
         this.rules = rules;
     }
 
-    public boolean addRule(RuleEntity rule){
+    public boolean addRule(RuleEntity rule) {
         return rules.add(rule);
     }
 }

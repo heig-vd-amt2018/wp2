@@ -59,7 +59,7 @@ paths:
           type: integer
           format: int64
           required : true
-          description : bagde's name
+          description : bagde's id
       operationId: getBadge
       produces:
         - application/json
@@ -84,7 +84,7 @@ paths:
           type: integer
           format: int64
           required: true
-          description: badge's name
+          description: badge's id
         - in: body
           name: badge
           required: true
@@ -152,7 +152,7 @@ paths:
           type : integer
           format: int64
           required : true
-          description : get a specific pointScale
+          description: pointScale's id
       operationId: getPointScale
       produces:
         - application/json
@@ -212,7 +212,7 @@ paths:
         '201':
           description: created
           schema:
-            $ref: '#/definitions/Rule'
+            $ref: '#/definitions/Location'
         '401':
           $ref: "#/responses/Unauthorized"
     get:
@@ -233,17 +233,18 @@ paths:
         '401':
           $ref: "#/responses/Unauthorized"
 
-  /rules/{name}:
+  /rules/{id}:
     get:
       tags:
         - "rules"
       summary: "Return a specific app rule from its name"
       parameters:
         - in : path
-          name : name
-          type : string
+          name : id
+          type: integer
+          format: int64
           required : true
-          description : rule's name
+          description : rule's id
       operationId: getRule
       produces:
         - application/json
@@ -263,11 +264,12 @@ paths:
       consumes:
         - application/json
       parameters:
-        - in: path
-          name: name
-          type: string
-          required: true
-          description: rule's name
+        - in : path
+          name : id
+          type: integer
+          format: int64
+          required : true
+          description : rule's id
         - in: body
           name: rule
           required: true
@@ -330,11 +332,12 @@ definitions:
   Rule:
     type: object
     properties:
+      id:
+        type: integer
+        format: int64
       name:
         type: string
       eventName:
-        type: string
-      apiKey:
         type: string
       pointScaleName:
         type: string

@@ -43,7 +43,7 @@ public class PointScalesApiController implements PointScalesApi {
     public ResponseEntity<PointScale> getPointScale(Long id) {
 
         PointScale pointScale;
-        PointScaleEntity pointScaleEntity = pointScaleRepository.findOne((long)id);
+        PointScaleEntity pointScaleEntity = pointScaleRepository.findOne((long) id);
 
         pointScale = toPointScale(pointScaleEntity);
 
@@ -69,17 +69,21 @@ public class PointScalesApiController implements PointScalesApi {
 
     private PointScaleEntity toPointScaleEntity(PointScale pointScale) {
         PointScaleEntity entity = new PointScaleEntity();
-        entity.setDescription(pointScale.getDescription());
+
         entity.setId(pointScale.getId());
         entity.setName(pointScale.getName());
+        entity.setDescription(pointScale.getDescription());
+
         return entity;
     }
 
     private PointScale toPointScale(PointScaleEntity entity) {
         PointScale pointScale = new PointScale();
-        pointScale.setDescription(entity.getDescription());
+
         pointScale.setId(entity.getId());
         pointScale.setName(entity.getName());
+        pointScale.setDescription(entity.getDescription());
+
         return pointScale;
     }
 
