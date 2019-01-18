@@ -2,7 +2,6 @@ package ch.heigvd.amt.wp2.model.entities;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "rule")
@@ -17,22 +16,28 @@ public class RuleEntity extends AbstractDomainModelEntity<Long> {
     @Column(name = "event_type", nullable = false)
     private String eventType;
 
-    @Column(name = "point_rewards", nullable = false)
-    private List<PointRewardEntity> pointRewards;
+    @Column(name = "point_scales", nullable = false)
+    private List<PointScaleEntity> pointScales;
 
     @Column(name = "badges", nullable = false)
-    private List<BadgeRewardEntity> badgeRewards;
+    private List<BadgeEntity> badges;
 
     public RuleEntity() {
         //here fo JPA
     }
 
-    public RuleEntity(ApplicationEntity application, String name, String eventType, List<PointRewardEntity> pointRewards, List<BadgeRewardEntity> badgeRewards) {
+    public RuleEntity(
+            ApplicationEntity application,
+            String name,
+            String eventType,
+            List<PointScaleEntity> pointScales,
+            List<BadgeEntity> badges
+    ) {
         this.application = application;
         this.name = name;
         this.eventType = eventType;
-        this.pointRewards = pointRewards;
-        this.badgeRewards = badgeRewards;
+        this.pointScales = pointScales;
+        this.badges = badges;
     }
 
     public ApplicationEntity getApplication() {
@@ -59,19 +64,19 @@ public class RuleEntity extends AbstractDomainModelEntity<Long> {
         this.eventType = eventType;
     }
 
-    public List<PointRewardEntity> getPointRewards() {
-        return pointRewards;
+    public List<PointScaleEntity> getPointScales() {
+        return pointScales;
     }
 
-    public void setPointRewards(List<PointRewardEntity> pointRewards) {
-        this.pointRewards = pointRewards;
+    public void setPointScales(List<PointScaleEntity> pointScales) {
+        this.pointScales = pointScales;
     }
 
-    public List<BadgeRewardEntity> getBadgeRewards() {
-        return badgeRewards;
+    public List<BadgeEntity> getBadges() {
+        return badges;
     }
 
-    public void setBadgeRewards(List<BadgeRewardEntity> badgeRewards) {
-        this.badgeRewards = badgeRewards;
+    public void setBadges(List<BadgeEntity> badges) {
+        this.badges = badges;
     }
 }

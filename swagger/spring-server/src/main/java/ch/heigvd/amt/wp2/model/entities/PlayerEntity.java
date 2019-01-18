@@ -26,17 +26,17 @@ public class PlayerEntity extends AbstractDomainModelEntity<Long> {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<PointRewardEntity> pointRewards;
+    private List<PointScaleRewardEntity> pointScaleReward;
 
     public PlayerEntity() {
         //only here for JPA
     }
 
-    public PlayerEntity(ApplicationEntity application, String username, List<BadgeRewardEntity> badgeRewards, List<PointRewardEntity> pointRewards) {
+    public PlayerEntity(ApplicationEntity application, String username, List<BadgeRewardEntity> badgeRewards, List<PointScaleRewardEntity> pointScaleReward) {
         this.application = application;
         this.username = username;
         this.badgeRewards = badgeRewards;
-        this.pointRewards = pointRewards;
+        this.pointScaleReward = pointScaleReward;
     }
 
     public String getUsername() {
@@ -59,16 +59,16 @@ public class PlayerEntity extends AbstractDomainModelEntity<Long> {
         return badgeRewards.add(badgeReward);
     }
 
-    public List<PointRewardEntity> getPointRewards() {
-        return pointRewards;
+    public List<PointScaleRewardEntity> getPointScaleReward() {
+        return pointScaleReward;
     }
 
-    public void setPointRewards(List<PointRewardEntity> pointRewards) {
-        this.pointRewards = pointRewards;
+    public void setPointScaleReward(List<PointScaleRewardEntity> pointScaleReward) {
+        this.pointScaleReward = pointScaleReward;
     }
 
-    public boolean addPointReward(PointRewardEntity pointReward) {
-        return pointRewards.add(pointReward);
+    public boolean addPointReward(PointScaleRewardEntity pointReward) {
+        return pointScaleReward.add(pointReward);
     }
 }
 

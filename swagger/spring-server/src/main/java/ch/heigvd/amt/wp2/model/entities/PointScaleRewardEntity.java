@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "point_reward")
-public class PointRewardEntity extends AbstractDomainModelEntity<Long> {
+public class PointScaleRewardEntity extends AbstractDomainModelEntity<Long> {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "player_id", nullable = false)
     private PlayerEntity player;
@@ -20,11 +20,11 @@ public class PointRewardEntity extends AbstractDomainModelEntity<Long> {
     @Column(name = "amount", nullable = false)
     private long amount;
 
-    public PointRewardEntity() {
+    public PointScaleRewardEntity() {
         //Here for JPA
     }
 
-    public PointRewardEntity(PlayerEntity player, PointScaleEntity pointScale, long amount) {
+    public PointScaleRewardEntity(PlayerEntity player, PointScaleEntity pointScale, long amount) {
         this.player = player;
         this.createdDate = new Timestamp((new Date()).getTime());
         this.pointScale = pointScale;
