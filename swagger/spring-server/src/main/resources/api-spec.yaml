@@ -307,10 +307,6 @@ paths:
           $ref: "#/responses/Unauthorized"
 
 definitions:
-  properties:
-    type: "object"
-    additionalProperties: true
-
   badge:
     type: object
     properties:
@@ -510,6 +506,3 @@ parameters:
         timestamp:
           type: "string"
           format: "date-time"
-        properties:
-          $ref: "#/definitions/properties"
-
