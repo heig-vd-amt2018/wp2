@@ -1,6 +1,7 @@
 package ch.heigvd.amt.wp2.model.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,6 +32,14 @@ public class PlayerEntity extends AbstractDomainModelEntity<Long> {
     public PlayerEntity() {
         //only here for JPA
     }
+
+    public PlayerEntity(ApplicationEntity application, String username) {
+        this.application = application;
+        this.username = username;
+        this.badgeRewards = new ArrayList<>();
+        this.pointScaleReward = new ArrayList<>();
+    }
+
 
     public PlayerEntity(ApplicationEntity application, String username, List<BadgeRewardEntity> badgeRewards, List<PointScaleRewardEntity> pointScaleReward) {
         this.application = application;
