@@ -132,7 +132,7 @@ public class PointScalesApiController implements PointScalesApi {
                 pointScales.add(toPointScaleDescription(pointScaleDescriptionEntity));
             }
 
-            return ResponseEntity.ok(pointScales);
+            response = ResponseEntity.ok(pointScales);
         } else {
             response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }

@@ -102,6 +102,8 @@ public class BadgesApiController implements BadgesApi {
             @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
             @ApiParam(value = "", required = true) @Valid @RequestParam String badgeName
     ) {
+        ResponseEntity response;
+
         ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
 
         if (application != null) {
@@ -110,24 +112,36 @@ public class BadgesApiController implements BadgesApi {
             if (badgeEntity != null) {
                 Badge badge = toBadge(badgeEntity);
 
-                return ResponseEntity.ok(badge);
+                response = ResponseEntity.ok(badge);
             } else {
-                return ResponseEntity.notFound().build();
+                response = ResponseEntity.notFound().build();
             }
         } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+
+        return response;
     }
 
     @Override
     public ResponseEntity<List<Badge>> getBadges(@ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey) {
-        List<Badge> badges = new ArrayList<>();
+        ResponseEntity response;
 
-        for(BadgeEntity badgeEntity : badgeRepository.findAll()) {
-            badges.add(toBadge(badgeEntity));
+        ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
+
+        if (application != null) {
+            List<Badge> badges = new ArrayList<>();
+
+            for (BadgeEntity badgeEntity : badgeRepository.getAllByApplication(application)) {
+                badges.add(toBadge(badgeEntity));
+            }
+
+            response = ResponseEntity.ok(badges);
+        } else {
+            response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        return ResponseEntity.ok(badges);
+        return response;
     }
 
     @Override
