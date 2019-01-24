@@ -21,14 +21,14 @@ public class RuleEntity extends AbstractDomainModelEntity<Long> {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<BadgeEntity> badges;
+    private List<RuleBadgeEntity> badges;
 
     @OneToMany(
             mappedBy = "rule",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<PointScaleEntity> pointScales;
+    private List<RulePointScaleEntity> pointScales;
 
     public RuleEntity() {
         //here fo JPA
@@ -38,8 +38,8 @@ public class RuleEntity extends AbstractDomainModelEntity<Long> {
             ApplicationEntity application,
             String name,
             String eventType,
-            List<PointScaleEntity> pointScales,
-            List<BadgeEntity> badges
+            List<RulePointScaleEntity> pointScales,
+            List<RuleBadgeEntity> badges
     ) {
         this.application = application;
         this.name = name;
@@ -72,19 +72,19 @@ public class RuleEntity extends AbstractDomainModelEntity<Long> {
         this.eventType = eventType;
     }
 
-    public List<PointScaleEntity> getPointScales() {
+    public List<RulePointScaleEntity> getPointScales() {
         return pointScales;
     }
 
-    public void setPointScales(List<PointScaleEntity> pointScales) {
+    public void setPointScales(List<RulePointScaleEntity> pointScales) {
         this.pointScales = pointScales;
     }
 
-    public List<BadgeEntity> getBadges() {
+    public List<RuleBadgeEntity> getBadges() {
         return badges;
     }
 
-    public void setBadges(List<BadgeEntity> badges) {
+    public void setBadges(List<RuleBadgeEntity> badges) {
         this.badges = badges;
     }
 }

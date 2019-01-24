@@ -99,6 +99,7 @@ paths:
       description: "Return a specific badge for the application"
       operationId: getBadge
       parameters:
+        - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/badgeName"
       produces:
         - application/json

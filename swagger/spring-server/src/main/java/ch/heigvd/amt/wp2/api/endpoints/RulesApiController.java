@@ -5,14 +5,8 @@ import ch.heigvd.amt.wp2.api.exceptions.NotFoundException;
 import ch.heigvd.amt.wp2.api.model.Rule;
 import ch.heigvd.amt.wp2.api.model.RulePatch;
 import ch.heigvd.amt.wp2.api.model.RulePost;
-import ch.heigvd.amt.wp2.model.entities.ApplicationEntity;
-import ch.heigvd.amt.wp2.model.entities.BadgeEntity;
-import ch.heigvd.amt.wp2.model.entities.PointScaleEntity;
-import ch.heigvd.amt.wp2.model.entities.RuleEntity;
-import ch.heigvd.amt.wp2.repositories.ApplicationRepository;
-import ch.heigvd.amt.wp2.repositories.BadgeRepository;
-import ch.heigvd.amt.wp2.repositories.PointScaleRepository;
-import ch.heigvd.amt.wp2.repositories.RuleRepository;
+import ch.heigvd.amt.wp2.model.entities.*;
+import ch.heigvd.amt.wp2.repositories.*;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,18 +39,21 @@ public class RulesApiController implements RulesApi {
     @Autowired
     RuleRepository ruleRepository;
 
-    private List<String> toBadgeNames(List<BadgeEntity> badgeEntities) {
+    @Autowired
+    RuleBadgeRepository ruleBadgeRepository;
+
+    private List<String> toBadgeNames(List<RuleBadgeEntity> badgeEntities) {
         List<String> badges = new ArrayList<>();
 
-        for (BadgeEntity badge : badgeEntities) {
-            badges.add(badge.getName());
+        for (RuleBadgeEntity ruleBadge : badgeEntities) {
+            badges.add(ruleBadge.getBadge().getName());
         }
 
         return badges;
     }
 
-    private List<BadgeEntity> toBadges(ApplicationEntity application, List<String> badgeNames) throws NotFoundException {
-        List<BadgeEntity> badges = new ArrayList<>();
+    private List<RuleBadgeEntity> toRuleBadges(ApplicationEntity application, RuleEntity rule, List<String> badgeNames) throws NotFoundException {
+        List<RuleBadgeEntity> badges = new ArrayList<>();
 
         for (String badgeName : badgeNames) {
             BadgeEntity badge = badgeRepository.getByApplicationAndName(application, badgeName);
@@ -65,24 +62,24 @@ public class RulesApiController implements RulesApi {
                 throw new NotFoundException(404, "Badge not found.");
             }
 
-            badges.add(badge);
+            badges.add(new RuleBadgeEntity(rule, badge));
         }
 
         return badges;
     }
 
-    private List<String> toPointScaleNames(List<PointScaleEntity> pointScaleEntities) {
+    private List<String> toPointScaleNames(List<RulePointScaleEntity> pointScaleEntities) {
         List<String> pointScales = new ArrayList<>();
 
-        for (PointScaleEntity pointScale : pointScaleEntities) {
-            pointScales.add(pointScale.getName());
+        for (RulePointScaleEntity pointScale : pointScaleEntities) {
+            pointScales.add(pointScale.getPointScale().getName());
         }
 
         return pointScales;
     }
 
-    private List<PointScaleEntity> toPointScales(ApplicationEntity application, List<String> pointScaleNames) throws NotFoundException {
-        List<PointScaleEntity> pointScales = new ArrayList<>();
+    private List<RulePointScaleEntity> toPointScales(ApplicationEntity application, RuleEntity rule, List<String> pointScaleNames) throws NotFoundException {
+        List<RulePointScaleEntity> pointScales = new ArrayList<>();
 
         for (String badgeName : pointScaleNames) {
             PointScaleEntity pointScale = pointScaleRepository.getByApplicationAndName(application, badgeName);
@@ -91,15 +88,15 @@ public class RulesApiController implements RulesApi {
                 throw new NotFoundException(404, "Point scale not found.");
             }
 
-            pointScales.add(pointScale);
+            pointScales.add(new RulePointScaleEntity(rule, pointScale));
         }
 
         return pointScales;
     }
 
     private void updateRuleEntity(ApplicationEntity application, RuleEntity rule, RulePatch rulePatch) throws NotFoundException {
-        List<BadgeEntity> badges = toBadges(application, rulePatch.getBadges());
-        List<PointScaleEntity> pointScales = toPointScales(application, rulePatch.getPointScales());
+        List<RuleBadgeEntity> badges = toRuleBadges(application, rule, rulePatch.getBadges());
+        List<RulePointScaleEntity> pointScales = toPointScales(application, rule, rulePatch.getPointScales());
 
         rule.setEventType(rulePatch.getEventType());
         rule.setBadges(badges);
@@ -109,8 +106,8 @@ public class RulesApiController implements RulesApi {
     private RuleEntity toRuleEntity(ApplicationEntity application, RulePost rulePost) throws NotFoundException {
         RuleEntity entity = new RuleEntity();
 
-        List<BadgeEntity> badges = toBadges(application, rulePost.getBadges());
-        List<PointScaleEntity> pointScales = toPointScales(application, rulePost.getPointScales());
+        List<RuleBadgeEntity> badges = toRuleBadges(application, entity, rulePost.getBadges());
+        List<RulePointScaleEntity> pointScales = toPointScales(application, entity, rulePost.getPointScales());
 
         entity.setApplication(application);
         entity.setName(rulePost.getName());
