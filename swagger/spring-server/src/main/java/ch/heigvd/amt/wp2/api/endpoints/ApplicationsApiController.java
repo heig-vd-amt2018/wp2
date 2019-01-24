@@ -6,6 +6,7 @@ import ch.heigvd.amt.wp2.model.entities.ApplicationEntity;
 import ch.heigvd.amt.wp2.repositories.ApplicationRepository;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,11 +23,19 @@ public class ApplicationsApiController implements ApplicationsApi {
 
     @Override
     public ResponseEntity<Void> createApplication(@ApiParam(value = "", required = true) @Valid @RequestBody Application application) {
+        ResponseEntity response;
+
         ApplicationEntity newApplicationEntity = toApplicationEntity(application);
 
-        applicationRepository.save(newApplicationEntity);
+        try {
+            applicationRepository.save(newApplicationEntity);
 
-        return ResponseEntity.noContent().build();
+            response = ResponseEntity.noContent().build();
+        } catch(Exception e) {
+            response = ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+
+        return response;
     }
 
     private ApplicationEntity toApplicationEntity(Application application) {

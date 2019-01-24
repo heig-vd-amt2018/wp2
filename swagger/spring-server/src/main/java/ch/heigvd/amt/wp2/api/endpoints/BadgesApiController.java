@@ -6,6 +6,7 @@ import ch.heigvd.amt.wp2.api.model.BadgePatch;
 import ch.heigvd.amt.wp2.api.model.BadgePost;
 import ch.heigvd.amt.wp2.model.entities.ApplicationEntity;
 import ch.heigvd.amt.wp2.model.entities.BadgeEntity;
+import ch.heigvd.amt.wp2.model.entities.PointScaleEntity;
 import ch.heigvd.amt.wp2.repositories.ApplicationRepository;
 import ch.heigvd.amt.wp2.repositories.BadgeRepository;
 import io.swagger.annotations.ApiParam;
@@ -66,23 +67,35 @@ public class BadgesApiController implements BadgesApi {
             @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
             @ApiParam(value = "", required = true) @Valid @RequestBody BadgePost badgePost
     ) {
+        ResponseEntity response;
+
         ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
 
         if (application != null) {
-            BadgeEntity newBadgeEntity = toBadgeEntity(application, badgePost);
+            String applicationName = badgePost.getName();
 
-            badgeRepository.save(newBadgeEntity);
+            BadgeEntity badge = badgeRepository.getByApplicationAndName(application, applicationName);
 
-            String name = newBadgeEntity.getName();
+            if (badge == null) {
+                BadgeEntity newBadgeEntity = toBadgeEntity(application, badgePost);
 
-            URI location = ServletUriComponentsBuilder
-                    .fromCurrentRequest().path("/{name}")
-                    .buildAndExpand(name).toUri();
+                badgeRepository.save(newBadgeEntity);
 
-            return ResponseEntity.created(location).build();
+                String name = newBadgeEntity.getName();
+
+                URI location = ServletUriComponentsBuilder
+                        .fromCurrentRequest().path("/{name}")
+                        .buildAndExpand(name).toUri();
+
+                response = ResponseEntity.created(location).build();
+            } else {
+                response = ResponseEntity.status(HttpStatus.CONFLICT).build();
+            }
         } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+
+        return response;
     }
 
     @Override
