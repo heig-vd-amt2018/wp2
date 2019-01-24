@@ -36,7 +36,7 @@ responses:
   Created:
     description: "The entity has been created."
     schema:
-      $ref: '#/definitions/location'
+      type: "string"
   Conflict:
     description: "The identifier is already used. Please change and try again."
   NotFound:
@@ -108,7 +108,7 @@ paths:
         200:
           description: "Badge has been successfully updated."
           schema:
-            $ref: '#/definitions/location'
+            type: "string"
         401:
           $ref: "#/responses/Unauthorized"
 
@@ -177,7 +177,7 @@ paths:
         200:
           description: "Point scale has been successfully updated."
           schema:
-            $ref: '#/definitions/location'
+            type: "string"
         401:
           $ref: "#/responses/Unauthorized"
 
@@ -246,7 +246,7 @@ paths:
         200:
           description: "Rule has been successfully updated."
           schema:
-            $ref: '#/definitions/location'
+            type: "string"
         401:
           $ref: "#/responses/Unauthorized"
 
@@ -267,21 +267,6 @@ paths:
           $ref: "#/responses/Unauthorized"
 
 definitions:
-  description:
-    type: "string"
-  eventType:
-    type: "string"
-  image:
-    type: "string"
-  location:
-    type: "string"
-  name:
-    type: "string"
-  username:
-    type: "string"
-  timestamp:
-    type: "string"
-    format: "date-time"
   properties:
     type: "object"
     additionalProperties: true
@@ -290,34 +275,34 @@ definitions:
     type: object
     properties:
       name:
-        $ref: "#/definitions/name"
+        type: "string"
       description:
-        $ref: "#/definitions/description"
+        type: "string"
       image:
-        $ref: "#/definitions/image"
+        type: "string"
 
   pointScale:
     type: object
     properties:
       name:
-        $ref: "#/definitions/name"
+        type: "string"
       description:
-        $ref: "#/definitions/description"
+        type: "string"
 
   rule:
     properties:
       name:
-        $ref: "#/definitions/name"
+        type: "string"
       eventType:
-        $ref: "#/definitions/eventType"
+        type: "string"
       pointScales:
         type: "array"
         items:
-          $ref: "#/definitions/pointScale"
+          type: "string"
       badges:
         type: "array"
         items:
-          $ref: "#/definitions/badge"
+          type: "string"
 
 parameters:
   badgeName:
@@ -339,11 +324,11 @@ parameters:
         - "image"
       properties:
         name:
-          $ref: "#/definitions/name"
+          type: "string"
         description:
-          $ref: "#/definitions/description"
+          type: "string"
         image:
-          $ref: "#/definitions/image"
+          type: "string"
   badgePatch:
     name: "badgePatch"
     description: "The badge's details"
@@ -356,9 +341,9 @@ parameters:
         - "image"
       properties:
         description:
-          $ref: "#/definitions/description"
+          type: "string"
         image:
-          $ref: "#/definitions/image"
+          type: "string"
 
 
   pointScaleName:
@@ -368,7 +353,7 @@ parameters:
     required: true
     type: "string"
   pointScalePost:
-    name: "pointScale"
+    name: "pointScalePost"
     description: "The point scale's details"
     in: "body"
     required: true
@@ -379,11 +364,11 @@ parameters:
         - "description"
       properties:
         name:
-          $ref: "#/definitions/name"
+          type: "string"
         description:
-          $ref: "#/definitions/description"
+          type: "string"
   pointScalePatch:
-    name: "pointScale"
+    name: "pointScalePatch"
     description: "The point scale's details"
     in: "body"
     required: true
@@ -393,7 +378,7 @@ parameters:
         - "description"
       properties:
         description:
-          $ref: "#/definitions/description"
+          type: "string"
 
   ruleName:
     name: "ruleName"
@@ -402,7 +387,7 @@ parameters:
     required: true
     type: "string"
   rulePost:
-    name: "rule"
+    name: "rulePost"
     description: "The rule's details."
     in: "body"
     required: true
@@ -413,19 +398,19 @@ parameters:
         - "eventType"
       properties:
         name:
-          $ref: "#/definitions/name"
+          type: "string"
         eventType:
-          $ref: "#/definitions/eventType"
+          type: "string"
         pointScales:
           type: "array"
           items:
-            $ref: "#/parameters/pointScaleName"
+            type : "string"
         badges:
           type: "array"
           items:
-            $ref: "#/parameters/badgeName"
+            type : "string"
   rulePatch:
-    name: "rule"
+    name: "rulePatch"
     description: "The rule's details."
     in: "body"
     required: true
@@ -435,19 +420,19 @@ parameters:
         - "eventType"
       properties:
         eventType:
-          $ref: "#/definitions/eventType"
+          type: "string"
         pointScales:
           type: "array"
           items:
-            $ref: "#/parameters/pointScaleName"
+            type : "string"
         badges:
           type: "array"
           items:
-            $ref: "#/parameters/badgeName"
+            type : "string"
 
   event:
-    name: "rule"
-    description: "The rule's details."
+    name: "event"
+    description: "The event's details."
     in: "body"
     required: true
     schema:
@@ -459,11 +444,12 @@ parameters:
         - "properties"
       properties:
         username:
-          $ref: "#/definitions/username"
+          type: "string"
         eventType:
-          $ref: "#/definitions/eventType"
+          type: "string"
         timestamp:
-          $ref: "#/definitions/timestamp"
+          type: "string"
+          format: "date-time"
         properties:
           $ref: "#/definitions/properties"
 

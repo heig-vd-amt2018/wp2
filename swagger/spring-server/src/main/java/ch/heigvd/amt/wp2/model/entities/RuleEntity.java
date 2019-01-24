@@ -16,10 +16,18 @@ public class RuleEntity extends AbstractDomainModelEntity<Long> {
     @Column(name = "event_type", nullable = false)
     private String eventType;
 
-    @Column(name = "point_scales", nullable = false)
+    @OneToMany(
+            mappedBy = "rule",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<PointScaleEntity> pointScales;
 
-    @Column(name = "badges", nullable = false)
+    @OneToMany(
+            mappedBy = "rule",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<BadgeEntity> badges;
 
     public RuleEntity() {
