@@ -33,6 +33,8 @@ responses:
     description: "The identifier is already used. Please change and try again."
   NotFound:
     description: "The specified resource was not found."
+    schema:
+      type: "string"
 
 paths:
   /applications:
@@ -97,6 +99,7 @@ paths:
       description: "Return a specific badge for the application"
       operationId: getBadge
       parameters:
+        - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/badgeName"
       produces:
         - application/json
@@ -107,6 +110,8 @@ paths:
             $ref: '#/definitions/badge'
         401:
           $ref: "#/responses/Unauthorized"
+        404:
+          $ref: "#/responses/NotFound"
     patch:
       tags:
         - "Badges"
@@ -125,6 +130,8 @@ paths:
             type: "string"
         401:
           $ref: "#/responses/Unauthorized"
+        404:
+          $ref: "#/responses/NotFound"
 
   /pointScales:
     post:
@@ -181,6 +188,8 @@ paths:
             $ref: '#/definitions/pointScale'
         401:
           $ref: "#/responses/Unauthorized"
+        404:
+          $ref: "#/responses/NotFound"
     patch:
       tags:
         - "Point scales"
@@ -199,6 +208,8 @@ paths:
             type: "string"
         401:
           $ref: "#/responses/Unauthorized"
+        404:
+          $ref: "#/responses/NotFound"
 
   /rules:
     post:
@@ -255,6 +266,8 @@ paths:
             $ref: '#/definitions/rule'
         401:
           $ref: "#/responses/Unauthorized"
+        404:
+          $ref: "#/responses/NotFound"
     patch:
       tags:
         - "Rules"
@@ -273,6 +286,8 @@ paths:
             type: "string"
         401:
           $ref: "#/responses/Unauthorized"
+        404:
+          $ref: "#/responses/NotFound"
 
   /events:
     post:

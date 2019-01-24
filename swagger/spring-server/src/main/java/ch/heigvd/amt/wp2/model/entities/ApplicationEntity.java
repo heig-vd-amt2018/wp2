@@ -7,7 +7,11 @@ import java.util.List;
 @Entity
 @Table(name = "application")
 public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
-    @Column(name = "api_key", nullable = false)
+    @Column(
+            name = "api_key",
+            unique = true,
+            nullable = false
+    )
     private String apiKey;
 
     @OneToMany(
@@ -40,14 +44,6 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
 
     public ApplicationEntity() {
         //here fo JPA
-    }
-
-    public ApplicationEntity(String apiKey) {
-        this.apiKey = apiKey;
-        this.badges = new ArrayList<>();
-        this.pointScales = new ArrayList<>();
-        this.players = new ArrayList<>();
-        this.rules = new ArrayList<>();
     }
 
     public ApplicationEntity(String apiKey, List<BadgeEntity> badges, List<PointScaleEntity> pointScales, List<PlayerEntity> players, List<RuleEntity> rules) {
