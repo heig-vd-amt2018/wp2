@@ -120,6 +120,27 @@ public class PointScalesApiController implements PointScalesApi {
     }
 
     @Override
+    public ResponseEntity<List<PointScale>> getPointScales(@ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey) {
+        ResponseEntity response;
+
+        ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
+
+        if (application != null) {
+            List<PointScale> pointScales = new ArrayList<>();
+
+            for (PointScaleEntity pointScaleEntity : pointScaleRepository.getAllByApplication(application)) {
+                pointScales.add(toPointScale(pointScaleEntity));
+            }
+
+            return ResponseEntity.ok(pointScales);
+        } else {
+            response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        return response;
+    }
+
+    @Override
     public ResponseEntity<String> updatePointScale(
             @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
             @ApiParam(value = "", required = true) @Valid @RequestParam String pointScaleName,
@@ -141,27 +162,6 @@ public class PointScalesApiController implements PointScalesApi {
             } else {
                 response = ResponseEntity.notFound().build();
             }
-        } else {
-            response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
-        return response;
-    }
-
-    @Override
-    public ResponseEntity<List<PointScale>> getPointScales(@ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey) {
-        ResponseEntity response;
-
-        ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
-
-        if (application != null) {
-            List<PointScale> pointScales = new ArrayList<>();
-
-            for (PointScaleEntity pointScaleEntity : pointScaleRepository.getAllByApplication(application)) {
-                pointScales.add(toPointScale(pointScaleEntity));
-            }
-
-            return ResponseEntity.ok(pointScales);
         } else {
             response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }

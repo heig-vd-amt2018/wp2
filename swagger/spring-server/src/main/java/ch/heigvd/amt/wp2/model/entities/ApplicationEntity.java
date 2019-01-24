@@ -46,14 +46,6 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
         //here fo JPA
     }
 
-    public ApplicationEntity(String apiKey) {
-        this.apiKey = apiKey;
-        this.badges = new ArrayList<>();
-        this.pointScales = new ArrayList<>();
-        this.players = new ArrayList<>();
-        this.rules = new ArrayList<>();
-    }
-
     public ApplicationEntity(String apiKey, List<BadgeEntity> badges, List<PointScaleEntity> pointScales, List<PlayerEntity> players, List<RuleEntity> rules) {
         this.apiKey = apiKey;
         this.badges = badges;

@@ -21,14 +21,14 @@ public class RuleEntity extends AbstractDomainModelEntity<Long> {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<PointScaleEntity> pointScales;
+    private List<BadgeEntity> badges;
 
     @OneToMany(
             mappedBy = "rule",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<BadgeEntity> badges;
+    private List<PointScaleEntity> pointScales;
 
     public RuleEntity() {
         //here fo JPA
