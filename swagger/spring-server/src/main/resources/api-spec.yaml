@@ -334,7 +334,12 @@ definitions:
       pointScales:
         type: "array"
         items:
-          type: "string"
+          type : "object"
+          properties:
+            name:
+              type: "string"
+            amount:
+              type: "integer"
       badges:
         type: "array"
         items:
@@ -460,7 +465,13 @@ parameters:
         pointScales:
           type: "array"
           items:
-            type : "string"
+            type : "object"
+            properties:
+              name:
+                type: "string"
+              amount:
+                type: "integer"
+
         badges:
           type: "array"
           items:
