@@ -3,6 +3,7 @@ Feature: Badges
   Background:
     Given there is a Badge server
 
+  #POST
   Scenario: Create a badge
     Given I have a badge payload
     When I POST it to the /badges endpoint
@@ -20,6 +21,7 @@ Feature: Badges
     And  I POST it to the /badges endpoint
     Then I receive a 409 status code
 
+  #GET
   Scenario: GET a list of badges
     When I ask for a list of badges with a GET on the /badges endpoint
     Then I receive a 200 status code
@@ -42,6 +44,7 @@ Feature: Badges
     When I ask for the badge with a GET on the /badges/badgeName endpoint
     Then I receive a 401 status code
 
+  #PATCH
   Scenario: Patch a badge
     Given I know the name of a badge
     When I PATCH it to the /badges endpoint
