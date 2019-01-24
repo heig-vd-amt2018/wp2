@@ -1,6 +1,7 @@
 package ch.heigvd.amt.wp2.model.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -39,6 +40,14 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
 
     public ApplicationEntity() {
         //here fo JPA
+    }
+
+    public ApplicationEntity(String apiKey) {
+        this.apiKey = apiKey;
+        this.badges = new ArrayList<>();
+        this.pointScales = new ArrayList<>();
+        this.players = new ArrayList<>();
+        this.rules = new ArrayList<>();
     }
 
     public ApplicationEntity(String apiKey, List<BadgeEntity> badges, List<PointScaleEntity> pointScales, List<PlayerEntity> players, List<RuleEntity> rules) {

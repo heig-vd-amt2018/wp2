@@ -9,6 +9,8 @@ host: localhost:8080
 basePath: /api
 
 tags:
+  - name: "Applications"
+    description: "These endpoints are to the applications. Development only."
   - name: "Badges"
     description: "These endpoints are to the badges."
   - name: "Point scales"
@@ -17,16 +19,6 @@ tags:
     description: "These endpoints are related to the rules."
   - name: "Events"
     description: "These endpoints are related to the events."
-
-securityDefinitions:
-  ApiKey:
-    description: "Format: {apiKey}"
-    type: apiKey
-    name: Authorization
-    in: header
-
-security:
-  - ApiKey: []
 
 responses:
   Unauthorized:
@@ -43,6 +35,24 @@ responses:
     description: "The specified resource was not found."
 
 paths:
+  /applications:
+    post:
+      tags:
+        - "Applications"
+      description: "Create a new application"
+      operationId: createApplication
+      security: []
+      consumes:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/application"
+      responses:
+        200:
+          description: "The application has been created."
+        401:
+          $ref: "#/responses/Unauthorized"
+        409:
+          $ref: "#/responses/Conflict"
   /badges:
     post:
       tags:
@@ -52,6 +62,7 @@ paths:
       consumes:
         - application/json
       parameters:
+        - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/badgePost"
       responses:
         201:
@@ -67,6 +78,8 @@ paths:
       operationId: getBadges
       produces:
         - application/json
+      parameters:
+        - $ref: "#/parameters/apiKey"
       responses:
         200:
           description: "Badges have been successfully retrieved."
@@ -102,6 +115,7 @@ paths:
       consumes:
         - application/json
       parameters:
+        - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/badgeName"
         - $ref: "#/parameters/badgePatch"
       responses:
@@ -121,6 +135,7 @@ paths:
       consumes:
         - application/json
       parameters:
+        - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/pointScalePost"
       responses:
         201:
@@ -136,6 +151,8 @@ paths:
       operationId: getPointScales
       produces:
         - application/json
+      parameters:
+        - $ref: "#/parameters/apiKey"
       responses:
         200:
           description: "Point scales have been successfully retrieved."
@@ -153,6 +170,7 @@ paths:
       description: "Return a specific point scale for the application"
       operationId: getPointScale
       parameters:
+        - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/pointScaleName"
       produces:
         - application/json
@@ -171,6 +189,7 @@ paths:
       consumes:
         - application/json
       parameters:
+        - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/pointScaleName"
         - $ref: "#/parameters/pointScalePatch"
       responses:
@@ -190,6 +209,7 @@ paths:
       consumes:
         - application/json
       parameters:
+        - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/rulePost"
       responses:
         201:
@@ -205,6 +225,8 @@ paths:
       operationId: getRules
       produces:
         - application/json
+      parameters:
+        - $ref: "#/parameters/apiKey"
       responses:
         200:
           description: "Rules have been successfully retrieved."
@@ -222,6 +244,7 @@ paths:
       description: "Return a specific badge for the application"
       operationId: getRule
       parameters:
+        - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/ruleName"
       produces:
         - application/json
@@ -240,6 +263,7 @@ paths:
       consumes:
         - application/json
       parameters:
+        - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/ruleName"
         - $ref: "#/parameters/rulePatch"
       responses:
@@ -259,6 +283,7 @@ paths:
       consumes:
         - application/json
       parameters:
+        - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/event"
       responses:
         200:
@@ -305,6 +330,26 @@ definitions:
           type: "string"
 
 parameters:
+  application:
+    name: "application"
+    description: "The application's details"
+    in: "body"
+    required: true
+    schema:
+      type: "object"
+      required:
+        - "apiKey"
+      properties:
+        apiKey:
+          type: "string"
+
+  apiKey:
+    name: "apiKey"
+    description: "The api key."
+    in: header
+    required: true
+    type: "string"
+
   badgeName:
     name: "badgeName"
     description: "The name of the badge."

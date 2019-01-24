@@ -10,7 +10,7 @@ public class BadgeEntity extends AbstractDomainModelEntity<Long> {
     private ApplicationEntity application;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rule_id", nullable = false)
+    @JoinColumn(name = "rule_id", nullable = true)
     private RuleEntity rule;
 
     @Column(name = "name", nullable = false)

@@ -6,17 +6,17 @@ import javax.persistence.*;
 @Table(name = "point_scale")
 public class PointScaleEntity extends AbstractDomainModelEntity<Long> {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "application_id", nullable = false)
+    @JoinColumn(name = "application_id", nullable = true)
     private ApplicationEntity application;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rule_id", nullable = false)
+    @JoinColumn(name = "rule_id", nullable = true)
     private RuleEntity rule;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = true)
     private String name;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", nullable = true)
     private String description;
 
     public PointScaleEntity() {
