@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface ApplicationRepository extends CrudRepository<ApplicationEntity, Long> {
-    List<ApplicationEntity> findByNameAndApiKey(String name, String apiKey);
+    //List<ApplicationEntity> findByNameAndApiKey(String name, String apiKey);
 }

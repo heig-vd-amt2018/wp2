@@ -1,46 +1,58 @@
-Feature: pointScale
+Feature: Pointscales
 
   Background:
-    Given there is a pointScale server
+    Given There is a pointscales server
 
-  Scenario: Create a pointScales
-    Given I have a pointScale payload
-    When I POST it to the /pointScales endpoint
+  #POST
+  Scenario: Create a pointscale
+    Given I have a pointscale payload
+    When I POST it to the /pointscales endpoint
     Then I receive a 201 status code
 
-  Scenario: Get a list of pointScales
-    Given I know the name of a pointScale
-    When I ask for the pointScale with a GET on the /pointScales/pointScaleName endpoint
-    Then I receive a 200 status code
-    And I receive a list of pointScales
-
-  Scenario: Get a pointScale
-    When I ask for a list of pointScales with a GET on the  /pointScales endpoint
-    Then I receive a 200 status code
-    And I receive the pointScale
-
-  Scenario: Check that the pointScale has been registred
-    Given I have a pointScale payload
-    When I POST it to the /pointScales endpoint
-    And I ask for a list of pointScales with a GET on the /pointScales endpoint
-    Then I see my pointScale in the list
-
-  Scenario: Check that the patch for a pointScale work
-    Given I know the name of a pointScale
-    When I PATCH it to the /pointScales endpoint
-    And I ask for a the current pointScale with a GET on the /pointScales/pointScaleName endpoint
-    Then I see my check if the pointScale has been patched
-
-  Scenario: Check that if I don't have authorization , I can't get a pointScale
-    Given I don't have authorization
-    Then I know the name of a pointScale
-    When I ask for the pointScale with a GET on the /pointScales/pointScaleName endpoint
+  Scenario: Check that if I don't have authorization, I can't create a pointscale
+    Given  I don't have authorization
+    And  I have a pointscale payload
+    When I POST it to the /pointscales endpoint
     Then I receive a 401 status code
 
-  Scenario: Check that it is not possible to create thow pointScales with the same name
-    Given  I have a pointScale payload
-    When I POST it to the /pointScale endpoint
-    And  I POST it to the /pointScale endpoint
+  Scenario: Check that it is not possible to create a pointscale with the same name
+    Given  I have a pointscale payload
+    When I POST it to the /pointscales endpoint
+    And  I POST it to the /pointscales endpoint
     Then I receive a 409 status code
 
+  #GET
+  Scenario: GET a list of pointscales
+    When I ask for a list of pointscales with a GET on the /pointscales endpoint
+    Then I receive a 200 status code
+    And I receive the pointscales
 
+  Scenario: Check that if I don't have authorization, I can't get a list of badges
+    Given  I don't have authorization
+    When I ask for a list of pointscales with a GET on the /pointscales endpoint
+    Then I receive a 401 status code
+
+  Scenario: GET a pointscale
+    Given I know the name of a pointscale
+    When I ask for the pointscale with a GET on the /pointscales/pointscaleName endpoint
+    Then I receive a 200 status code
+    And I receive the pointscale
+
+  Scenario: Check that if I don't have authorization, I can't get a pointscale
+    Given  I don't have authorization
+    And  I know the name of a pointscale
+    When I ask for the pointscale with a GET on the /pointscales/bapointscaleName endpoint
+    Then I receive a 401 status code
+
+  #PATCH
+  Scenario: Patch a pointscale
+    Given I know the name of a pointscale
+    When I PATCH it to the /pointscales endpoint
+    And I ask for a the current pointscale with a GET on the /pointscales/pointscaleName endpoint
+    Then I see my check if the pointscale has been patched
+
+  Scenario: Check that if I don't have authorization, I can't post a pointscale
+    Given  I don't have authorization
+    And I know the name of a pointscale
+    When I PATCH it to the /pointscales endpoint
+    Then I receive a 401 status code

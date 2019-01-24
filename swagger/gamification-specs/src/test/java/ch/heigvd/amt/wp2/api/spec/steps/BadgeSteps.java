@@ -1,11 +1,10 @@
-/*package ch.heigvd.amt.wp2.api.spec.steps;
+package ch.heigvd.amt.wp2.api.spec.steps;
 
 import ch.heigvd.amt.wp2.ApiException;
 import ch.heigvd.amt.wp2.ApiResponse;
 import ch.heigvd.amt.wp2.api.BadgesApi;
 import ch.heigvd.amt.wp2.api.spec.helpers.Environment;
 import ch.heigvd.amt.wp2.api.dto.Badge;
-import ch.heigvd.amt.wp2.api.dto.BadgePost;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -19,7 +18,7 @@ public class BadgeSteps {
   private Environment environment;
   private BadgesApi badgesApi;
   private Badge badge;
-  private BadgePost badgePost;
+  //private BadgePost badgePost;
 
   private ApiResponse lastApiResponse;
   private ApiException lastApiException;
@@ -31,7 +30,7 @@ public class BadgeSteps {
         this.badgesApi = environment.getBadgeApi();
     }
 
-    @Given("^there is a Badges server$")
+    /*@Given("^there is a Badges server$")
     public void there_is_a_badges_server() throws Throwable {
         assertNotNull(badgesApi);
     }
@@ -39,14 +38,14 @@ public class BadgeSteps {
     @Given("^I have a badge payload$")
     public void i_have_a_badge_payload() throws Throwable {
         badge = new Badge();
-        badgePost = new BadgePost();
+        //badgePost = new BadgePost();
 
         //badge.setDescription("BADGE DESCRIPTION");
         //badge.setImage(null);
         //badge.setName("NAME");
     }
 
-    @When("^I POST it to the /bagdes endpoint$")
+    /*@When("^I POST it to the /bagdes endpoint$")
     public void i_POST_it_to_the_badges_endpoint() throws Throwable {
         try {
             lastApiResponse = badgesApi.createBadgeWithHttpInfo(badgePost);
@@ -145,5 +144,9 @@ public class BadgeSteps {
     public void i_ask_for_a_the_current_badge_with_a_GET_on_the_badges_badgeName_endpoint() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
-    }
-}*/
+    }*/
+
+
+
+
+}

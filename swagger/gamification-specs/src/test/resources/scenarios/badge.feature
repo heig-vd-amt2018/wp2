@@ -1,7 +1,7 @@
 Feature: Badges
 
   Background:
-    Given there is a Badge server
+    Given There is a badge server
 
   #POST
   Scenario: Create a badge
