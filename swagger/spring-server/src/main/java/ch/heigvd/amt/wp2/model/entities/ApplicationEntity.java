@@ -6,12 +6,8 @@ import java.util.List;
 @Entity
 @Table(name = "application")
 public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
-
-    @Column(name = "name", nullable = false)
-    private String name;
-
     @Column(name = "api_key", nullable = false)
-    private Long apiKey;
+    private String apiKey;
 
     @OneToMany(
             mappedBy = "application",
@@ -45,8 +41,7 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
         //here fo JPA
     }
 
-    public ApplicationEntity(String name, Long apiKey, List<BadgeEntity> badges, List<PointScaleEntity> pointScales, List<PlayerEntity> players, List<RuleEntity> rules) {
-        this.name = name;
+    public ApplicationEntity(String apiKey, List<BadgeEntity> badges, List<PointScaleEntity> pointScales, List<PlayerEntity> players, List<RuleEntity> rules) {
         this.apiKey = apiKey;
         this.badges = badges;
         this.pointScales = pointScales;
@@ -54,19 +49,11 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
         this.rules = rules;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getApiKey() {
+    public String getApiKey() {
         return apiKey;
     }
 
-    public void setApiKey(Long apiKey) {
+    public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
     }
 
