@@ -49,15 +49,15 @@ Feature: Badges
   #PATCH
   Scenario: Patch a badge
     Given I have authorization for Badge
-    And I have a badge payload with the name "nameTest4" and description "nameDescription4"
+    And I have a badge payload with the name "nameTest4", description "nameDescription4" and image "imageName4"
     When I POST it to the /badges endpoint
-    And I have a badge payload with the name "nameTest4" and description "newNameDescription4"
+    And I have a badge payload with the name "nameTest4", description "newnameDescription4" and image "imageName4"
     When  I ask for the badge with a PATCH on the /badges/"nameTest4" endpoint
     And I ask for the badge with a GET on the /badges/"nameTest4" endpoint
     Then I see if the badge has been patched
 
   Scenario: Check that if I don't have authorization, I can't post a badge
     Given  I don't have authorization for Badge
-    And I have a badge payload with the name "nameTest4" and description "newNameDescription"
+    And  I have a badge payload with the name "nameTest4", description "newnameDescription4" and image "imageName4"
     When  I ask for the badge with a PATCH on the /badges/"nameTest4" endpoint
     Then I receive a 403 status code for badge
