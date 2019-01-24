@@ -9,6 +9,10 @@ public class PointScaleEntity extends AbstractDomainModelEntity<Long> {
     @JoinColumn(name = "application_id", nullable = false)
     private ApplicationEntity application;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rule_id", nullable = false)
+    private RuleEntity rule;
+
     @Column(name = "name", nullable = false)
     private String name;
 
