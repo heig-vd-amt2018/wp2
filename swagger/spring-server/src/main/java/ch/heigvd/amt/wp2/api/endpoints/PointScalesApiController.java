@@ -1,13 +1,13 @@
 package ch.heigvd.amt.wp2.api.endpoints;
 
 import ch.heigvd.amt.wp2.api.PointScalesApi;
-import ch.heigvd.amt.wp2.api.model.PointScale;
+import ch.heigvd.amt.wp2.api.model.PointScaleDescription;
 import ch.heigvd.amt.wp2.api.model.PointScalePatch;
 import ch.heigvd.amt.wp2.api.model.PointScalePost;
 import ch.heigvd.amt.wp2.model.entities.ApplicationEntity;
-import ch.heigvd.amt.wp2.model.entities.PointScaleEntity;
+import ch.heigvd.amt.wp2.model.entities.PointScaleDescriptionEntity;
 import ch.heigvd.amt.wp2.repositories.ApplicationRepository;
-import ch.heigvd.amt.wp2.repositories.PointScaleRepository;
+import ch.heigvd.amt.wp2.repositories.PointScaleDescriptionRepository;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,14 +32,14 @@ public class PointScalesApiController implements PointScalesApi {
     ApplicationRepository applicationRepository;
 
     @Autowired
-    PointScaleRepository pointScaleRepository;
+    PointScaleDescriptionRepository pointScaleDescriptionRepository;
 
-    private void updatePointScaleEntity(PointScaleEntity pointScale, PointScalePatch pointScalePatch) {
+    private void updatePointScaleDescriptionEntity(PointScaleDescriptionEntity pointScale, PointScalePatch pointScalePatch) {
         pointScale.setDescription(pointScalePatch.getDescription());
     }
 
-    private PointScaleEntity toPointScaleEntity(ApplicationEntity application, PointScalePost pointScalePost) {
-        PointScaleEntity entity = new PointScaleEntity();
+    private PointScaleDescriptionEntity toPointScaleDescriptionEntity(ApplicationEntity application, PointScalePost pointScalePost) {
+        PointScaleDescriptionEntity entity = new PointScaleDescriptionEntity();
 
         entity.setApplication(application);
         entity.setName(pointScalePost.getName());
@@ -48,13 +48,13 @@ public class PointScalesApiController implements PointScalesApi {
         return entity;
     }
 
-    private PointScale toPointScale(PointScaleEntity entity) {
-        PointScale pointScale = new PointScale();
+    private PointScaleDescription toPointScaleDescription(PointScaleDescriptionEntity entity) {
+        PointScaleDescription pointScaleDescription = new PointScaleDescription();
 
-        pointScale.setName(entity.getName());
-        pointScale.setDescription(entity.getDescription());
+        pointScaleDescription.setName(entity.getName());
+        pointScaleDescription.setDescription(entity.getDescription());
 
-        return pointScale;
+        return pointScaleDescription;
     }
 
     @Override
@@ -69,14 +69,14 @@ public class PointScalesApiController implements PointScalesApi {
         if (application != null) {
             String applicationName = pointScalePost.getName();
 
-            PointScaleEntity pointScale = pointScaleRepository.getByApplicationAndName(application, applicationName);
+            PointScaleDescriptionEntity pointScaleDescription = pointScaleDescriptionRepository.getByApplicationAndName(application, applicationName);
 
-            if (pointScale == null) {
-                PointScaleEntity newPointScaleEntity = toPointScaleEntity(application, pointScalePost);
+            if (pointScaleDescription == null) {
+                PointScaleDescriptionEntity newPointScaleDescriptionEntity = toPointScaleDescriptionEntity(application, pointScalePost);
 
-                pointScaleRepository.save(newPointScaleEntity);
+                pointScaleDescriptionRepository.save(newPointScaleDescriptionEntity);
 
-                String name = newPointScaleEntity.getName();
+                String name = newPointScaleDescriptionEntity.getName();
 
                 URI location = ServletUriComponentsBuilder
                         .fromCurrentRequest().path("/{name}")
@@ -94,7 +94,7 @@ public class PointScalesApiController implements PointScalesApi {
     }
 
     @Override
-    public ResponseEntity<PointScale> getPointScale(
+    public ResponseEntity<PointScaleDescription> getPointScale(
             @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
             @ApiParam(value = "", required = true) @Valid @RequestParam String pointScaleName
     ) {
@@ -103,12 +103,12 @@ public class PointScalesApiController implements PointScalesApi {
         ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
 
         if (application != null) {
-            PointScaleEntity pointScaleEntity = pointScaleRepository.getByApplicationAndName(application, pointScaleName);
+            PointScaleDescriptionEntity pointScaleDescriptionEntity = pointScaleDescriptionRepository.getByApplicationAndName(application, pointScaleName);
 
-            if (pointScaleEntity != null) {
-                PointScale pointScale = toPointScale(pointScaleEntity);
+            if (pointScaleDescriptionEntity != null) {
+                PointScaleDescription pointScaleDescription = toPointScaleDescription(pointScaleDescriptionEntity);
 
-                response = ResponseEntity.ok(pointScale);
+                response = ResponseEntity.ok(pointScaleDescription);
             } else {
                 response = ResponseEntity.notFound().build();
             }
@@ -120,16 +120,16 @@ public class PointScalesApiController implements PointScalesApi {
     }
 
     @Override
-    public ResponseEntity<List<PointScale>> getPointScales(@ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey) {
+    public ResponseEntity<List<PointScaleDescription>> getPointScales(@ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey) {
         ResponseEntity response;
 
         ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
 
         if (application != null) {
-            List<PointScale> pointScales = new ArrayList<>();
+            List<PointScaleDescription> pointScales = new ArrayList<>();
 
-            for (PointScaleEntity pointScaleEntity : pointScaleRepository.getAllByApplication(application)) {
-                pointScales.add(toPointScale(pointScaleEntity));
+            for (PointScaleDescriptionEntity pointScaleDescriptionEntity : pointScaleDescriptionRepository.getAllByApplication(application)) {
+                pointScales.add(toPointScaleDescription(pointScaleDescriptionEntity));
             }
 
             return ResponseEntity.ok(pointScales);
@@ -151,12 +151,12 @@ public class PointScalesApiController implements PointScalesApi {
         ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
 
         if (application != null) {
-            PointScaleEntity pointScaleEntity = pointScaleRepository.getByApplicationAndName(application, pointScaleName);
+            PointScaleDescriptionEntity pointScaleDescriptionEntity = pointScaleDescriptionRepository.getByApplicationAndName(application, pointScaleName);
 
-            if (pointScaleEntity != null) {
-                updatePointScaleEntity(pointScaleEntity, pointScalePatch);
+            if (pointScaleDescriptionEntity != null) {
+                updatePointScaleDescriptionEntity(pointScaleDescriptionEntity, pointScalePatch);
 
-                pointScaleRepository.save(pointScaleEntity);
+                pointScaleDescriptionRepository.save(pointScaleDescriptionEntity);
 
                 response = ResponseEntity.noContent().build();
             } else {

@@ -4,8 +4,8 @@
 //import ch.heigvd.amt.wp2.api.PointScalesApi;
 //import ch.heigvd.amt.wp2.api.model.Event;
 //import ch.heigvd.amt.wp2.api.model.PointScale;
-//import ch.heigvd.amt.wp2.model.entities.PointScaleEntity;
-//import ch.heigvd.amt.wp2.repositories.PointScaleRepository;
+//import ch.heigvd.amt.wp2.model.entities.PointScaleDescriptionEntity;
+//import ch.heigvd.amt.wp2.repositories.PointScaleDescriptionRepository;
 //import io.swagger.annotations.ApiParam;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.http.ResponseEntity;

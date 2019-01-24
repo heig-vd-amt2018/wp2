@@ -6,7 +6,6 @@ import ch.heigvd.amt.wp2.api.model.BadgePatch;
 import ch.heigvd.amt.wp2.api.model.BadgePost;
 import ch.heigvd.amt.wp2.model.entities.ApplicationEntity;
 import ch.heigvd.amt.wp2.model.entities.BadgeEntity;
-import ch.heigvd.amt.wp2.model.entities.PointScaleEntity;
 import ch.heigvd.amt.wp2.repositories.ApplicationRepository;
 import ch.heigvd.amt.wp2.repositories.BadgeRepository;
 import io.swagger.annotations.ApiParam;

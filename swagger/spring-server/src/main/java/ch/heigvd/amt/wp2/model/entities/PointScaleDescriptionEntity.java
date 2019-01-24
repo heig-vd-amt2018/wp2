@@ -3,8 +3,8 @@ package ch.heigvd.amt.wp2.model.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "point_scale")
-public class PointScaleEntity extends AbstractDomainModelEntity<Long> {
+@Table(name = "point_scale_description")
+public class PointScaleDescriptionEntity extends AbstractDomainModelEntity<Long> {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "application_id", nullable = true)
     private ApplicationEntity application;
@@ -15,11 +15,11 @@ public class PointScaleEntity extends AbstractDomainModelEntity<Long> {
     @Column(name = "description", nullable = true)
     private String description;
 
-    public PointScaleEntity() {
+    public PointScaleDescriptionEntity() {
         //here fo JPA
     }
 
-    public PointScaleEntity(ApplicationEntity application, String name, String description) {
+    public PointScaleDescriptionEntity(ApplicationEntity application, String name, String description) {
         this.application = application;
         this.name = name;
         this.description = description;

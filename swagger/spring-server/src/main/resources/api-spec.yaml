@@ -10,9 +10,11 @@ basePath: /api
 
 tags:
   - name: "Applications"
-    description: "These endpoints are to the applications. Development only."
+    description: "These endpoints are related to the applications. Development only."
+  - name: "Players"
+    description: "These endpoints are related to the players."
   - name: "Badges"
-    description: "These endpoints are to the badges."
+    description: "These endpoints are related to the badges."
   - name: "Point scales"
     description: "These endpoints are related to the point scales."
   - name: "Rules"
@@ -55,6 +57,29 @@ paths:
           $ref: "#/responses/Unauthorized"
         409:
           $ref: "#/responses/Conflict"
+
+
+  /players/{username}:
+    get:
+      tags:
+        - "Players"
+      description: "Return a specific player for the application with its badges and point scales"
+      operationId: getPlayer
+      parameters:
+        - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/username"
+      produces:
+        - application/json
+      responses:
+        200:
+          description: "Player has been successfully retrieved."
+          schema:
+            $ref: '#/definitions/player'
+        401:
+          $ref: "#/responses/Unauthorized"
+        404:
+          $ref: "#/responses/NotFound"
+
   /badges:
     post:
       tags:
@@ -166,7 +191,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/pointScale'
+              $ref: "#/definitions/pointScaleDescription"
         '401':
           $ref: "#/responses/Unauthorized"
 
@@ -185,7 +210,7 @@ paths:
         200:
           description: "Point scale has been successfully retrieved."
           schema:
-            $ref: '#/definitions/pointScale'
+            $ref: "#/definitions/pointScaleDescription"
         401:
           $ref: "#/responses/Unauthorized"
         404:
@@ -307,9 +332,17 @@ paths:
           $ref: "#/responses/Unauthorized"
 
 definitions:
-  properties:
-    type: "object"
-    additionalProperties: true
+  player:
+    type: object
+    properties:
+      badges:
+        type: "array"
+        items:
+          type : "string"
+      pointScaleSums:
+        type: "array"
+        items:
+          $ref: "#/definitions/pointScaleAmount"
 
   badge:
     type: object
@@ -321,13 +354,21 @@ definitions:
       image:
         type: "string"
 
-  pointScale:
+  pointScaleDescription:
     type: object
     properties:
       name:
         type: "string"
       description:
         type: "string"
+
+  pointScaleAmount:
+    type: object
+    properties:
+      pointScaleName:
+        type: "string"
+      amount:
+        type: "integer"
 
   rule:
     properties:
@@ -338,12 +379,7 @@ definitions:
       pointScales:
         type: "array"
         items:
-          type : "object"
-          properties:
-            name:
-              type: "string"
-            amount:
-              type: "integer"
+          $ref: "#/definitions/pointScaleAmount"
       badges:
         type: "array"
         items:
@@ -367,6 +403,13 @@ parameters:
     name: "apiKey"
     description: "The api key."
     in: header
+    required: true
+    type: "string"
+
+  username:
+    name: "username"
+    description: "The username of the player."
+    in: "path"
     required: true
     type: "string"
 
@@ -409,7 +452,6 @@ parameters:
           type: "string"
         image:
           type: "string"
-
 
   pointScaleName:
     name: "pointScaleName"
@@ -466,16 +508,10 @@ parameters:
           type: "string"
         eventType:
           type: "string"
-        pointScales:
+        pointScaleAmounts:
           type: "array"
           items:
-            type : "object"
-            properties:
-              name:
-                type: "string"
-              amount:
-                type: "integer"
-
+            $ref: "#/definitions/pointScaleAmount"
         badges:
           type: "array"
           items:
@@ -492,10 +528,10 @@ parameters:
       properties:
         eventType:
           type: "string"
-        pointScales:
+        pointScaleAmounts:
           type: "array"
           items:
-            type : "string"
+            $ref: "#/definitions/pointScaleAmount"
         badges:
           type: "array"
           items:
@@ -521,6 +557,4 @@ parameters:
         timestamp:
           type: "string"
           format: "date-time"
-        properties:
-          $ref: "#/definitions/properties"
 

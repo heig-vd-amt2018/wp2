@@ -2,9 +2,7 @@ package ch.heigvd.amt.wp2.api.endpoints;
 
 import ch.heigvd.amt.wp2.api.RulesApi;
 import ch.heigvd.amt.wp2.api.exceptions.NotFoundException;
-import ch.heigvd.amt.wp2.api.model.Rule;
-import ch.heigvd.amt.wp2.api.model.RulePatch;
-import ch.heigvd.amt.wp2.api.model.RulePost;
+import ch.heigvd.amt.wp2.api.model.*;
 import ch.heigvd.amt.wp2.model.entities.*;
 import ch.heigvd.amt.wp2.repositories.*;
 import io.swagger.annotations.ApiParam;
@@ -34,7 +32,10 @@ public class RulesApiController implements RulesApi {
     BadgeRepository badgeRepository;
 
     @Autowired
-    PointScaleRepository pointScaleRepository;
+    PointScaleDescriptionRepository pointScaleDescriptionRepository;
+
+    @Autowired
+    PointScaleAmountRepository pointScaleAmountRepository;
 
     @Autowired
     RuleRepository ruleRepository;
@@ -53,7 +54,7 @@ public class RulesApiController implements RulesApi {
     }
 
     private List<RuleBadgeEntity> toRuleBadges(ApplicationEntity application, RuleEntity rule, List<String> badgeNames) throws NotFoundException {
-        List<RuleBadgeEntity> badges = new ArrayList<>();
+        List<RuleBadgeEntity> entities = new ArrayList<>();
 
         for (String badgeName : badgeNames) {
             BadgeEntity badge = badgeRepository.getByApplicationAndName(application, badgeName);
@@ -62,71 +63,87 @@ public class RulesApiController implements RulesApi {
                 throw new NotFoundException(404, "Badge not found.");
             }
 
-            badges.add(new RuleBadgeEntity(rule, badge));
+            entities.add(new RuleBadgeEntity(rule, badge));
         }
 
-        return badges;
+        return entities;
     }
 
-    private List<String> toPointScaleNames(List<RulePointScaleEntity> pointScaleEntities) {
-        List<String> pointScales = new ArrayList<>();
+    private List<PointScaleAmount> toPointScaleAmounts(List<RulePointScaleAmountEntity> pointScaleAmountEntities) {
+        List<PointScaleAmount> pointScaleAmounts = new ArrayList<>();
 
-        for (RulePointScaleEntity pointScale : pointScaleEntities) {
-            pointScales.add(pointScale.getPointScale().getName());
+        for (RulePointScaleAmountEntity rulePointScaleAmount : pointScaleAmountEntities) {
+            PointScaleAmount pointScaleAmount = new PointScaleAmount();
+            PointScaleAmountEntity pointScaleAmountEntity = rulePointScaleAmount.getPointScaleAmount();
+
+            pointScaleAmount.setPointScaleName(pointScaleAmountEntity.getPointScale().getName());
+            pointScaleAmount.setAmount(pointScaleAmountEntity.getAmount());
+
+            pointScaleAmounts.add(pointScaleAmount);
         }
 
-        return pointScales;
+        return pointScaleAmounts;
     }
 
-    private List<RulePointScaleEntity> toPointScales(ApplicationEntity application, RuleEntity rule, List<String> pointScaleNames) throws NotFoundException {
-        List<RulePointScaleEntity> pointScales = new ArrayList<>();
+    private List<RulePointScaleAmountEntity> toRulePointScaleAmounts(ApplicationEntity application, RuleEntity rule, List<PointScaleAmount> pointScaleAmounts) throws NotFoundException {
+        List<RulePointScaleAmountEntity> entities = new ArrayList<>();
 
-        for (String badgeName : pointScaleNames) {
-            PointScaleEntity pointScale = pointScaleRepository.getByApplicationAndName(application, badgeName);
+        for (PointScaleAmount pointScaleAmount : pointScaleAmounts) {
+            PointScaleDescriptionEntity pointScaleDescription = pointScaleDescriptionRepository.getByApplicationAndName(application, pointScaleAmount.getPointScaleName());
 
-            if (pointScale == null) {
+            if (pointScaleDescription == null) {
                 throw new NotFoundException(404, "Point scale not found.");
             }
 
-            pointScales.add(new RulePointScaleEntity(rule, pointScale));
+            PointScaleAmountEntity entity = new PointScaleAmountEntity();
+
+            entity.setPointScale(pointScaleDescription);
+            entity.setAmount(pointScaleAmount.getAmount());
+
+            pointScaleAmountRepository.save(entity);
+
+            entities.add(new RulePointScaleAmountEntity(rule, entity));
         }
 
-        return pointScales;
-    }
-
-    private void updateRuleEntity(ApplicationEntity application, RuleEntity rule, RulePatch rulePatch) throws NotFoundException {
-        List<RuleBadgeEntity> badges = toRuleBadges(application, rule, rulePatch.getBadges());
-        List<RulePointScaleEntity> pointScales = toPointScales(application, rule, rulePatch.getPointScales());
-
-        rule.setEventType(rulePatch.getEventType());
-        rule.setBadges(badges);
-        rule.setPointScales(pointScales);
+        return entities;
     }
 
     private RuleEntity toRuleEntity(ApplicationEntity application, RulePost rulePost) throws NotFoundException {
         RuleEntity entity = new RuleEntity();
 
         List<RuleBadgeEntity> badges = toRuleBadges(application, entity, rulePost.getBadges());
-        List<RulePointScaleEntity> pointScales = toPointScales(application, entity, rulePost.getPointScales());
+        List<RulePointScaleAmountEntity> pointScaleAmounts = toRulePointScaleAmounts(application, entity, rulePost.getPointScaleAmounts());
 
         entity.setApplication(application);
         entity.setName(rulePost.getName());
         entity.setEventType(rulePost.getEventType());
         entity.setBadges(badges);
-        entity.setPointScales(pointScales);
+        entity.setPointScaleAmounts(pointScaleAmounts);
 
         return entity;
     }
 
-    private Rule toRule(RuleEntity entity) {
+    private Rule toRule(RuleEntity ruleEntity) {
         Rule rule = new Rule();
 
-        rule.setName(entity.getName());
-        rule.setEventType(entity.getEventType());
-        rule.setBadges(toBadgeNames(entity.getBadges()));
-        rule.setPointScales(toPointScaleNames(entity.getPointScales()));
+        List<String> badges = toBadgeNames(ruleEntity.getBadges());
+        List<PointScaleAmount> pointScaleAmounts = toPointScaleAmounts(ruleEntity.getPointScaleAmounts());
+
+        rule.setName(ruleEntity.getName());
+        rule.setEventType(ruleEntity.getEventType());
+        rule.setBadges(badges);
+        rule.setPointScales(pointScaleAmounts);
 
         return rule;
+    }
+
+    private void updateRuleEntity(ApplicationEntity application, RuleEntity rule, RulePatch rulePatch) throws NotFoundException {
+        List<RuleBadgeEntity> badges = toRuleBadges(application, rule, rulePatch.getBadges());
+        List<RulePointScaleAmountEntity> pointScaleAmounts = toRulePointScaleAmounts(application, rule, rulePatch.getPointScaleAmounts());
+
+        rule.setEventType(rulePatch.getEventType());
+        rule.setBadges(badges);
+        rule.setPointScaleAmounts(pointScaleAmounts);
     }
 
     @Override

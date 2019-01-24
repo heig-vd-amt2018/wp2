@@ -14,8 +14,8 @@ public class PointScaleRewardEntity extends AbstractDomainModelEntity<Long> {
     @Column(name = "created_date", updatable = false, nullable = false)
     private Timestamp createdDate;
 
-    @Column(name = "point_scale", nullable = false)
-    private PointScaleEntity pointScale;
+    @Column(name = "point_scale_description_id", nullable = false)
+    private PointScaleDescriptionEntity pointScale;
 
     @Column(name = "amount", nullable = false)
     private long amount;
@@ -24,7 +24,7 @@ public class PointScaleRewardEntity extends AbstractDomainModelEntity<Long> {
         //Here for JPA
     }
 
-    public PointScaleRewardEntity(PlayerEntity player, PointScaleEntity pointScale, long amount) {
+    public PointScaleRewardEntity(PlayerEntity player, PointScaleDescriptionEntity pointScale, long amount) {
         this.player = player;
         this.createdDate = new Timestamp((new Date()).getTime());
         this.pointScale = pointScale;
@@ -47,11 +47,11 @@ public class PointScaleRewardEntity extends AbstractDomainModelEntity<Long> {
         this.createdDate = createdDate;
     }
 
-    public PointScaleEntity getPointScale() {
+    public PointScaleDescriptionEntity getPointScale() {
         return pointScale;
     }
 
-    public void setPointScale(PointScaleEntity pointScale) {
+    public void setPointScale(PointScaleDescriptionEntity pointScale) {
         this.pointScale = pointScale;
     }
 
