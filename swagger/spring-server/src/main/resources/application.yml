@@ -4,9 +4,10 @@ spring:
     username: root
     password: adminpw
     platform: mysql
-    initialize: false
+    initialize: true
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate.ddl-auto: create
 
 ---
 spring:
@@ -16,3 +17,6 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     initialize: true
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate.ddl-auto: create
