@@ -34,70 +34,8 @@ public class PointScalesApiController implements PointScalesApi {
     @Autowired
     PointScaleRepository pointScaleRepository;
 
-    @Override
-    public ResponseEntity<String> createPointScale(
-            @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
-            @ApiParam(value = "", required = true) @Valid @RequestBody PointScalePost pointScalePost
-    ) {
-        ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
-
-        if (application != null) {
-            PointScaleEntity newPointScaleEntity = toPointScaleEntity(application, pointScalePost);
-
-            pointScaleRepository.save(newPointScaleEntity);
-
-            String name = newPointScaleEntity.getName();
-
-            URI location = ServletUriComponentsBuilder
-                    .fromCurrentRequest().path("/{name}")
-                    .buildAndExpand(name).toUri();
-
-            return ResponseEntity.created(location).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-    }
-
-    @Override
-    public ResponseEntity<PointScale> getPointScale(
-            @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
-            @ApiParam(value = "", required = true) @Valid @RequestParam String pointScaleName
-    ) {
-        ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
-
-        if (application != null) {
-            PointScaleEntity pointScaleEntity = pointScaleRepository.getByApplicationAndName(application, pointScaleName);
-
-            if (pointScaleEntity != null) {
-                PointScale pointScale = toPointScale(pointScaleEntity);
-
-                return ResponseEntity.ok(pointScale);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-    }
-
-    @Override
-    public ResponseEntity<String> updatePointScale(
-            @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
-            @ApiParam(value = "", required = true) @Valid @RequestParam String pointScaleName,
-            @ApiParam(value = "", required = true) @Valid @RequestBody PointScalePatch pointScalePatch
-    ) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<List<PointScale>> getPointScales(@ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey) {
-        List<PointScale> pointScales = new ArrayList<>();
-
-        for (PointScaleEntity pointScaleEntity : pointScaleRepository.findAll()) {
-            pointScales.add(toPointScale(pointScaleEntity));
-        }
-
-        return ResponseEntity.ok(pointScales);
+    private void updatePointScaleEntity(PointScaleEntity pointScale, PointScalePatch pointScalePatch) {
+        pointScale.setDescription(pointScalePatch.getDescription());
     }
 
     private PointScaleEntity toPointScaleEntity(ApplicationEntity application, PointScalePost pointScalePost) {
@@ -117,5 +55,117 @@ public class PointScalesApiController implements PointScalesApi {
         pointScale.setDescription(entity.getDescription());
 
         return pointScale;
+    }
+
+    @Override
+    public ResponseEntity<String> createPointScale(
+            @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
+            @ApiParam(value = "", required = true) @Valid @RequestBody PointScalePost pointScalePost
+    ) {
+        ResponseEntity response;
+
+        ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
+
+        if (application != null) {
+            String applicationName = pointScalePost.getName();
+
+            PointScaleEntity pointScale = pointScaleRepository.getByApplicationAndName(application, applicationName);
+
+            if (pointScale == null) {
+                PointScaleEntity newPointScaleEntity = toPointScaleEntity(application, pointScalePost);
+
+                pointScaleRepository.save(newPointScaleEntity);
+
+                String name = newPointScaleEntity.getName();
+
+                URI location = ServletUriComponentsBuilder
+                        .fromCurrentRequest().path("/{name}")
+                        .buildAndExpand(name).toUri();
+
+                response = ResponseEntity.created(location).build();
+            } else {
+                response = ResponseEntity.status(HttpStatus.CONFLICT).build();
+            }
+        } else {
+            response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<PointScale> getPointScale(
+            @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
+            @ApiParam(value = "", required = true) @Valid @RequestParam String pointScaleName
+    ) {
+        ResponseEntity response;
+
+        ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
+
+        if (application != null) {
+            PointScaleEntity pointScaleEntity = pointScaleRepository.getByApplicationAndName(application, pointScaleName);
+
+            if (pointScaleEntity != null) {
+                PointScale pointScale = toPointScale(pointScaleEntity);
+
+                response = ResponseEntity.ok(pointScale);
+            } else {
+                response = ResponseEntity.notFound().build();
+            }
+        } else {
+            response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<String> updatePointScale(
+            @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
+            @ApiParam(value = "", required = true) @Valid @RequestParam String pointScaleName,
+            @ApiParam(value = "", required = true) @Valid @RequestBody PointScalePatch pointScalePatch
+    ) {
+        ResponseEntity response;
+
+        ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
+
+        if (application != null) {
+            PointScaleEntity pointScaleEntity = pointScaleRepository.getByApplicationAndName(application, pointScaleName);
+
+            if (pointScaleEntity != null) {
+                updatePointScaleEntity(pointScaleEntity, pointScalePatch);
+
+                pointScaleRepository.save(pointScaleEntity);
+
+                response = ResponseEntity.noContent().build();
+            } else {
+                response = ResponseEntity.notFound().build();
+            }
+        } else {
+            response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        return response;
+    }
+
+    @Override
+    public ResponseEntity<List<PointScale>> getPointScales(@ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey) {
+        ResponseEntity response;
+
+        ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
+
+        if (application != null) {
+            List<PointScale> pointScales = new ArrayList<>();
+
+            for (PointScaleEntity pointScaleEntity : pointScaleRepository.getAllByApplication(application)) {
+                pointScales.add(toPointScale(pointScaleEntity));
+            }
+
+            return ResponseEntity.ok(pointScales);
+        } else {
+            response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        return response;
     }
 }

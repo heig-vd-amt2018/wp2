@@ -7,7 +7,11 @@ import java.util.List;
 @Entity
 @Table(name = "application")
 public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
-    @Column(name = "api_key", nullable = false)
+    @Column(
+            name = "api_key",
+            unique = true,
+            nullable = false
+    )
     private String apiKey;
 
     @OneToMany(
