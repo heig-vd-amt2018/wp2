@@ -63,7 +63,6 @@ public class BadgesApiController implements BadgesApi {
     }
 
     @Override
-    @Transactional
     public ResponseEntity<String> createBadge(
             @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
             @ApiParam(value = "", required = true) @Valid @RequestBody BadgePost badgePost
@@ -100,7 +99,6 @@ public class BadgesApiController implements BadgesApi {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public ResponseEntity<Badge> getBadge(
             @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
             @ApiParam(value = "", required = true) @Valid @PathVariable("badgeName") String badgeName
@@ -127,7 +125,6 @@ public class BadgesApiController implements BadgesApi {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public ResponseEntity<List<Badge>> getBadges(@ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey) {
         ResponseEntity response;
 
@@ -149,7 +146,6 @@ public class BadgesApiController implements BadgesApi {
     }
 
     @Override
-    @Transactional
     public ResponseEntity<String> updateBadge(
             @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
             @ApiParam(value = "", required = true) @Valid @PathVariable("badgeName") String badgeName,
