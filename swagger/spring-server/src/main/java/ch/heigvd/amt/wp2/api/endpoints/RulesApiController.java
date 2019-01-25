@@ -12,7 +12,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -25,7 +26,7 @@ import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-07-26T19:36:34.802Z")
 
-@Controller
+@Service
 public class RulesApiController implements RulesApi {
 
     @Autowired
@@ -150,6 +151,7 @@ public class RulesApiController implements RulesApi {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<String> createRule(
             @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
             @ApiParam(value = "", required = true) @Valid @RequestBody RulePost rulePost
@@ -238,6 +240,7 @@ public class RulesApiController implements RulesApi {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<String> updateRule(
             @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
             @ApiParam(value = "", required = true) @Valid @PathVariable("ruleName") String ruleName,
