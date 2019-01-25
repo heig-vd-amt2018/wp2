@@ -1,6 +1,7 @@
 package ch.heigvd.amt.wp2.api.endpoints;
 
 import ch.heigvd.amt.wp2.api.EventsApi;
+import ch.heigvd.amt.wp2.api.exceptions.ApiException;
 import ch.heigvd.amt.wp2.api.model.Event;
 import ch.heigvd.amt.wp2.model.entities.*;
 import ch.heigvd.amt.wp2.repositories.ApplicationRepository;
@@ -54,10 +55,22 @@ public class EventsApiController implements EventsApi {
 
             for (RuleEntity rule : application.getRules()) {
                 if (rule.getEventType().equals(eventType)) {
+                    // Check for badges
                     for (RuleBadgeEntity ruleBadge : rule.getBadges()) {
-                        badgeRewardRepository.save(new BadgeRewardEntity(player, ruleBadge.getBadge()));
+                        boolean badgeAlreadyObtained = false;
+
+                        for (BadgeRewardEntity badgeRewardEntity : player.getBadgeRewards()) {
+                            if (badgeRewardEntity.getBadge().equals(ruleBadge.getBadge())) {
+                                badgeAlreadyObtained = true;
+                            }
+                        }
+
+                        if (!badgeAlreadyObtained) {
+                            badgeRewardRepository.save(new BadgeRewardEntity(player, ruleBadge.getBadge()));
+                        }
                     }
 
+                    // Check for point scales
                     for (RulePointScaleAmountEntity rulePointScaleAmount : rule.getPointScaleAmounts()) {
                         PointScaleAmountEntity pointScaleAmountEntity = rulePointScaleAmount.getPointScaleAmount();
 

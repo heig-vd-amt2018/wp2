@@ -1,7 +1,8 @@
 package ch.heigvd.amt.wp2.model.entities;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
+import java.util.Set;
 
 @Entity
 @Table(name = "application")
@@ -18,34 +19,34 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<BadgeEntity> badges;
+    private Set<BadgeEntity> badges;
 
     @OneToMany(
             mappedBy = "application",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<PointScaleDescriptionEntity> pointScales;
+    private Set<PointScaleDescriptionEntity> pointScales;
 
     @OneToMany(
             mappedBy = "application",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<PlayerEntity> players;
+    private Set<PlayerEntity> players;
 
     @OneToMany(
             mappedBy = "application",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<RuleEntity> rules;
+    private Set<RuleEntity> rules;
 
     public ApplicationEntity() {
         //here fo JPA
     }
 
-    public ApplicationEntity(String apiKey, List<BadgeEntity> badges, List<PointScaleDescriptionEntity> pointScales, List<PlayerEntity> players, List<RuleEntity> rules) {
+    public ApplicationEntity(String apiKey, Set<BadgeEntity> badges, Set<PointScaleDescriptionEntity> pointScales, Set<PlayerEntity> players, Set<RuleEntity> rules) {
         this.apiKey = apiKey;
         this.badges = badges;
         this.pointScales = pointScales;
@@ -61,11 +62,11 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
         this.apiKey = apiKey;
     }
 
-    public List<BadgeEntity> getBadges() {
+    public Set<BadgeEntity> getBadges() {
         return badges;
     }
 
-    public void setBadges(List<BadgeEntity> badges) {
+    public void setBadges(Set<BadgeEntity> badges) {
         this.badges = badges;
     }
 
@@ -73,11 +74,11 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
         return badges.add(badge);
     }
 
-    public List<PointScaleDescriptionEntity> getPointScales() {
+    public Set<PointScaleDescriptionEntity> getPointScales() {
         return pointScales;
     }
 
-    public void setPointScales(List<PointScaleDescriptionEntity> pointScales) {
+    public void setPointScales(Set<PointScaleDescriptionEntity> pointScales) {
         this.pointScales = pointScales;
     }
 
@@ -85,11 +86,11 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
         return pointScales.add(pointScale);
     }
 
-    public List<PlayerEntity> getPlayers() {
+    public Set<PlayerEntity> getPlayers() {
         return players;
     }
 
-    public void setPlayers(List<PlayerEntity> players) {
+    public void setPlayers(Set<PlayerEntity> players) {
         this.players = players;
     }
 
@@ -97,11 +98,11 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
         return players.add(player);
     }
 
-    public List<RuleEntity> getRules() {
+    public Set<RuleEntity> getRules() {
         return rules;
     }
 
-    public void setRules(List<RuleEntity> rules) {
+    public void setRules(Set<RuleEntity> rules) {
         this.rules = rules;
     }
 

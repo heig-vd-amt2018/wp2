@@ -1,8 +1,8 @@
 package ch.heigvd.amt.wp2.model.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -20,14 +20,14 @@ public class PlayerEntity extends AbstractDomainModelEntity<Long> {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<BadgeRewardEntity> badgeRewards;
+    private Set<BadgeRewardEntity> badgeRewards;
 
     @OneToMany(
             mappedBy = "player",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<PointRewardEntity> pointScaleReward;
+    private Set<PointRewardEntity> pointScaleReward;
 
     public PlayerEntity() {
         //only here for JPA
@@ -36,12 +36,12 @@ public class PlayerEntity extends AbstractDomainModelEntity<Long> {
     public PlayerEntity(ApplicationEntity application, String username) {
         this.application = application;
         this.username = username;
-        this.badgeRewards = new ArrayList<>();
-        this.pointScaleReward = new ArrayList<>();
+        this.badgeRewards = new HashSet<>();
+        this.pointScaleReward = new HashSet<>();
     }
 
 
-    public PlayerEntity(ApplicationEntity application, String username, List<BadgeRewardEntity> badgeRewards, List<PointRewardEntity> pointScaleReward) {
+    public PlayerEntity(ApplicationEntity application, String username, Set<BadgeRewardEntity> badgeRewards, Set<PointRewardEntity> pointScaleReward) {
         this.application = application;
         this.username = username;
         this.badgeRewards = badgeRewards;
@@ -56,11 +56,11 @@ public class PlayerEntity extends AbstractDomainModelEntity<Long> {
         this.username = username;
     }
 
-    public List<BadgeRewardEntity> getBadgeRewards() {
+    public Set<BadgeRewardEntity> getBadgeRewards() {
         return badgeRewards;
     }
 
-    public void setBadgeRewards(List<BadgeRewardEntity> badgeRewards) {
+    public void setBadgeRewards(Set<BadgeRewardEntity> badgeRewards) {
         this.badgeRewards = badgeRewards;
     }
 
@@ -68,11 +68,11 @@ public class PlayerEntity extends AbstractDomainModelEntity<Long> {
         return badgeRewards.add(badgeReward);
     }
 
-    public List<PointRewardEntity> getPointScaleReward() {
+    public Set<PointRewardEntity> getPointScaleReward() {
         return pointScaleReward;
     }
 
-    public void setPointScaleReward(List<PointRewardEntity> pointScaleReward) {
+    public void setPointScaleReward(Set<PointRewardEntity> pointScaleReward) {
         this.pointScaleReward = pointScaleReward;
     }
 

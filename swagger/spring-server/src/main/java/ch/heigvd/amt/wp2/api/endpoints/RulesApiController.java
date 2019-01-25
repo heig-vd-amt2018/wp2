@@ -21,7 +21,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-07-26T19:36:34.802Z")
 
@@ -46,7 +48,7 @@ public class RulesApiController implements RulesApi {
     @Autowired
     RuleBadgeRepository ruleBadgeRepository;
 
-    private List<String> toBadgeNames(List<RuleBadgeEntity> badgeEntities) {
+    private List<String> toBadgeNames(Set<RuleBadgeEntity> badgeEntities) {
         List<String> badges = new ArrayList<>();
 
         for (RuleBadgeEntity ruleBadge : badgeEntities) {
@@ -56,8 +58,8 @@ public class RulesApiController implements RulesApi {
         return badges;
     }
 
-    private List<RuleBadgeEntity> toRuleBadges(ApplicationEntity application, RuleEntity rule, List<String> badgeNames) throws NotFoundException {
-        List<RuleBadgeEntity> entities = new ArrayList<>();
+    private Set<RuleBadgeEntity> toRuleBadges(ApplicationEntity application, RuleEntity rule, List<String> badgeNames) throws NotFoundException {
+        Set<RuleBadgeEntity> entities = new HashSet<>();
 
         for (String badgeName : badgeNames) {
             BadgeEntity badge = badgeRepository.getByApplicationAndName(application, badgeName);
@@ -72,7 +74,7 @@ public class RulesApiController implements RulesApi {
         return entities;
     }
 
-    private List<PointScaleAmount> toPointScaleAmounts(List<RulePointScaleAmountEntity> pointScaleAmountEntities) {
+    private List<PointScaleAmount> toPointScaleAmounts(Set<RulePointScaleAmountEntity> pointScaleAmountEntities) {
         List<PointScaleAmount> pointScaleAmounts = new ArrayList<>();
 
         for (RulePointScaleAmountEntity rulePointScaleAmount : pointScaleAmountEntities) {
@@ -88,8 +90,8 @@ public class RulesApiController implements RulesApi {
         return pointScaleAmounts;
     }
 
-    private List<RulePointScaleAmountEntity> toRulePointScaleAmounts(ApplicationEntity application, RuleEntity rule, List<PointScaleAmount> pointScaleAmounts) throws NotFoundException {
-        List<RulePointScaleAmountEntity> entities = new ArrayList<>();
+    private Set<RulePointScaleAmountEntity> toRulePointScaleAmounts(ApplicationEntity application, RuleEntity rule, List<PointScaleAmount> pointScaleAmounts) throws NotFoundException {
+        Set<RulePointScaleAmountEntity> entities = new HashSet<>();
 
         for (PointScaleAmount pointScaleAmount : pointScaleAmounts) {
             PointScaleDescriptionEntity pointScaleDescription = pointScaleDescriptionRepository.getByApplicationAndName(application, pointScaleAmount.getPointScaleName());
@@ -114,8 +116,8 @@ public class RulesApiController implements RulesApi {
     private RuleEntity toRuleEntity(ApplicationEntity application, RulePost rulePost) throws NotFoundException {
         RuleEntity entity = new RuleEntity();
 
-        List<RuleBadgeEntity> badges = toRuleBadges(application, entity, rulePost.getBadges());
-        List<RulePointScaleAmountEntity> pointScaleAmounts = toRulePointScaleAmounts(application, entity, rulePost.getPointScaleAmounts());
+        Set<RuleBadgeEntity> badges = toRuleBadges(application, entity, rulePost.getBadges());
+        Set<RulePointScaleAmountEntity> pointScaleAmounts = toRulePointScaleAmounts(application, entity, rulePost.getPointScaleAmounts());
 
         entity.setApplication(application);
         entity.setName(rulePost.getName());
@@ -141,8 +143,8 @@ public class RulesApiController implements RulesApi {
     }
 
     private void updateRuleEntity(ApplicationEntity application, RuleEntity rule, RulePatch rulePatch) throws NotFoundException {
-        List<RuleBadgeEntity> badges = toRuleBadges(application, rule, rulePatch.getBadges());
-        List<RulePointScaleAmountEntity> pointScaleAmounts = toRulePointScaleAmounts(application, rule, rulePatch.getPointScaleAmounts());
+        Set<RuleBadgeEntity> badges = toRuleBadges(application, rule, rulePatch.getBadges());
+        Set<RulePointScaleAmountEntity> pointScaleAmounts = toRulePointScaleAmounts(application, rule, rulePatch.getPointScaleAmounts());
 
         rule.setEventType(rulePatch.getEventType());
         rule.setBadges(badges);

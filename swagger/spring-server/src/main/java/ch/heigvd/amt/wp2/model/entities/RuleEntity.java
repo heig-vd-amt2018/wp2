@@ -1,7 +1,7 @@
 package ch.heigvd.amt.wp2.model.entities;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "rule")
@@ -21,14 +21,14 @@ public class RuleEntity extends AbstractDomainModelEntity<Long> {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<RuleBadgeEntity> badges;
+    private Set<RuleBadgeEntity> badges;
 
     @OneToMany(
             mappedBy = "rule",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<RulePointScaleAmountEntity> pointScaleAmounts;
+    private Set<RulePointScaleAmountEntity> pointScaleAmounts;
 
     public RuleEntity() {
         //here fo JPA
@@ -38,8 +38,8 @@ public class RuleEntity extends AbstractDomainModelEntity<Long> {
             ApplicationEntity application,
             String name,
             String eventType,
-            List<RulePointScaleAmountEntity> pointScaleAmounts,
-            List<RuleBadgeEntity> badges
+            Set<RulePointScaleAmountEntity> pointScaleAmounts,
+            Set<RuleBadgeEntity> badges
     ) {
         this.application = application;
         this.name = name;
@@ -72,19 +72,19 @@ public class RuleEntity extends AbstractDomainModelEntity<Long> {
         this.eventType = eventType;
     }
 
-    public List<RulePointScaleAmountEntity> getPointScaleAmounts() {
+    public Set<RulePointScaleAmountEntity> getPointScaleAmounts() {
         return pointScaleAmounts;
     }
 
-    public void setPointScaleAmounts(List<RulePointScaleAmountEntity> pointScaleAmounts) {
+    public void setPointScaleAmounts(Set<RulePointScaleAmountEntity> pointScaleAmounts) {
         this.pointScaleAmounts = pointScaleAmounts;
     }
 
-    public List<RuleBadgeEntity> getBadges() {
+    public Set<RuleBadgeEntity> getBadges() {
         return badges;
     }
 
-    public void setBadges(List<RuleBadgeEntity> badges) {
+    public void setBadges(Set<RuleBadgeEntity> badges) {
         this.badges = badges;
     }
 }
