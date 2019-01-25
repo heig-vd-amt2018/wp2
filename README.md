@@ -60,13 +60,13 @@ This work package has been done with the following technologies:
 
 | Description                                                  | Status |
 | ------------------------------------------------------------ | ------ |
-| As an application developer with an **API client**, I can perform CRUD operations on **badges**. When I ask the list of badges, I only see the badges of my application (thanks to the API key provided in the request). | TODO |
-| As an application developer with an **API client**, I can perform CRUD operations on **point scales**. When I ask the list of badges, I only see the badges of my application (thanks to the API key provided in the request). | TODO |
-| As an application developer with an **API client**, I can perform CRUD operations on **rules**. When I ask the list of badges, I only see the badges of my application (thanks to the API key provided in the request). *The simplest feature is to support stateless rules that evaluate only the event type*. | TODO |
-| As a gamified application, I can send a stream of application events. The correct rules are evaluated and the correct rewards are given to the user. | TODO |
-| As an application developer, I can define rules that evaluate more than the event type: I can write expressions that evaluate the properties attached to the event (e.g. give the badge if the event is type "askQuestion" and if event has a property "difficulty" with a value higher than 5). | TODO |
-| As an application developer, I can define rules that allow me manage some state (e.g. give the badge after 5 events of type "askQuestion") have been asked. | TODO |
-| As a **spiritual guide**, I can clone the repo, move to a documented repository and type `docker-compose up` to start the system. I also have instructions for running the automated tests. | TODO |
-| As a **spiritual guide**, I have complete Cucumber tests for the badges, point scales and rules endpoints. | TODO |
-| As a **spiritual guide**, I have advanced Cucumber tests for the /events endpoints, that validate the business logic (has the rule been triggered and are the side effects correct?) | TODO |
-| As a **spiritual guide**, I have load testing script (e.g. JMeter) that I can use to evaluate if the engine behaves correctly when several events for the same user arrive at the same time. The experiments that have been done are well documented (e.g. under which conditions did we have a bug, how did we solve it, etc.) | TODO |
+| As an application developer with an **API client**, I can perform CRUD operations on **badges**. When I ask the list of badges, I only see the badges of my application (thanks to the API key provided in the request). | Done |
+| As an application developer with an **API client**, I can perform CRUD operations on **point scales**. When I ask the list of badges, I only see the badges of my application (thanks to the API key provided in the request). | Done |
+| As an application developer with an **API client**, I can perform CRUD operations on **rules**. When I ask the list of badges, I only see the badges of my application (thanks to the API key provided in the request). *The simplest feature is to support stateless rules that evaluate only the event type*. | Done |
+| As a gamified application, I can send a stream of application events. The correct rules are evaluated and the correct rewards are given to the user. | Done |
+| As an application developer, I can define rules that evaluate more than the event type: I can write expressions that evaluate the properties attached to the event (e.g. give the badge if the event is type "askQuestion" and if event has a property "difficulty" with a value higher than 5). | Not yet |
+| As an application developer, I can define rules that allow me manage some state (e.g. give the badge after 5 events of type "askQuestion") have been asked. | Not yet |
+| As a **spiritual guide**, I can clone the repo, move to a documented repository and type `docker-compose up` to start the system. I also have instructions for running the automated tests. | Done |
+| As a **spiritual guide**, I have complete Cucumber tests for the badges, point scales and rules endpoints. | Done |
+| As a **spiritual guide**, I have advanced Cucumber tests for the /events endpoints, that validate the business logic (has the rule been triggered and are the side effects correct?) | Not yet |
+| As a **spiritual guide**, I have load testing script (e.g. JMeter) that I can use to evaluate if the engine behaves correctly when several events for the same user arrive at the same time. The experiments that have been done are well documented (e.g. under which conditions did we have a bug, how did we solve it, etc.) | Not yet |
