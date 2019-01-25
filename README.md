@@ -70,7 +70,7 @@ In our project the mechanism that might be the most vulnerable to heavy loads is
     - As GET is not implemented by our API, verification is done manually in the database
     - RESULT : PASS
 
-    ![applications](C:\Users\Joel\Documents\HEIG\AMT\Projet\wp2\img\applications.png.jpg)
+    ![applications](./img/applications.png.jpg)
 
 - Try creating multiple point scales with the same name for that application on `POST /pointScales`
 
