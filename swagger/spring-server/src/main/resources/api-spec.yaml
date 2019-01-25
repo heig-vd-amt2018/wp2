@@ -335,14 +335,32 @@ definitions:
   player:
     type: object
     properties:
-      badges:
+      badgesRewards:
         type: "array"
         items:
-          type : "string"
-      pointScaleSums:
+          $ref: "#/definitions/playerBadgesReward"
+      pointScalesrewards:
         type: "array"
         items:
-          $ref: "#/definitions/pointScaleAmount"
+          $ref: "#/definitions/pointScalesRewards"
+
+  playerBadgesReward:
+    type: object
+    properties:
+      name:
+        type: "string"
+      timestamp:
+        type: "string"
+
+  pointScalesRewards:
+    type: object
+    properties:
+      name:
+        type: "string"
+      amout:
+        type: integer
+      timestamp:
+        type: "string"
 
   badge:
     type: object
@@ -419,6 +437,7 @@ parameters:
     in: "path"
     required: true
     type: "string"
+
   badgePost:
     name: "badgePost"
     description: "The badge's details"
@@ -437,6 +456,7 @@ parameters:
           type: "string"
         image:
           type: "string"
+
   badgePatch:
     name: "badgePatch"
     description: "The badge's details"
@@ -459,6 +479,7 @@ parameters:
     in: "path"
     required: true
     type: "string"
+
   pointScalePost:
     name: "pointScalePost"
     description: "The point scale's details"
@@ -474,6 +495,7 @@ parameters:
           type: "string"
         description:
           type: "string"
+
   pointScalePatch:
     name: "pointScalePatch"
     description: "The point scale's details"
@@ -493,6 +515,7 @@ parameters:
     in: "path"
     required: true
     type: "string"
+
   rulePost:
     name: "rulePost"
     description: "The rule's details."
@@ -516,6 +539,7 @@ parameters:
           type: "array"
           items:
             type : "string"
+
   rulePatch:
     name: "rulePatch"
     description: "The rule's details."
@@ -557,3 +581,4 @@ parameters:
         timestamp:
           type: "string"
           format: "date-time"
+
