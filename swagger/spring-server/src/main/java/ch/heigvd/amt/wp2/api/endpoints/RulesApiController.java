@@ -107,13 +107,13 @@ public class RulesApiController implements RulesApi {
         RuleEntity entity = new RuleEntity();
 
         List<RuleBadgeEntity> badges = toRuleBadges(application, entity, rulePost.getBadges());
-        List<RulePointScaleEntity> pointScales = toPointScales(application, entity, rulePost.getPointScales());
+        //List<RulePointScaleEntity> pointScales = toPointScales(application, entity, rulePost.getPointScales());
 
         entity.setApplication(application);
         entity.setName(rulePost.getName());
         entity.setEventType(rulePost.getEventType());
         entity.setBadges(badges);
-        entity.setPointScales(pointScales);
+        //entity.setPointScales(pointScales);
 
         return entity;
     }
@@ -124,7 +124,7 @@ public class RulesApiController implements RulesApi {
         rule.setName(entity.getName());
         rule.setEventType(entity.getEventType());
         rule.setBadges(toBadgeNames(entity.getBadges()));
-        rule.setPointScales(toPointScaleNames(entity.getPointScales()));
+        //rule.setPointScales(toPointScaleNames(entity.getPointScales()));
 
         return rule;
     }
