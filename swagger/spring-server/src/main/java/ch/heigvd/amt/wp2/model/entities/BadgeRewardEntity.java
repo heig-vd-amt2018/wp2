@@ -14,7 +14,8 @@ public class BadgeRewardEntity extends AbstractDomainModelEntity<Long> {
     @Column(name = "created_date", updatable = false, nullable = false)
     private Timestamp createdDate;
 
-    @Column(name = "badge_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "badge_id", nullable = false)
     private BadgeEntity badge;
 
     public BadgeRewardEntity() {

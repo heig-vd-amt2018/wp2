@@ -14,7 +14,8 @@ public class PointScaleRewardEntity extends AbstractDomainModelEntity<Long> {
     @Column(name = "created_date", updatable = false, nullable = false)
     private Timestamp createdDate;
 
-    @Column(name = "point_scale_description_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "point_scale_description_id", nullable = false)
     private PointScaleDescriptionEntity pointScale;
 
     @Column(name = "amount", nullable = false)

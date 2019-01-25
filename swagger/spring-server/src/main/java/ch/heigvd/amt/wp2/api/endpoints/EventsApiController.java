@@ -53,7 +53,7 @@ public class EventsApiController implements EventsApi {
             String eventType = event.getEventType();
 
             for (RuleEntity rule : application.getRules()) {
-                if (rule.getEventType() == eventType) {
+                if (rule.getEventType().equals(eventType)) {
                     for (RuleBadgeEntity ruleBadge : rule.getBadges()) {
                         badgeRewardRepository.save(new BadgeRewardEntity(player, ruleBadge.getBadge()));
                     }
@@ -61,11 +61,13 @@ public class EventsApiController implements EventsApi {
                     for (RulePointScaleAmountEntity rulePointScaleAmount : rule.getPointScaleAmounts()) {
                         PointScaleAmountEntity pointScaleAmountEntity = rulePointScaleAmount.getPointScaleAmount();
 
-                        pointRewardRepository.save(new PointScaleRewardEntity(
-                                player,
-                                pointScaleAmountEntity.getPointScale(),
-                                pointScaleAmountEntity.getAmount()
-                        ));
+                        pointRewardRepository.save(
+                                new PointScaleRewardEntity(
+                                    player,
+                                    pointScaleAmountEntity.getPointScale(),
+                                    pointScaleAmountEntity.getAmount()
+                            )
+                        );
                     }
                 }
             }
