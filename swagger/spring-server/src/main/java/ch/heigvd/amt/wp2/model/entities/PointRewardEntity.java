@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "point_reward")
-public class PointScaleRewardEntity extends AbstractDomainModelEntity<Long> {
+public class PointRewardEntity extends AbstractDomainModelEntity<Long> {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "player_id", nullable = false)
     private PlayerEntity player;
@@ -14,17 +14,18 @@ public class PointScaleRewardEntity extends AbstractDomainModelEntity<Long> {
     @Column(name = "created_date", updatable = false, nullable = false)
     private Timestamp createdDate;
 
-    @Column(name = "point_scale", nullable = false)
-    private PointScaleEntity pointScale;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "point_scale_description_id", nullable = false)
+    private PointScaleDescriptionEntity pointScale;
 
     @Column(name = "amount", nullable = false)
     private long amount;
 
-    public PointScaleRewardEntity() {
+    public PointRewardEntity() {
         //Here for JPA
     }
 
-    public PointScaleRewardEntity(PlayerEntity player, PointScaleEntity pointScale, long amount) {
+    public PointRewardEntity(PlayerEntity player, PointScaleDescriptionEntity pointScale, long amount) {
         this.player = player;
         this.createdDate = new Timestamp((new Date()).getTime());
         this.pointScale = pointScale;
@@ -47,11 +48,11 @@ public class PointScaleRewardEntity extends AbstractDomainModelEntity<Long> {
         this.createdDate = createdDate;
     }
 
-    public PointScaleEntity getPointScale() {
+    public PointScaleDescriptionEntity getPointScale() {
         return pointScale;
     }
 
-    public void setPointScale(PointScaleEntity pointScale) {
+    public void setPointScale(PointScaleDescriptionEntity pointScale) {
         this.pointScale = pointScale;
     }
 

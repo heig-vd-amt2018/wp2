@@ -3,10 +3,9 @@ package ch.heigvd.amt.wp2.api.spec.steps;
 import ch.heigvd.amt.wp2.ApiException;
 import ch.heigvd.amt.wp2.ApiResponse;
 import ch.heigvd.amt.wp2.api.PointScalesApi;
-import ch.heigvd.amt.wp2.api.dto.PointScale;
+import ch.heigvd.amt.wp2.api.dto.PointScaleDescription;
 import ch.heigvd.amt.wp2.api.dto.PointScalePost;
 import ch.heigvd.amt.wp2.api.spec.helpers.Environment;
-import com.squareup.okhttp.*;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -22,8 +21,8 @@ public class PointscaleSteps {
 
     private Environment environment;
     private PointScalesApi pointScalesApi;
-    private PointScale pointScale;
-    private PointScale pointScalePatched;
+    private PointScaleDescription pointScale;
+    private PointScaleDescription pointScalePatched;
 
     private ApiResponse lastApiResponse;
     private ApiException lastApiException;
@@ -31,8 +30,7 @@ public class PointscaleSteps {
     private int lastStatusCode;
     private String apiKey = null;
 
-    private List<PointScale> pointScaleList;
-
+    private List<PointScaleDescription> pointScaleList;
     private PointScalePost pointScalePost;
 
 
@@ -58,7 +56,7 @@ public class PointscaleSteps {
 
     @Given("^I have a pointscale payload$")
     public void i_have_a_pointscale_payload() throws Throwable {
-        pointScale = new ch.heigvd.amt.wp2.api.dto.PointScale();
+        pointScale = new PointScaleDescription();
         pointScale.setName("test name");
         pointScale.setDescription("test description");
     }
@@ -66,7 +64,7 @@ public class PointscaleSteps {
     @Given("^I have a pointscale payload with the name \"([^\"]*)\" and description \"([^\"]*)\"$")
     public void i_have_a_pointscale_payload_with_the_name_and_description(String arg1, String arg2) throws Throwable {
 
-        pointScale = new PointScale();
+        pointScale = new PointScaleDescription();
         pointScale.setName(arg1);
         pointScale.setDescription(arg2);
 
@@ -100,14 +98,14 @@ public class PointscaleSteps {
     @When("^I ask for a list of pointscales with a GET on the /pointscales endpoint$")
     public void i_ask_for_a_list_of_pointscales_with_a_GET_on_the_pointscales_endpoint() throws Throwable {
 
-        pointScaleList = new ArrayList<PointScale>();
+        pointScaleList = new ArrayList<PointScaleDescription>();
 
     try {
             lastApiResponse = pointScalesApi.getPointScalesWithHttpInfo(apiKey);
             lastApiCallThrewException = false;
             lastApiException = null;
             lastStatusCode = lastApiResponse.getStatusCode();
-            pointScaleList = (List<PointScale>)lastApiResponse.getData();
+            pointScaleList = (List<PointScaleDescription>)lastApiResponse.getData();
         } catch (ApiException e) {
             lastApiCallThrewException = true;
             lastApiResponse = null;
@@ -129,7 +127,7 @@ public class PointscaleSteps {
             lastApiCallThrewException = false;
             lastApiException = null;
             lastStatusCode = lastApiResponse.getStatusCode();
-            pointScale = (PointScale)lastApiResponse.getData();
+            pointScale = (PointScaleDescription)lastApiResponse.getData();
         } catch (ApiException e) {
             lastApiCallThrewException = true;
             lastApiResponse = null;
@@ -150,7 +148,7 @@ public class PointscaleSteps {
         PointScalePatch pointScalePatch = new PointScalePatch();
         pointScalePatch.setDescription(pointScale.getDescription());
 
-        pointScalePatched = new PointScale();
+        pointScalePatched = new PointScaleDescription();
 
         pointScalePatched.setDescription(pointScale.getDescription());
         pointScalePatched.setName(pointScale.getName());

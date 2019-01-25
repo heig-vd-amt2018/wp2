@@ -7,7 +7,7 @@ spring:
     initialize: true
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
-    hibernate.ddl-auto: create
+    hibernate.ddl-auto: create-drop
 
 ---
 spring:
@@ -19,4 +19,4 @@ spring:
     initialize: true
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
-    hibernate.ddl-auto: create
+    hibernate.ddl-auto: create-drop

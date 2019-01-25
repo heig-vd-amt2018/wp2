@@ -28,7 +28,7 @@ Feature: Badges
     Given  I have authorization for Badge
     When I ask for a list of badges with a GET on the /badges endpoint
     Then I receive a 200 status code for badge
-    And I receive the badge
+    And I receive the badges
 
   Scenario: Check that if I don't have authorization, I can't get a list of badges
     Given  I don't have authorization for Badge

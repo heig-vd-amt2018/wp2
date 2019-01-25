@@ -6,7 +6,6 @@ import ch.heigvd.amt.wp2.api.model.BadgePatch;
 import ch.heigvd.amt.wp2.api.model.BadgePost;
 import ch.heigvd.amt.wp2.model.entities.ApplicationEntity;
 import ch.heigvd.amt.wp2.model.entities.BadgeEntity;
-import ch.heigvd.amt.wp2.model.entities.PointScaleEntity;
 import ch.heigvd.amt.wp2.repositories.ApplicationRepository;
 import ch.heigvd.amt.wp2.repositories.BadgeRepository;
 import io.swagger.annotations.ApiParam;
@@ -14,9 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -63,6 +63,7 @@ public class BadgesApiController implements BadgesApi {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<String> createBadge(
             @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
             @ApiParam(value = "", required = true) @Valid @RequestBody BadgePost badgePost
@@ -99,10 +100,13 @@ public class BadgesApiController implements BadgesApi {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ResponseEntity<Badge> getBadge(
             @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
-            @ApiParam(value = "", required = true) @Valid @RequestParam String badgeName
+            @ApiParam(value = "", required = true) @Valid @PathVariable("badgeName") String badgeName
     ) {
+        ResponseEntity response;
+
         ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
 
         if (application != null) {
@@ -111,41 +115,55 @@ public class BadgesApiController implements BadgesApi {
             if (badgeEntity != null) {
                 Badge badge = toBadge(badgeEntity);
 
-                return ResponseEntity.ok(badge);
+                response = ResponseEntity.ok(badge);
             } else {
-                return ResponseEntity.notFound().build();
+                response = ResponseEntity.notFound().build();
             }
         } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+
+        return response;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ResponseEntity<List<Badge>> getBadges(@ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey) {
-        List<Badge> badges = new ArrayList<>();
+        ResponseEntity response;
 
-        for(BadgeEntity badgeEntity : badgeRepository.findAll()) {
-            badges.add(toBadge(badgeEntity));
+        ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
+
+        if (application != null) {
+            List<Badge> badges = new ArrayList<>();
+
+            for (BadgeEntity badgeEntity : badgeRepository.getAllByApplication(application)) {
+                badges.add(toBadge(badgeEntity));
+            }
+
+            response = ResponseEntity.ok(badges);
+        } else {
+            response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        return ResponseEntity.ok(badges);
+        return response;
     }
 
     @Override
+    @Transactional
     public ResponseEntity<String> updateBadge(
             @ApiParam(value = "", required = true) @Valid @RequestHeader String apiKey,
-            @ApiParam(value = "", required = true) @Valid @RequestParam String badgeName,
+            @ApiParam(value = "", required = true) @Valid @PathVariable("badgeName") String badgeName,
             @ApiParam(value = "", required = true) @Valid @RequestBody BadgePatch badgePatch
     ) {
         ResponseEntity response;
 
         ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
 
-        if(application != null){
+        if (application != null) {
             BadgeEntity badgeEntity = badgeRepository.getByApplicationAndName(application, badgeName);
 
             if (badgeEntity != null) {
-                updateBadgeEntity(badgeEntity,badgePatch);
+                updateBadgeEntity(badgeEntity, badgePatch);
 
                 badgeRepository.save(badgeEntity);
 

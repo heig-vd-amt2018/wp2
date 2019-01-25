@@ -1,7 +1,6 @@
 package ch.heigvd.amt.wp2.model.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,7 +25,7 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<PointScaleEntity> pointScales;
+    private List<PointScaleDescriptionEntity> pointScales;
 
     @OneToMany(
             mappedBy = "application",
@@ -46,7 +45,7 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
         //here fo JPA
     }
 
-    public ApplicationEntity(String apiKey, List<BadgeEntity> badges, List<PointScaleEntity> pointScales, List<PlayerEntity> players, List<RuleEntity> rules) {
+    public ApplicationEntity(String apiKey, List<BadgeEntity> badges, List<PointScaleDescriptionEntity> pointScales, List<PlayerEntity> players, List<RuleEntity> rules) {
         this.apiKey = apiKey;
         this.badges = badges;
         this.pointScales = pointScales;
@@ -74,15 +73,15 @@ public class ApplicationEntity extends AbstractDomainModelEntity<Long> {
         return badges.add(badge);
     }
 
-    public List<PointScaleEntity> getPointScales() {
+    public List<PointScaleDescriptionEntity> getPointScales() {
         return pointScales;
     }
 
-    public void setPointScales(List<PointScaleEntity> pointScales) {
+    public void setPointScales(List<PointScaleDescriptionEntity> pointScales) {
         this.pointScales = pointScales;
     }
 
-    public boolean addPointScale(PointScaleEntity pointScale) {
+    public boolean addPointScale(PointScaleDescriptionEntity pointScale) {
         return pointScales.add(pointScale);
     }
 
