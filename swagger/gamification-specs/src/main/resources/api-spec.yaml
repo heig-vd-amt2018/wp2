@@ -1,390 +1,588 @@
 swagger: '2.0'
+
 info:
   version: '0.1.0'
   title: WP2 API
   description: Gamification API for WP2
+
 host: localhost:8080
 basePath: /api
-schemes:
-  - http
+
+tags:
+- name: "Applications"
+  description: "These endpoints are related to the applications. Development only."
+- name: "Players"
+  description: "These endpoints are related to the players."
+- name: "Badges"
+  description: "These endpoints are related to the badges."
+- name: "Point scales"
+  description: "These endpoints are related to the point scales."
+- name: "Rules"
+  description: "These endpoints are related to the rules."
+- name: "Events"
+  description: "These endpoints are related to the events."
+
+responses:
+  Unauthorized:
+    description: "Unauthorized access."
+  Forbidden:
+    description: "The entity do not have the rights to access the ressource."
+  Created:
+    description: "The entity has been created."
+    schema:
+      type: "string"
+  Conflict:
+    description: "The identifier is already used. Please change and try again."
+  NotFound:
+    description: "The specified resource was not found."
+    schema:
+      type: "string"
+
 paths:
+  /applications:
+    post:
+      tags:
+      - "Applications"
+      description: "Create a new application"
+      operationId: createApplication
+      security: []
+      consumes:
+      - application/json
+      parameters:
+      - $ref: "#/parameters/application"
+      responses:
+        200:
+          description: "The application has been created."
+        401:
+          $ref: "#/responses/Unauthorized"
+        409:
+          $ref: "#/responses/Conflict"
+
+
+  /players/{username}:
+    get:
+      tags:
+      - "Players"
+      description: "Return a specific player for the application with its badges and point scales"
+      operationId: getPlayer
+      parameters:
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/username"
+      produces:
+      - application/json
+      responses:
+        200:
+          description: "Player has been successfully retrieved."
+          schema:
+            $ref: '#/definitions/player'
+        401:
+          $ref: "#/responses/Unauthorized"
+        404:
+          $ref: "#/responses/NotFound"
+
   /badges:
     post:
       tags:
-        - "badges"
-      summary: "Add a new badge to the app"
-      description: create a badge
+      - "Badges"
+      description: "Create a new badge for the application"
       operationId: createBadge
       consumes:
-        - application/json
+      - application/json
       parameters:
-        - name: badge
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/Badge'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/badgePost"
       responses:
-        '201':
-          description: created
-          schema:
-            $ref: '#/definitions/Location'
-        '401':
+        201:
+          $ref: "#/responses/Created"
+        401:
           $ref: "#/responses/Unauthorized"
+        409:
+          $ref: "#/responses/Conflict"
     get:
       tags:
-        - "badges"
-      summary: "Return all the badges for an app"
-      description: get the list of all badges
+      - "Badges"
+      description: "Get all the badges for the application"
       operationId: getBadges
       produces:
-        - application/json
+      - application/json
+      parameters:
+      - $ref: "#/parameters/apiKey"
       responses:
-        '200':
-          description: success
+        200:
+          description: "Badges have been successfully retrieved."
           schema:
             type: array
             items:
-              $ref: '#/definitions/Badge'
-        '401':
+              $ref: '#/definitions/badge'
+        401:
           $ref: "#/responses/Unauthorized"
 
-  /badges/{id}:
+  /badges/{badgeName}:
     get:
       tags:
-        - "badges"
-      summary: "Return a specific app badge from its name"
-      parameters:
-        - in : path
-          name : id
-          type: integer
-          format: int64
-          required : true
-          description : bagde's id
+      - "Badges"
+      description: "Return a specific badge for the application"
       operationId: getBadge
+      parameters:
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/badgeName"
       produces:
-        - application/json
+      - application/json
       responses:
-        '200':
-          description: success
+        200:
+          description: "Badge has been successfully retrieved."
           schema:
-            $ref: '#/definitions/Badge'
-        '401':
+            $ref: '#/definitions/badge'
+        401:
           $ref: "#/responses/Unauthorized"
+        404:
+          $ref: "#/responses/NotFound"
     patch:
       tags:
-        - "badges"
-      summary: "Update a specific badge"
-      description: update a badge
+      - "Badges"
+      description: "Update a specific badge for the application"
       operationId: updateBadge
       consumes:
-        - application/json
+      - application/json
       parameters:
-        - in: path
-          name: id
-          type: integer
-          format: int64
-          required: true
-          description: badge's id
-        - in: body
-          name: badge
-          required: true
-          schema:
-            $ref: '#/definitions/Badge'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/badgeName"
+      - $ref: "#/parameters/badgePatch"
       responses:
-        '200':
-          description: updated
+        200:
+          description: "Badge has been successfully updated."
           schema:
-            $ref: '#/definitions/Location'
-        '401':
+            type: "string"
+        401:
           $ref: "#/responses/Unauthorized"
-
+        404:
+          $ref: "#/responses/NotFound"
 
   /pointScales:
     post:
       tags:
-        - "pointScales"
-      summary: "Add a new pointScale to the app"
-      description: create a pointScale
+      - "Point scales"
+      description: "Create a new point scale for the application"
       operationId: createPointScale
       consumes:
-        - application/json
+      - application/json
       parameters:
-        - name: pointScale
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/PointScale'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/pointScalePost"
       responses:
-        '201':
-          description: created
-          schema:
-            $ref: '#/definitions/Location'
-        '401':
+        201:
+          $ref: "#/responses/Created"
+        401:
           $ref: "#/responses/Unauthorized"
-
+        409:
+          $ref: "#/responses/Conflict"
     get:
       tags:
-        - "pointScales"
-      summary: "Return all the pointScales of the app"
-      description: get the list of all pointScales
+      - "Point scales"
+      description: "Get all the point scales for the application"
       operationId: getPointScales
       produces:
-        - application/json
+      - application/json
+      parameters:
+      - $ref: "#/parameters/apiKey"
       responses:
-        '200':
-          description: success
+        200:
+          description: "Point scales have been successfully retrieved."
           schema:
             type: array
             items:
-              $ref: '#/definitions/PointScale'
+              $ref: "#/definitions/pointScaleDescription"
         '401':
           $ref: "#/responses/Unauthorized"
 
-  /pointScales/{id}:
+  /pointScales/{pointScaleName}:
     get:
       tags:
-        - "pointScales"
-      summary: "Return a specific pointScales with the id"
-      description: get the specific app pointScale
-      parameters:
-        - in : path
-          name : id
-          type : integer
-          format: int64
-          required : true
-          description: pointScale's id
+      - "Point scales"
+      description: "Return a specific point scale for the application"
       operationId: getPointScale
+      parameters:
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/pointScaleName"
       produces:
-        - application/json
+      - application/json
       responses:
-        '200':
-          description: success
+        200:
+          description: "Point scale has been successfully retrieved."
           schema:
-            $ref: '#/definitions/PointScale'
-        '401':
+            $ref: "#/definitions/pointScaleDescription"
+        401:
           $ref: "#/responses/Unauthorized"
+        404:
+          $ref: "#/responses/NotFound"
     patch:
       tags:
-        - "pointScales"
-      summary: "Update a specific pointScale"
-      description: update a pointScale
-      operationId: updatePointScales
+      - "Point scales"
+      description: "Update a specific point scale for the application"
+      operationId: updatePointScale
       consumes:
-        - application/json
+      - application/json
       parameters:
-        - in: path
-          name: id
-          type: integer
-          format: int64
-          required: true
-          description: pointScale's id
-        - in: body
-          name: pointScale
-          required: true
-          schema:
-            $ref: '#/definitions/PointScale'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/pointScaleName"
+      - $ref: "#/parameters/pointScalePatch"
       responses:
-        '200':
-          description: updated
+        200:
+          description: "Point scale has been successfully updated."
           schema:
-            $ref: '#/definitions/Location'
-        '401':
+            type: "string"
+        401:
           $ref: "#/responses/Unauthorized"
-
-
+        404:
+          $ref: "#/responses/NotFound"
 
   /rules:
     post:
       tags:
-        - "rules"
-      summary: "Add a new rules to the app"
-      description: create a rule
+      - "Rules"
+      description: "Create a new rule for the application"
       operationId: createRule
       consumes:
-        - application/json
+      - application/json
       parameters:
-        - in: body
-          name: rule
-          required: true
-          schema:
-            $ref: '#/definitions/Rule'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/rulePost"
       responses:
-        '201':
-          description: created
-          schema:
-            $ref: '#/definitions/Location'
-        '401':
+        201:
+          $ref: "#/responses/Created"
+        401:
           $ref: "#/responses/Unauthorized"
+        409:
+          $ref: "#/responses/Conflict"
     get:
       tags:
-        - "rules"
-      summary: "Get all rules defined for the app"
-      description: get rules
+      - "Rules"
+      description: "Get all the rules for the application"
       operationId: getRules
       produces:
-        - application/json
+      - application/json
+      parameters:
+      - $ref: "#/parameters/apiKey"
       responses:
-        '200':
-          description: success
+        200:
+          description: "Rules have been successfully retrieved."
           schema:
             type: array
             items:
-              $ref: '#/definitions/Rule'
+              $ref: '#/definitions/rule'
         '401':
           $ref: "#/responses/Unauthorized"
 
-  /rules/{id}:
+  /rules/{ruleName}:
     get:
       tags:
-        - "rules"
-      summary: "Return a specific app rule from its name"
-      parameters:
-        - in : path
-          name : id
-          type: integer
-          format: int64
-          required : true
-          description : rule's id
+      - "Rules"
+      description: "Return a specific badge for the application"
       operationId: getRule
+      parameters:
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/ruleName"
       produces:
-        - application/json
+      - application/json
       responses:
-        '200':
-          description: success
+        200:
+          description: "Rule has been successfully retrieved."
           schema:
-            $ref: '#/definitions/Rule'
-        '401':
+            $ref: '#/definitions/rule'
+        401:
           $ref: "#/responses/Unauthorized"
+        404:
+          $ref: "#/responses/NotFound"
     patch:
       tags:
-        - "rules"
-      summary: "Update a specific rule"
-      description: update a rule
+      - "Rules"
+      description: "Update a specific rule for the application"
       operationId: updateRule
       consumes:
-        - application/json
+      - application/json
       parameters:
-        - in : path
-          name : id
-          type: integer
-          format: int64
-          required : true
-          description : rule's id
-        - in: body
-          name: rule
-          required: true
-          schema:
-            $ref: '#/definitions/Rule'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/ruleName"
+      - $ref: "#/parameters/rulePatch"
       responses:
-        '200':
-          description: updated
+        200:
+          description: "Rule has been successfully updated."
           schema:
-            $ref: '#/definitions/Location'
-        '401':
+            type: "string"
+        401:
           $ref: "#/responses/Unauthorized"
+        404:
+          $ref: "#/responses/NotFound"
 
   /events:
     post:
       tags:
-        - "events"
-      summary: "send event"
-      description: post event
+      - "Events"
+      description: "Create a new event for the application"
       operationId: postEvent
       consumes:
-        - application/json
+      - application/json
       parameters:
-        - name: event
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/Event'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/event"
       responses:
-        '200':
-          description: handled
-        '401':
+        200:
+          description: "The event has been processed."
+        401:
           $ref: "#/responses/Unauthorized"
 
 definitions:
-  Badge:
+  player:
     type: object
     properties:
-      id:
-        type: integer
-        format: int64
+      badgeRewards:
+        type: "array"
+        items:
+          $ref: "#/definitions/badgeReward"
+      pointRewards:
+        type: "array"
+        items:
+          $ref: "#/definitions/pointReward"
+
+  badgeReward:
+    type: object
+    properties:
       name:
-        type: string
-      image:
-        type: string
-      description:
-        type: string
-
-  PointScale:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      name:
-        type: string
-      description:
-        type: string
-
-  Rule:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      name:
-        type: string
-      eventName:
-        type: string
-      pointScaleName:
-        type: string
-      badgeName:
-        type: string
-      threshold:
-        type: integer
-        format: int64
-
-  User:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-
-  Location:
-    type: object
-    properties:
-      location:
-        type: string
-
-  Event:
-    type: object
-    properties:
-      userId:
-        type: integer
-        format: int64
+        type: "string"
       timestamp:
-        type: integer
-        format: date-type
-      type:
-        type: string
-      quantity:
-        type: integer
-        format: int64
+        type: "string"
+        format: "date-time"
 
-securityDefinitions:
-  ApiKey:
-    description: "Format: {apiKey}"
-    type: apiKey
-    name: Authorization
+  pointReward:
+    type: object
+    properties:
+      name:
+        type: "string"
+      amount:
+        type: "integer"
+        format: "int64"
+      timestamp:
+        type: "string"
+        format: "date-time"
+
+  badge:
+    type: object
+    properties:
+      name:
+        type: "string"
+      description:
+        type: "string"
+      image:
+        type: "string"
+
+  pointScaleDescription:
+    type: object
+    properties:
+      name:
+        type: "string"
+      description:
+        type: "string"
+
+  pointScaleAmount:
+    type: object
+    properties:
+      pointScaleName:
+        type: "string"
+      amount:
+        type: "integer"
+        format: "int64"
+
+  rule:
+    properties:
+      name:
+        type: "string"
+      eventType:
+        type: "string"
+      pointScales:
+        type: "array"
+        items:
+          $ref: "#/definitions/pointScaleAmount"
+      badges:
+        type: "array"
+        items:
+          type: "string"
+
+parameters:
+  application:
+    name: "application"
+    description: "The application's details"
+    in: "body"
+    required: true
+    schema:
+      type: "object"
+      required:
+      - "apiKey"
+      properties:
+        apiKey:
+          type: "string"
+
+  apiKey:
+    name: "apiKey"
+    description: "The api key."
     in: header
+    required: true
+    type: "string"
 
-security:
-  - ApiKey: []
+  username:
+    name: "username"
+    description: "The username of the player."
+    in: "path"
+    required: true
+    type: "string"
 
-responses:
-  Unauthorized:
-    description: "Unauthorized access"
+  badgeName:
+    name: "badgeName"
+    description: "The name of the badge."
+    in: "path"
+    required: true
+    type: "string"
+
+  badgePost:
+    name: "badgePost"
+    description: "The badge's details"
+    in: "body"
+    required: true
+    schema:
+      type: "object"
+      required:
+      - "name"
+      - "description"
+      - "image"
+      properties:
+        name:
+          type: "string"
+        description:
+          type: "string"
+        image:
+          type: "string"
+
+  badgePatch:
+    name: "badgePatch"
+    description: "The badge's details"
+    in: "body"
+    required: true
+    schema:
+      type: "object"
+      required:
+      - "description"
+      - "image"
+      properties:
+        description:
+          type: "string"
+        image:
+          type: "string"
+
+  pointScaleName:
+    name: "pointScaleName"
+    description: "The name of the point scale."
+    in: "path"
+    required: true
+    type: "string"
+
+  pointScalePost:
+    name: "pointScalePost"
+    description: "The point scale's details"
+    in: "body"
+    required: true
+    schema:
+      type: "object"
+      required:
+      - "name"
+      - "description"
+      properties:
+        name:
+          type: "string"
+        description:
+          type: "string"
+
+  pointScalePatch:
+    name: "pointScalePatch"
+    description: "The point scale's details"
+    in: "body"
+    required: true
+    schema:
+      type: "object"
+      required:
+      - "description"
+      properties:
+        description:
+          type: "string"
+
+  ruleName:
+    name: "ruleName"
+    description: "The name of the rule."
+    in: "path"
+    required: true
+    type: "string"
+
+  rulePost:
+    name: "rulePost"
+    description: "The rule's details."
+    in: "body"
+    required: true
+    schema:
+      type: "object"
+      required:
+      - "name"
+      - "eventType"
+      properties:
+        name:
+          type: "string"
+        eventType:
+          type: "string"
+        pointScaleAmounts:
+          type: "array"
+          items:
+            $ref: "#/definitions/pointScaleAmount"
+        badges:
+          type: "array"
+          items:
+            type : "string"
+
+  rulePatch:
+    name: "rulePatch"
+    description: "The rule's details."
+    in: "body"
+    required: true
+    schema:
+      type: "object"
+      required:
+      - "eventType"
+      properties:
+        eventType:
+          type: "string"
+        pointScaleAmounts:
+          type: "array"
+          items:
+            $ref: "#/definitions/pointScaleAmount"
+        badges:
+          type: "array"
+          items:
+            type : "string"
+
+  event:
+    name: "event"
+    description: "The event's details."
+    in: "body"
+    required: true
+    schema:
+      type: "object"
+      required:
+      - "username"
+      - "eventType"
+      - "timestamp"
+      - "properties"
+      properties:
+        username:
+          type: "string"
+        eventType:
+          type: "string"
+        timestamp:
+          type: "string"
+          format: "date-time"
+
