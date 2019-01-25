@@ -44,7 +44,7 @@ public class EventsApiController implements EventsApi {
         ApplicationEntity application = applicationRepository.findByApiKey(apiKey);
 
         if (application != null) {
-            PlayerEntity player = playerRepository.findByApplicationAndUsername(application, event.getUsername());
+            PlayerEntity player = playerRepository.getByApplicationAndUsername(application, event.getUsername());
 
             if (player == null) {
                 player = playerRepository.save(new PlayerEntity(application, event.getUsername()));
@@ -62,7 +62,7 @@ public class EventsApiController implements EventsApi {
                         PointScaleAmountEntity pointScaleAmountEntity = rulePointScaleAmount.getPointScaleAmount();
 
                         pointRewardRepository.save(
-                                new PointScaleRewardEntity(
+                                new PointRewardEntity(
                                     player,
                                     pointScaleAmountEntity.getPointScale(),
                                     pointScaleAmountEntity.getAmount()

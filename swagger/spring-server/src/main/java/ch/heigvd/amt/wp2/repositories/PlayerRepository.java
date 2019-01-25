@@ -5,5 +5,5 @@ import ch.heigvd.amt.wp2.model.entities.PlayerEntity;
 import org.springframework.data.repository.CrudRepository;
 
 public interface PlayerRepository extends CrudRepository<PlayerEntity, Long> {
-    PlayerEntity findByApplicationAndUsername(ApplicationEntity application, String username);
+    PlayerEntity getByApplicationAndUsername(ApplicationEntity application, String username);
 }
