@@ -1,5 +1,7 @@
 package ch.heigvd.amt.wp2.model.entities;
 
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;

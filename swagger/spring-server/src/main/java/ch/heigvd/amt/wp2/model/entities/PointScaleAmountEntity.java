@@ -10,7 +10,7 @@ public class PointScaleAmountEntity extends AbstractDomainModelEntity<Long> {
     private PointScaleDescriptionEntity pointScale;
 
     @Column(name = "amount", nullable = true)
-    private int amount;
+    private long amount;
 
     public PointScaleAmountEntity() {
         //here fo JPA
@@ -29,11 +29,11 @@ public class PointScaleAmountEntity extends AbstractDomainModelEntity<Long> {
         this.pointScale = pointScale;
     }
 
-    public int getAmount() {
+    public long getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(long amount) {
         this.amount = amount;
     }
 }

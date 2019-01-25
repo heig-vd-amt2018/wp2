@@ -335,32 +335,35 @@ definitions:
   player:
     type: object
     properties:
-      badgesRewards:
+      badgeRewards:
         type: "array"
         items:
-          $ref: "#/definitions/playerBadgesReward"
-      pointScalesrewards:
+          $ref: "#/definitions/badgeReward"
+      pointRewards:
         type: "array"
         items:
-          $ref: "#/definitions/pointScalesRewards"
+          $ref: "#/definitions/pointReward"
 
-  playerBadgesReward:
+  badgeReward:
     type: object
     properties:
       name:
         type: "string"
       timestamp:
         type: "string"
+        format: "date-time"
 
-  pointScalesRewards:
+  pointReward:
     type: object
     properties:
       name:
         type: "string"
-      amout:
-        type: integer
+      amount:
+        type: "integer"
+        format: "int64"
       timestamp:
         type: "string"
+        format: "date-time"
 
   badge:
     type: object
@@ -387,6 +390,7 @@ definitions:
         type: "string"
       amount:
         type: "integer"
+        format: "int64"
 
   rule:
     properties:

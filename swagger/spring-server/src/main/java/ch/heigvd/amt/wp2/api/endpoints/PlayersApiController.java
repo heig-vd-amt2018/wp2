@@ -1,10 +1,7 @@
 package ch.heigvd.amt.wp2.api.endpoints;
 
 import ch.heigvd.amt.wp2.api.PlayersApi;
-import ch.heigvd.amt.wp2.api.model.Player;
-import ch.heigvd.amt.wp2.api.model.PlayerBadgesReward;
-import ch.heigvd.amt.wp2.api.model.PointScaleAmount;
-import ch.heigvd.amt.wp2.api.model.PointScalesRewards;
+import ch.heigvd.amt.wp2.api.model.*;
 import ch.heigvd.amt.wp2.model.entities.ApplicationEntity;
 import ch.heigvd.amt.wp2.model.entities.BadgeRewardEntity;
 import ch.heigvd.amt.wp2.model.entities.PlayerEntity;
@@ -14,6 +11,7 @@ import ch.heigvd.amt.wp2.repositories.BadgeRewardRepository;
 import ch.heigvd.amt.wp2.repositories.PlayerRepository;
 import ch.heigvd.amt.wp2.repositories.PointRewardRepository;
 import io.swagger.annotations.ApiParam;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,27 +43,30 @@ public class PlayersApiController implements PlayersApi {
     private Player toPlayer(PlayerEntity playerEntity) {
         Player player = new Player();
 
-        List<PlayerBadgesReward> badges = new ArrayList<>();
-        List<PointScalesRewards> points = new ArrayList<>();
+        List<BadgeReward> badges = new ArrayList<>();
+        List<PointReward> points = new ArrayList<>();
 
-        for (BadgeRewardEntity badge : playerEntity.getBadgeRewards()) {
-             PlayerBadgesReward pbr = new PlayerBadgesReward();
-             pbr.setName(badge.getBadge().getName());
-             pbr.setTimestamp(badge.getCreatedDate().toString());
+        for (BadgeRewardEntity badgeRewardEntity : playerEntity.getBadgeRewards()) {
+             BadgeReward badgeReward = new BadgeReward();
 
-             badges.add(pbr);
+             badgeReward.setName(badgeRewardEntity.getBadge().getName());
+             badgeReward.setTimestamp(new DateTime(badgeRewardEntity.getCreatedDate()));
+
+             badges.add(badgeReward);
         }
 
-        for (PointRewardEntity point : playerEntity.getPointScaleReward()) {
-            PointScalesRewards psr = new PointScalesRewards();
+        for (PointRewardEntity pointRewardEntity : playerEntity.getPointScaleReward()) {
+            PointReward pointReward = new PointReward();
 
-            psr.setName(point.getPointScale().getName());
-            psr.setAmout((int) point.getAmount());
-            psr.setTimestamp(point.getCreatedDate().toString());
+            pointReward.setName(pointRewardEntity.getPointScale().getName());
+            pointReward.setAmount(pointRewardEntity.getAmount());
+            pointReward.setTimestamp(new DateTime(pointRewardEntity.getCreatedDate()));
+
+            points.add(pointReward);
         }
 
-        player.setBadgesRewards(badges);
-        player.setPointScalesrewards(points);
+        player.setBadgeRewards(badges);
+        player.setPointRewards(points);
 
         return player;
     }

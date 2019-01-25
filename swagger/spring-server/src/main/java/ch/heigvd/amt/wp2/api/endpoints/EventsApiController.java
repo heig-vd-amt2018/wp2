@@ -71,6 +71,8 @@ public class EventsApiController implements EventsApi {
                     }
                 }
             }
+
+            response = ResponseEntity.noContent().build();
         } else {
             response = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }

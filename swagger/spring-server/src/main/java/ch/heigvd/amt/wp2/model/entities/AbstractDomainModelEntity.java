@@ -11,12 +11,23 @@ public abstract class AbstractDomainModelEntity<PK> implements Serializable {
     @Column(name = "id", updatable = false, nullable = false)
     private PK id;
 
+    @Version
+    private Long version;
+
     public PK getId() {
         return id;
     }
 
     public void setId(PK id) {
         this.id = id;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     @Override
