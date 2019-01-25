@@ -63,10 +63,10 @@ public class EventsApiController implements EventsApi {
 
                         pointRewardRepository.save(
                                 new PointRewardEntity(
-                                    player,
-                                    pointScaleAmountEntity.getPointScale(),
-                                    pointScaleAmountEntity.getAmount()
-                            )
+                                        player,
+                                        pointScaleAmountEntity.getPointScale(),
+                                        pointScaleAmountEntity.getAmount()
+                                )
                         );
                     }
                 }
