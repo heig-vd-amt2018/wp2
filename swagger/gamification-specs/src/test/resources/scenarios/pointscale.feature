@@ -5,7 +5,7 @@ Feature: Pointscales
 
   #POST
   Scenario: Create a pointscale
-    Given  I have authorization
+    Given  I have authorization for pointScale with apikey "apiKey1"
     And I have a pointscale payload with the name "nameTest" and description "nameDescription"
     When I POST it to the /pointscales endpoint
     Then I receive a 201 status code
@@ -17,7 +17,7 @@ Feature: Pointscales
     Then I receive a 403 status code
 
   Scenario: Check that it is not possible to create a pointscale with the same name
-    Given  I have authorization
+    Given  I have authorization for pointScale with apikey "apiKey1"
     And I have a pointscale payload with the name "nameTest3" and description "nameDescription3"
     Then I POST it to the /pointscales endpoint
     And  I POST it to the /pointscales endpoint
@@ -25,7 +25,7 @@ Feature: Pointscales
 
   #GET
     Scenario: GET a list of pointscales
-    Given  I have authorization
+    Given  I have authorization for pointScale with apikey "apiKey1"
     When I ask for a list of pointscales with a GET on the /pointscales endpoint
     Then I receive a 200 status code
     And I receive the pointscales
@@ -36,7 +36,7 @@ Feature: Pointscales
     Then I receive a 403 status code
 
   Scenario: GET a pointscale
-    Given  I have authorization
+    Given  I have authorization for pointScale with apikey "apiKey1"
     When I ask for the pointscale with a GET on the /pointscales/"nameTest3" endpoint
     Then I receive a 200 status code
     And I receive the pointscale
@@ -48,7 +48,7 @@ Feature: Pointscales
 
   #PATCH
   Scenario: Patch a pointscale
-    Given I have authorization
+    Given  I have authorization for pointScale with apikey "apiKey1"
     And I have a pointscale payload with the name "nameTest4" and description "nameDescription4"
     When I POST it to the /pointscales endpoint
     And I have a pointscale payload with the name "nameTest4" and description "newNameDescription4"

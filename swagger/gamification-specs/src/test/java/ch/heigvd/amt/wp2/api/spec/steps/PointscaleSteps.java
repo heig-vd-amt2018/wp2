@@ -39,10 +39,11 @@ public class PointscaleSteps {
         this.pointScalesApi = environment.getPointScalesApi();
     }
 
-    @Given("^I have authorization$")
-    public void i_have_authorization() throws Throwable {
-        apiKey = "test";
+    @Given("^I have authorization for pointScale with apikey \"([^\"]*)\"$")
+    public void i_have_authorization_for_pointScale_with_apikey(String arg1) throws Throwable {
+        apiKey = arg1;
     }
+
 
     @Given("^I don't have authorization$")
     public void i_don_t_have_authorization() throws Throwable {

@@ -44,9 +44,15 @@ public class BadgesSteps {
         assertNotNull(badgesApi);
     }
 
+    @Given("^I have authorization for Badge with apikey \"([^\"]*)\"$")
+    public void i_have_authorization_for_Badge_with_apikey(String arg1) throws Throwable {
+                apiKey = arg1;
+    }
+
+
     @Given("^I have authorization for Badge$")
     public void i_have_authorization_for_Badge() throws Throwable {
-            apiKey = "test";
+
     }
 
     @Given("^I don't have authorization for Badge$")
@@ -122,7 +128,6 @@ public class BadgesSteps {
             lastApiException = e;
             lastStatusCode = lastApiException.getCode();
         }
-
     }
 
     @Then("^I receive the badge$")

@@ -5,7 +5,7 @@ Feature: Badges
 
   #POST
   Scenario: Create a badge
-    Given  I have authorization for Badge
+    Given  I have authorization for Badge with apikey "apiKey1"
     And I have a badge payload with the name "nameTest", description "nameDescription" and image "imageName"
     When I POST it to the /badges endpoint
     Then I receive a 201 status code for badge
@@ -17,7 +17,7 @@ Feature: Badges
     Then I receive a 403 status code for badge
 
   Scenario: Check that it is not possible to create a badge with the same name
-    Given  I have authorization for Badge
+    Given  I have authorization for Badge with apikey "apiKey1"
     And I have a badge payload with the name "nameTest3", description "nameDescription3" and image "imageName3"
     Then I POST it to the /badges endpoint
     And  I POST it to the /badges endpoint
@@ -25,7 +25,7 @@ Feature: Badges
 
   #GET
     Scenario: GET a list of badges
-    Given  I have authorization for Badge
+      Given  I have authorization for Badge with apikey "apiKey1"
     When I ask for a list of badges with a GET on the /badges endpoint
     Then I receive a 200 status code for badge
     And I receive the badges
@@ -36,7 +36,7 @@ Feature: Badges
     Then I receive a 403 status code for badge
 
   Scenario: GET a badge
-    Given  I have authorization for Badge
+    Given  I have authorization for Badge with apikey "apiKey1"
     When I ask for the badge with a GET on the /badges/"nameTest3" endpoint
     Then I receive a 200 status code for badge
     And I receive the badge
@@ -48,7 +48,7 @@ Feature: Badges
 
   #PATCH
   Scenario: Patch a badge
-    Given I have authorization for Badge
+    Given  I have authorization for Badge with apikey "apiKey1"
     And I have a badge payload with the name "nameTest4", description "nameDescription4" and image "imageName4"
     When I POST it to the /badges endpoint
     And I have a badge payload with the name "nameTest4", description "newnameDescription4" and image "imageName4"

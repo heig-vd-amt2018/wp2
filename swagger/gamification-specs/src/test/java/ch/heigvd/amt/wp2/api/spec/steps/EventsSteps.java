@@ -37,10 +37,11 @@ public class EventsSteps {
         assertNotNull(eventsApi);
     }
 
-    @Given("^I have authorization for Event$")
-    public void i_have_authorization_for_Event() throws Throwable {
-        apiKey = "test";
+    @Given("^I have authorization for events with apikey \"([^\"]*)\"$")
+    public void i_have_authorization_for_events_with_apikey(String arg1) throws Throwable {
+        apiKey = arg1;
     }
+
 
     @Given("^I don't have authorization for Event$")
     public void i_don_t_have_authorization_for_Event() throws Throwable {
