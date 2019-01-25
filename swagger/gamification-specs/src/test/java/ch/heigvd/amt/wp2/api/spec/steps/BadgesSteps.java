@@ -5,7 +5,6 @@ import ch.heigvd.amt.wp2.ApiResponse;
 import ch.heigvd.amt.wp2.api.BadgesApi;
 import ch.heigvd.amt.wp2.api.dto.Badge;
 import ch.heigvd.amt.wp2.api.spec.helpers.Environment;
-import com.squareup.okhttp.*;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -32,16 +31,8 @@ public class BadgesSteps {
     private int lastStatusCode;
 
     private String apiKey = null;
-
-    private String listBadges = null;
-
-    private String badgejson = null;
-    private String badgejsonPatched = null;
-
     private List<Badge> badgesList;
-
     private Badge badgePatched;
-
 
     public BadgesSteps(Environment environment) {
         this.environment = environment;
@@ -66,7 +57,7 @@ public class BadgesSteps {
     @Given("^I have a badge payload with the name \"([^\"]*)\", description \"([^\"]*)\" and image \"([^\"]*)\"$")
     public void i_have_a_badge_payload_with_the_name_description_and_image(String arg1, String arg2, String arg3) throws Throwable {
 
-        badge = new ch.heigvd.amt.wp2.api.dto.Badge();
+        badge = new Badge();
         badge.setName(arg1);
         badge.setDescription(arg2);
         badge.setImage(arg3);
