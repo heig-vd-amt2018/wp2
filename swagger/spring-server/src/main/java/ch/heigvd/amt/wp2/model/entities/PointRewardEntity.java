@@ -27,9 +27,9 @@ public class PointRewardEntity extends AbstractDomainModelEntity<Long> {
         //Here for JPA
     }
 
-    public PointRewardEntity(PlayerEntity player, PointScaleDescriptionEntity pointScale, long amount) {
+    public PointRewardEntity(PlayerEntity player, Timestamp timestamp, PointScaleDescriptionEntity pointScale, long amount) {
         this.player = player;
-        this.createdDate = new Timestamp((new Date()).getTime());
+        this.createdDate = timestamp;
         this.pointScale = pointScale;
         this.amount = amount;
     }

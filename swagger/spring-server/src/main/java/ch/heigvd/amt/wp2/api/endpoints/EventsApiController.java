@@ -1,8 +1,8 @@
 package ch.heigvd.amt.wp2.api.endpoints;
 
 import ch.heigvd.amt.wp2.api.EventsApi;
-import ch.heigvd.amt.wp2.api.exceptions.ApiException;
 import ch.heigvd.amt.wp2.api.model.Event;
+import ch.heigvd.amt.wp2.api.model.PointReward;
 import ch.heigvd.amt.wp2.model.entities.*;
 import ch.heigvd.amt.wp2.repositories.ApplicationRepository;
 import ch.heigvd.amt.wp2.repositories.BadgeRewardRepository;
@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import javax.validation.Valid;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-07-26T19:36:34.802Z")
 
@@ -52,21 +54,30 @@ public class EventsApiController implements EventsApi {
             }
 
             String eventType = event.getEventType();
+            Timestamp timestamp = new Timestamp(event.getTimestamp().getMillis());
 
             for (RuleEntity rule : application.getRules()) {
                 if (rule.getEventType().equals(eventType)) {
                     // Check for badges
                     for (RuleBadgeEntity ruleBadge : rule.getBadges()) {
-                        boolean badgeAlreadyObtained = false;
+                        BadgeRewardEntity newBadge = new BadgeRewardEntity(
+                                player,
+                                timestamp,
+                                ruleBadge.getBadge()
+                        );
 
-                        for (BadgeRewardEntity badgeRewardEntity : player.getBadgeRewards()) {
-                            if (badgeRewardEntity.getBadge().equals(ruleBadge.getBadge())) {
-                                badgeAlreadyObtained = true;
+                        if (!player.getBadgeRewards().contains(newBadge)) {
+                            boolean badgeAlreadyObtained = false;
+
+                            for (BadgeRewardEntity badgeRewardEntity : player.getBadgeRewards()) {
+                                if (badgeRewardEntity.getBadge().equals(ruleBadge.getBadge())) {
+                                    badgeAlreadyObtained = true;
+                                }
                             }
-                        }
 
-                        if (!badgeAlreadyObtained) {
-                            badgeRewardRepository.save(new BadgeRewardEntity(player, ruleBadge.getBadge()));
+                            if (!badgeAlreadyObtained) {
+                                badgeRewardRepository.save(newBadge);
+                            }
                         }
                     }
 
@@ -74,13 +85,16 @@ public class EventsApiController implements EventsApi {
                     for (RulePointScaleAmountEntity rulePointScaleAmount : rule.getPointScaleAmounts()) {
                         PointScaleAmountEntity pointScaleAmountEntity = rulePointScaleAmount.getPointScaleAmount();
 
-                        pointRewardRepository.save(
-                                new PointRewardEntity(
-                                        player,
-                                        pointScaleAmountEntity.getPointScale(),
-                                        pointScaleAmountEntity.getAmount()
-                                )
+                        PointRewardEntity newPoint = new PointRewardEntity(
+                                player,
+                                timestamp,
+                                pointScaleAmountEntity.getPointScale(),
+                                pointScaleAmountEntity.getAmount()
                         );
+
+                        if (!player.getPointScaleReward().contains(newPoint)) {
+                            pointRewardRepository.save(newPoint);
+                        }
                     }
                 }
             }

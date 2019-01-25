@@ -25,9 +25,9 @@ public class BadgeRewardEntity extends AbstractDomainModelEntity<Long> {
         //Here for JPA
     }
 
-    public BadgeRewardEntity(PlayerEntity player, BadgeEntity badge) {
+    public BadgeRewardEntity(PlayerEntity player, Timestamp timestamp, BadgeEntity badge) {
         this.player = player;
-        this.createdDate = new Timestamp((new Date()).getTime());
+        this.createdDate = timestamp;
         this.badge = badge;
     }
 
