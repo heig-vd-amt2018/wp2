@@ -9,18 +9,18 @@ host: localhost:8080
 basePath: /api
 
 tags:
-- name: "Applications"
-  description: "These endpoints are related to the applications. Development only."
-- name: "Players"
-  description: "These endpoints are related to the players."
-- name: "Badges"
-  description: "These endpoints are related to the badges."
-- name: "Point scales"
-  description: "These endpoints are related to the point scales."
-- name: "Rules"
-  description: "These endpoints are related to the rules."
-- name: "Events"
-  description: "These endpoints are related to the events."
+  - name: "Applications"
+    description: "These endpoints are related to the applications. Development only."
+  - name: "Players"
+    description: "These endpoints are related to the players."
+  - name: "Badges"
+    description: "These endpoints are related to the badges."
+  - name: "Point scales"
+    description: "These endpoints are related to the point scales."
+  - name: "Rules"
+    description: "These endpoints are related to the rules."
+  - name: "Events"
+    description: "These endpoints are related to the events."
 
 responses:
   Unauthorized:
@@ -42,14 +42,14 @@ paths:
   /applications:
     post:
       tags:
-      - "Applications"
+        - "Applications"
       description: "Create a new application"
       operationId: createApplication
       security: []
       consumes:
-      - application/json
+        - application/json
       parameters:
-      - $ref: "#/parameters/application"
+        - $ref: "#/parameters/application"
       responses:
         200:
           description: "The application has been created."
@@ -62,14 +62,14 @@ paths:
   /players/{username}:
     get:
       tags:
-      - "Players"
+        - "Players"
       description: "Return a specific player for the application with its badges and point scales"
       operationId: getPlayer
       parameters:
-      - $ref: "#/parameters/apiKey"
-      - $ref: "#/parameters/username"
+        - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/username"
       produces:
-      - application/json
+        - application/json
       responses:
         200:
           description: "Player has been successfully retrieved."
@@ -83,14 +83,14 @@ paths:
   /badges:
     post:
       tags:
-      - "Badges"
+        - "Badges"
       description: "Create a new badge for the application"
       operationId: createBadge
       consumes:
-      - application/json
+        - application/json
       parameters:
-      - $ref: "#/parameters/apiKey"
-      - $ref: "#/parameters/badgePost"
+        - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/badgePost"
       responses:
         201:
           $ref: "#/responses/Created"
@@ -100,13 +100,13 @@ paths:
           $ref: "#/responses/Conflict"
     get:
       tags:
-      - "Badges"
+        - "Badges"
       description: "Get all the badges for the application"
       operationId: getBadges
       produces:
-      - application/json
+        - application/json
       parameters:
-      - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/apiKey"
       responses:
         200:
           description: "Badges have been successfully retrieved."
@@ -120,14 +120,14 @@ paths:
   /badges/{badgeName}:
     get:
       tags:
-      - "Badges"
+        - "Badges"
       description: "Return a specific badge for the application"
       operationId: getBadge
       parameters:
-      - $ref: "#/parameters/apiKey"
-      - $ref: "#/parameters/badgeName"
+        - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/badgeName"
       produces:
-      - application/json
+        - application/json
       responses:
         200:
           description: "Badge has been successfully retrieved."
@@ -139,15 +139,15 @@ paths:
           $ref: "#/responses/NotFound"
     patch:
       tags:
-      - "Badges"
+        - "Badges"
       description: "Update a specific badge for the application"
       operationId: updateBadge
       consumes:
-      - application/json
+        - application/json
       parameters:
-      - $ref: "#/parameters/apiKey"
-      - $ref: "#/parameters/badgeName"
-      - $ref: "#/parameters/badgePatch"
+        - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/badgeName"
+        - $ref: "#/parameters/badgePatch"
       responses:
         200:
           description: "Badge has been successfully updated."
@@ -161,14 +161,14 @@ paths:
   /pointScales:
     post:
       tags:
-      - "Point scales"
+        - "Point scales"
       description: "Create a new point scale for the application"
       operationId: createPointScale
       consumes:
-      - application/json
+        - application/json
       parameters:
-      - $ref: "#/parameters/apiKey"
-      - $ref: "#/parameters/pointScalePost"
+        - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/pointScalePost"
       responses:
         201:
           $ref: "#/responses/Created"
@@ -178,13 +178,13 @@ paths:
           $ref: "#/responses/Conflict"
     get:
       tags:
-      - "Point scales"
+        - "Point scales"
       description: "Get all the point scales for the application"
       operationId: getPointScales
       produces:
-      - application/json
+        - application/json
       parameters:
-      - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/apiKey"
       responses:
         200:
           description: "Point scales have been successfully retrieved."
@@ -198,14 +198,14 @@ paths:
   /pointScales/{pointScaleName}:
     get:
       tags:
-      - "Point scales"
+        - "Point scales"
       description: "Return a specific point scale for the application"
       operationId: getPointScale
       parameters:
-      - $ref: "#/parameters/apiKey"
-      - $ref: "#/parameters/pointScaleName"
+        - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/pointScaleName"
       produces:
-      - application/json
+        - application/json
       responses:
         200:
           description: "Point scale has been successfully retrieved."
@@ -217,15 +217,15 @@ paths:
           $ref: "#/responses/NotFound"
     patch:
       tags:
-      - "Point scales"
+        - "Point scales"
       description: "Update a specific point scale for the application"
       operationId: updatePointScale
       consumes:
-      - application/json
+        - application/json
       parameters:
-      - $ref: "#/parameters/apiKey"
-      - $ref: "#/parameters/pointScaleName"
-      - $ref: "#/parameters/pointScalePatch"
+        - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/pointScaleName"
+        - $ref: "#/parameters/pointScalePatch"
       responses:
         200:
           description: "Point scale has been successfully updated."
@@ -239,14 +239,14 @@ paths:
   /rules:
     post:
       tags:
-      - "Rules"
+        - "Rules"
       description: "Create a new rule for the application"
       operationId: createRule
       consumes:
-      - application/json
+        - application/json
       parameters:
-      - $ref: "#/parameters/apiKey"
-      - $ref: "#/parameters/rulePost"
+        - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/rulePost"
       responses:
         201:
           $ref: "#/responses/Created"
@@ -256,13 +256,13 @@ paths:
           $ref: "#/responses/Conflict"
     get:
       tags:
-      - "Rules"
+        - "Rules"
       description: "Get all the rules for the application"
       operationId: getRules
       produces:
-      - application/json
+        - application/json
       parameters:
-      - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/apiKey"
       responses:
         200:
           description: "Rules have been successfully retrieved."
@@ -276,14 +276,14 @@ paths:
   /rules/{ruleName}:
     get:
       tags:
-      - "Rules"
+        - "Rules"
       description: "Return a specific badge for the application"
       operationId: getRule
       parameters:
-      - $ref: "#/parameters/apiKey"
-      - $ref: "#/parameters/ruleName"
+        - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/ruleName"
       produces:
-      - application/json
+        - application/json
       responses:
         200:
           description: "Rule has been successfully retrieved."
@@ -295,15 +295,15 @@ paths:
           $ref: "#/responses/NotFound"
     patch:
       tags:
-      - "Rules"
+        - "Rules"
       description: "Update a specific rule for the application"
       operationId: updateRule
       consumes:
-      - application/json
+        - application/json
       parameters:
-      - $ref: "#/parameters/apiKey"
-      - $ref: "#/parameters/ruleName"
-      - $ref: "#/parameters/rulePatch"
+        - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/ruleName"
+        - $ref: "#/parameters/rulePatch"
       responses:
         200:
           description: "Rule has been successfully updated."
@@ -317,16 +317,16 @@ paths:
   /events:
     post:
       tags:
-      - "Events"
+        - "Events"
       description: "Create a new event for the application"
       operationId: postEvent
       consumes:
-      - application/json
+        - application/json
       parameters:
-      - $ref: "#/parameters/apiKey"
-      - $ref: "#/parameters/event"
+        - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/event"
       responses:
-        200:
+        204:
           description: "The event has been processed."
         401:
           $ref: "#/responses/Unauthorized"
@@ -416,7 +416,7 @@ parameters:
     schema:
       type: "object"
       required:
-      - "apiKey"
+        - "apiKey"
       properties:
         apiKey:
           type: "string"
@@ -450,9 +450,9 @@ parameters:
     schema:
       type: "object"
       required:
-      - "name"
-      - "description"
-      - "image"
+        - "name"
+        - "description"
+        - "image"
       properties:
         name:
           type: "string"
@@ -469,8 +469,8 @@ parameters:
     schema:
       type: "object"
       required:
-      - "description"
-      - "image"
+        - "description"
+        - "image"
       properties:
         description:
           type: "string"
@@ -492,8 +492,8 @@ parameters:
     schema:
       type: "object"
       required:
-      - "name"
-      - "description"
+        - "name"
+        - "description"
       properties:
         name:
           type: "string"
@@ -508,7 +508,7 @@ parameters:
     schema:
       type: "object"
       required:
-      - "description"
+        - "description"
       properties:
         description:
           type: "string"
@@ -528,8 +528,8 @@ parameters:
     schema:
       type: "object"
       required:
-      - "name"
-      - "eventType"
+        - "name"
+        - "eventType"
       properties:
         name:
           type: "string"
@@ -552,7 +552,7 @@ parameters:
     schema:
       type: "object"
       required:
-      - "eventType"
+        - "eventType"
       properties:
         eventType:
           type: "string"
@@ -573,10 +573,9 @@ parameters:
     schema:
       type: "object"
       required:
-      - "username"
-      - "eventType"
-      - "timestamp"
-      - "properties"
+        - "username"
+        - "eventType"
+        - "timestamp"
       properties:
         username:
           type: "string"

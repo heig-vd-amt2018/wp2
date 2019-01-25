@@ -326,7 +326,7 @@ paths:
         - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/event"
       responses:
-        200:
+        204:
           description: "The event has been processed."
         401:
           $ref: "#/responses/Unauthorized"
@@ -576,7 +576,6 @@ parameters:
         - "username"
         - "eventType"
         - "timestamp"
-        - "properties"
       properties:
         username:
           type: "string"
