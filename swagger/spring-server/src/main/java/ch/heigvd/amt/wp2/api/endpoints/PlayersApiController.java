@@ -2,7 +2,9 @@ package ch.heigvd.amt.wp2.api.endpoints;
 
 import ch.heigvd.amt.wp2.api.PlayersApi;
 import ch.heigvd.amt.wp2.api.model.Player;
+import ch.heigvd.amt.wp2.api.model.PlayerBadgesReward;
 import ch.heigvd.amt.wp2.api.model.PointScaleAmount;
+import ch.heigvd.amt.wp2.api.model.PointScalesRewards;
 import ch.heigvd.amt.wp2.model.entities.ApplicationEntity;
 import ch.heigvd.amt.wp2.model.entities.BadgeRewardEntity;
 import ch.heigvd.amt.wp2.model.entities.PlayerEntity;
@@ -43,24 +45,27 @@ public class PlayersApiController implements PlayersApi {
     private Player toPlayer(PlayerEntity playerEntity) {
         Player player = new Player();
 
-        List<String> badges = new ArrayList<>();
-        List<PointScaleAmount> points = new ArrayList<>();
+        List<PlayerBadgesReward> badges = new ArrayList<>();
+        List<PointScalesRewards> points = new ArrayList<>();
 
         for (BadgeRewardEntity badge : playerEntity.getBadgeRewards()) {
-            badges.add(badge.getBadge().getName());
+             PlayerBadgesReward pbr = new PlayerBadgesReward();
+             pbr.setName(badge.getBadge().getName());
+             pbr.setTimestamp(badge.getCreatedDate().toString());
+
+             badges.add(pbr);
         }
 
         for (PointRewardEntity point : playerEntity.getPointScaleReward()) {
-            PointScaleAmount pointScaleAmount = new PointScaleAmount();
+            PointScalesRewards psr = new PointScalesRewards();
 
-            pointScaleAmount.setPointScaleName(point.getPointScale().getName());
-            pointScaleAmount.setAmount((int) point.getAmount());
-
-            points.add(pointScaleAmount);
+            psr.setName(point.getPointScale().getName());
+            psr.setAmout((int) point.getAmount());
+            psr.setTimestamp(point.getCreatedDate().toString());
         }
 
-        player.setBadges(badges);
-        player.setPointScaleSums(points);
+        player.setBadgesRewards(badges);
+        player.setPointScalesrewards(points);
 
         return player;
     }
