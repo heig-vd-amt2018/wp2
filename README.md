@@ -41,11 +41,93 @@ mvn clean test
 You will see the test results in the console, but you can also open the file located in `./target/cucumber/index.html`
 
 ## Tests with JMeter
-You can use the JMeter project to validate the server can support the load when many users use the PaaS. Do this when the server is running.
+You can use the JMeter project to validate the server can support the load when many users use the PaaS. 
+
+Having an API that behaves correctly when tested with Cucumber does not mean that it will do so on heavy loads. Load tests are designed to verify concurrency handling and performance limitations. 
+
+To execute the tests you should have  [JMeter](https://jmeter.apache.org/) installed.
+
+Tests scripts are located at `jmeter-scripts`
 
 ```
-TODO
+sh ./jmeter.sh path_to_jmeter_script
 ```
+
+Or execute GUI with jmeter.sh without argument and open the scripts through the GUI.
+
+In our project the mechanism that might be the most vulnerable to heavy loads is the Event handling but we will be testing a few more scenarios. Those tests are made with JMeter 5.0 that allows to perform multiple queries at the same time, chain queries and check responses.
+
+#### Scenarios
+
+##### Basic concurrent creations (jmeter-scripts/creations.jmx)
+
+*Load : 100 app dev posting the same application, Ramp-Up Period : 0 s*
+
+- Try creating application with same API key on `POST /applications` 
+
+  - There should be only one app created with that API key
+
+    - As GET is not implemented by our API, verification is done manually in the database
+    - RESULT : PASS
+
+    ![applications](C:\Users\Joel\Documents\HEIG\AMT\Projet\wp2\img\applications.png.jpg)
+
+- Try creating multiple point scales with the same name for that application on `POST /pointScales`
+
+  - There should be only one pointScale created
+    - Assertion on response JSON array size == 1 from  `GET /pointscales`
+    - RESULT : FAILED, found 6
+      - This shows that there is a concurrency problem for Point Scales creation
+
+- Try creating multiple badges with the same attributes for that application on `POST /badges`
+
+  - There should be only one badge created
+    - Assertion on response JSON array size == 1 from `GET /badges` 
+    - RESULT : FAILED, found 4
+      - This shows that there is a concurrency problem for Badges creation
+
+- Try creating multiple rules at the same time for that application on `POST /rules`
+
+  - There should be only one pointScale created
+    - RESULT : FAILED, found 4
+      - This shows that there is a concurrency problem for Rules creation
+
+
+
+Although this may cause errors (trying to affect an object with several), this is very unlikely to happen, since those content creations are done by the app developper. This means there is very little chance that the app developer sends 2 or more duplicated requests at the same time.
+
+
+
+##### Events handling scenario
+
+- Application :
+  - An app is created
+- PointScale : 
+  - a point scale *PostsScale* is created
+- Badges creation:
+  - two badges are created *Rookie* and *Expert* 
+- Rules creation:
+  - a rule *PostingRookie* is created. It delivers the badge *Rookie* to a user on Event type *posting*
+  - a rule *PostingPoints* is created. It increases the point scale *PostsScale* by 1 point on Event type *posting* 
+- User creation : 
+  - send an unrelated event to create a user without concurrency  (due to problems seen in the previous scenario)
+- 10 users send 1000 events of type *posting* for the user at the same time
+
+
+
+Assertions :
+
+- the user should have exactly 1 badge : *PostingRookie*
+  - assertion on BadgeRewards array size == 1
+  - RESULT : FAILED, found 4
+    - Concurrency problem
+- he should have 10'0000 PointScale rewards
+  - assertion on PointScaleRewards array size == 10000
+  - RESULT : PASS
+
+Here the concurrency problem remains, but has no effect on PointScalesRewards as all event should be processed anyway.
+
+
 
 ## Built with
 This work package has been done with the following technologies:
