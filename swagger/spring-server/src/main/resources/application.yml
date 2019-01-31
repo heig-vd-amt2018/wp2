@@ -14,8 +14,9 @@ spring:
   profiles: container
   datasource:
     url: jdbc:mysql://db:3306/wp2
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: root
+    password: adminpw
+    platform: mysql
     initialize: true
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
